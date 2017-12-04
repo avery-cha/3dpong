@@ -15,7 +15,7 @@ In 3D Pong, users will be able to:
 - [ ] Play on increasingly difficult levels
 
 ### Wireframes
-
+![3D Pong Wireframe](./3dpong.png)
 
 ### Architecture and Technologies
 This project will be implemented with the following technologies:
