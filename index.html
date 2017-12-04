@@ -32,24 +32,13 @@
     document.body.appendChild(renderer.domElement);
 
 
+    // ** Create Objects **
     var sphereGeometry = new THREE.SphereGeometry(1, 8, 6);
     var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     scene.add( sphere );
 
-
-
-    // var lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff })
-
-    // var lineGeometry = new THREE.Geometry();
-    // lineGeometry.vertices.push(new THREE.Vector3(-10, 0, 0));
-    // lineGeometry.vertices.push(new THREE.Vector3(0, 10, 0));
-    // lineGeometry.vertices.push(new THREE.Vector3(10, 0, 0));
-
-    // var line = new THREE.Line(lineGeometry, lineMaterial);
-    // scene.add(line)
-
-
+    // ** Create Walls **
     var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
     // var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
     var planeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ee00, wireframe: true, transparent: true }); 
@@ -102,65 +91,92 @@
     backPlane.translateZ( -10 );
     scene.add(backPlane);
 
-    var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    frontPlane.translateZ( 10 );
-    scene.add(frontPlane);
-    zCollidableList.push(frontPlane);
-    var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    frontPlane.translateZ( 10 );
-    scene.add(frontPlane);
+    // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // frontPlane.translateZ( 10 );
+    // scene.add(frontPlane);
+    // zCollidableList.push(frontPlane);
+    // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // frontPlane.translateZ( 10 );
+    // scene.add(frontPlane);
 
-
+    // ** Create paddles **
     var paddleGeometry = new THREE.PlaneGeometry(5, 3, 32, 32);
     var paddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true }); 
 
-    var playerPaddle = new THREE.Mesh(paddleGeometry, paddleMaterial)
-    playerPaddle.translateZ( 10 );
-    scene.add(playerPaddle);
-    zCollidableList.push(playerPaddle);
-    var playerPaddle = new THREE.Mesh(planeGeometry, planeMaterial);
-    playerPaddle.translateZ(10);
-    scene.add(playerPaddle);
+    var playerPaddle1 = new THREE.Mesh(paddleGeometry, paddleMaterial)
+    playerPaddle1.translateZ( 10 );
+    scene.add(playerPaddle1);
+    zCollidableList.push(playerPaddle1);
+    var playerPaddle2 = new THREE.Mesh(paddleGeometry, paddleMaterial);
+    playerPaddle2.translateZ( 10 );
+    scene.add(playerPaddle2);
 
 
-    
+    // ** Below code is to enable mouse control of the paddle **
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
-
-      function onMouseMove(event) {
-
-        // calculate mouse position in normalized device coordinates
-        // (-1 to +1) for both components
-
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-      }
-
-    projector = new THREE.Projector();
+    var vector = new THREE.Vector3();
 
     // when the mouse moves, call the given function
     document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+    function onDocumentMouseMove(event) {
+      event.preventDefault();
+
+      vector.set(
+        (event.clientX / window.innerWidth ) * 2 - 1,
+        (event.clientY / window.innerHeight ) * 2 - 1,
+        0.5
+      )
+      vector.unproject(camera);
+      var dir = vector.sub(camera.position).normalize();
+      var distance = (10 - camera.position.z) / dir.z;
+      var pos = camera.position.clone().add(dir.multiplyScalar(distance));
+
+      playerPaddle1.position.set(
+        pos.x, -pos.y, pos.z);
+      playerPaddle2.position.set(
+        pos.x, -pos.y, pos.z);
+    }
+
+    // ** Below code is to enable WASD keyboard control of the paddle **
+    // let xSpeed = 2.25;
+    // let ySpeed = 2.25;
+
+    // document.addEventListener("keydown", onDocumentKeyDown, false);
+    // function onDocumentKeyDown(event) {
+    //   var keyCode = event.which;
+    //   if (keyCode == 87) {
+    //     playerPaddle1.position.y += ySpeed;
+    //   } else if (keyCode == 83) {
+    //     playerPaddle1.position.y -= ySpeed;
+    //   } else if (keyCode == 65) {
+    //     playerPaddle1.position.x -= xSpeed;
+    //   } else if (keyCode == 68) {
+    //     playerPaddle1.position.x += xSpeed;
+    //   } else if (keyCode == 32) {
+    //     playerPaddle1.position.set(0, 0, 0);
+    //   }
+    //   if (keyCode == 87) {
+    //     playerPaddle2.position.y += ySpeed;
+    //   } else if (keyCode == 83) {
+    //     playerPaddle2.position.y -= ySpeed;
+    //   } else if (keyCode == 65) {
+    //     playerPaddle2.position.x -= xSpeed;
+    //   } else if (keyCode == 68) {
+    //     playerPaddle2.position.x += xSpeed;
+    //   } else if (keyCode == 32) {
+    //     playerPaddle2.position.set(0, 0, 0);
+    //   }
+    // };
 
 
     camera.position.z = 25;
 
 
-    var xBallVelocity = 0.2      
-    var yBallVelocity = 0.2  
-    var zBallVelocity = 0.3  
-
-    function onDocumentMouseMove( event ) {
-      // event.preventDefault();
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-      console.log(event);
-      playerPaddle.position.set(
-        event.clientX,
-        event.clientY,
-        10 );
-    }
-
+    var xBallVelocity = 0.2;    
+    var yBallVelocity = 0.2; 
+    var zBallVelocity = -0.15;  
 
     function animate() {
 

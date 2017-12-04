@@ -7,6 +7,7 @@ Users will progress through increasing levels of difficulty against a computer o
 
 ### Functionality and MVP
 In 3D Pong, users will be able to:
+(NOTE: I may have trouble reaching all of these features by Friday. Should I remove some now or can I gauge my progress a few days in?)
 
 - [ ] Move their paddle using their mouse
 - [ ] Deflect the ball towards their opponent when their paddle makes contact with the ball
