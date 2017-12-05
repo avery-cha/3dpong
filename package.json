@@ -1,0 +1,23 @@
+{
+  "name": "3dpong",
+  "version": "1.0.0",
+  "description": "### Background and Overview 3D Pong is a modern take on the classic arcade video game Pong.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trwong/3dpong.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trwong/3dpong/issues"
+  },
+  "homepage": "https://github.com/trwong/3dpong#readme",
+  "dependencies": {
+    "webpack": "^3.10.0"
+  }
+}

@@ -3,19 +3,40 @@
 <head>
   <meta charset=utf-8>
   <title>My first three.js app</title>
-  <style>
-    body {
-      margin: 0;
-    }
-
-    canvas {
-      width: 100%;
-      height: 100%
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="./css/style.scss" />
 </head>
 
-<body>
+<body id="main">
+  <div class="left-aside">
+    3D Pong
+    <br>
+    <div class="instructions-title">
+      How To Play:
+    </div>
+    <div class="instructions-text">
+       The rules are the same as the classic game of pong. Use your mouse to control your paddle. Hit the ball onto your opponents
+      side and prevent it from getting past your paddle. Score points by hitting the ball past your opponent. Win the game by scoring ten points. The game is over if ten points are scored against you.
+    </div>
+  </div>
+  <div class="right-aside">
+    <div class="score-title">
+      Score
+    </div>
+    <div class="scores content">
+      Player: <span id="player-score">0</span>
+      <br>
+      Comp: <span id="comp-score">0</span>
+      <div class="difficulty-buttons">
+        Select a difficulty:
+        
+        <button>Easy</button>
+        <button>Medium</button>
+        <button>Hard</button>
+        <button>Impossible</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/three.js"></script>
   <script>
 
@@ -35,52 +56,60 @@
 
     // ** Create Objects **
     var sphereGeometry = new THREE.SphereGeometry(1, 8, 6);
-    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0xcc00ff} );
+    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     scene.add( sphere );
 
     // ** Create Walls **
     var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
     // var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
-    var planeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ee00, wireframe: true, transparent: true }); 
+    var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true }); 
 
-    var rightPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    rightPlane.translateX( 10 );
+    var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 16, 20);
+    var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 20, 9);
+
+
+    var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+    rightPlane.translateX( 8 );
+    rightPlane.translateZ( 0 );
     rightPlane.rotation.y = 3.14159 / 2;
     scene.add(rightPlane);
     yCollidableList.push(rightPlane);
-    var rightPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    rightPlane.translateX( 10 );
+    var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+    rightPlane.translateX( 8 );
+    rightPlane.translateZ( 0 );
     rightPlane.rotation.y = 3.14159 / 2;
     scene.add(rightPlane);
 
-    var leftPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    leftPlane.translateX( -10 );
+    var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+    leftPlane.translateX( -8 );
+    leftPlane.translateZ( 0 );
     leftPlane.rotation.y = 3.14159 / 2;
     scene.add(leftPlane);
     yCollidableList.push(leftPlane);
-    var leftPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    leftPlane.translateX( 10 );
+    var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+    leftPlane.translateX( -8 );
+    leftPlane.translateZ( 0 );
     leftPlane.rotation.y = 3.14159 / 2;
     scene.add(leftPlane);
 
-    var topPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    topPlane.translateY( 10 );
+    var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+    topPlane.translateY( 4.5 );
     topPlane.rotation.x = 3.14159 / 2;
     scene.add(topPlane);
     xCollidableList.push(topPlane);
-    var topPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    topPlane.translateY( 10 );
+    var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+    topPlane.translateY( 4.5 );
     topPlane.rotation.x = 3.14159 / 2;
     scene.add(topPlane);
 
-    var bottomPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    bottomPlane.translateY( -10 );
+    var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+    bottomPlane.translateY( -4.5 );
     bottomPlane.rotation.x = 3.14159 / 2;
     scene.add(bottomPlane);
     xCollidableList.push(bottomPlane);
-    var bottomPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    bottomPlane.translateY( 10 );
+    var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+    bottomPlane.translateY( 4.5 );
     bottomPlane.rotation.x = 3.14159 / 2;
     scene.add(bottomPlane);
 
@@ -101,46 +130,109 @@
     // scene.add(frontPlane);
 
     // ** Create paddles **
-    var paddleGeometry = new THREE.PlaneGeometry(5, 3, 32, 32);
+    var paddleGeometry = new THREE.PlaneGeometry(3, 2, 32, 32);
     var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true }); 
 
     var playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial)
-    playerPaddle1.translateZ( 10 );
+    playerPaddle1.translateZ( 9.5 );
     scene.add(playerPaddle1);
     zCollidableList.push(playerPaddle1);
     var playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-    playerPaddle2.translateZ( 10 );
+    playerPaddle2.translateZ( 9.5 );
     scene.add(playerPaddle2);
 
     var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true }); 
     var computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial)
-    computerPaddle1.translateZ(-10);
+    computerPaddle1.translateZ( -9.5 );
     scene.add(computerPaddle1);
     zCollidableList.push(computerPaddle1);
     var computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-    computerPaddle2.translateZ(-10);
+    computerPaddle2.translateZ( -9.5 );
     scene.add(computerPaddle2);
 
     // ** Create 'nets' behind player paddles **
-    var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
-    var netMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true }); 
-    var playerNet = new THREE.Mesh(netGeometry, netMaterial)
-    playerNet.translateZ(24);
-    scene.add(playerNet);
-    netCollidableList.push(playerNet);
-    var playerNet = new THREE.Mesh(netGeometry, netMaterial);
-    playerNet.translateZ(24);
-    scene.add(playerNet);
+    // var vertNetGeometry = new THREE.PlaneGeometry(7, 9, 7, 9);
+    // var horizNetGeometry = new THREE.PlaneGeometry(16, 7, 16, 7);
+    // var netMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true }); 
 
-    var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
-    var netMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true }); 
-    var computerNet = new THREE.Mesh(netGeometry, netMaterial)
-    computerNet.translateZ(-24);
-    scene.add(computerNet);
-    netCollidableList.push(computerNet);
-    var computerNet = new THREE.Mesh(netGeometry, netMaterial);
-    computerNet.translateZ(-24);
-    scene.add(computerNet);
+    // var rightPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+    // rightPlayerNet.translateX(8);
+    // rightPlayerNet.translateZ(13.5);
+    // rightPlayerNet.rotation.y = 3.14159 / 2;
+    // scene.add(rightPlayerNet);
+    // netCollidableList.push(rightPlayerNet);
+    // var rightPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+    // rightPlayerNet.translateX(8);
+    // rightPlayerNet.translateZ(13.5);
+    // rightPlayerNet.rotation.y = 3.14159 / 2;
+    // scene.add(rightPlayerNet);
+
+    // var leftPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+    // leftPlayerNet.translateX(-8);
+    // leftPlayerNet.translateZ(0);
+    // leftPlayerNet.rotation.y = 3.14159 / 2;
+    // scene.add(leftPlayerNet);
+    // yCollidableList.push(leftPlayerNet);
+    // var leftPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+    // leftPlayerNet.translateX(-8);
+    // leftPlayerNet.translateZ(0);
+    // leftPlayerNet.rotation.y = 3.14159 / 2;
+    // scene.add(leftPlayerNet);
+
+    // var topPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+    // topPlayerNet.translateY(4.5);
+    // topPlayerNet.rotation.x = 3.14159 / 2;
+    // scene.add(topPlayerNet);
+    // xCollidableList.push(topPlayerNet);
+    // var topPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+    // topPlayerNet.translateY(4.5);
+    // topPlayerNet.rotation.x = 3.14159 / 2;
+    // scene.add(topPlayerNet);
+
+    // var bottomPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+    // bottomPlayerNet.translateY(-4.5);
+    // bottomPlayerNet.rotation.x = 3.14159 / 2;
+    // scene.add(bottomPlayerNet);
+    // xCollidableList.push(bottomPlayerNet);
+    // var bottomPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+    // bottomPlayerNet.translateY(4.5);
+    // bottomPlayerNet.rotation.x = 3.14159 / 2;
+    // scene.add(bottomPlayerNet);
+
+    // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // backPlane.translateZ( -10 );
+    // scene.add(backPlane);
+    // zCollidableList.push(backPlane);
+    // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // backPlane.translateZ( -10 );
+    // scene.add(backPlane);
+
+
+
+
+
+
+
+    // var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
+    // var playerNet = new THREE.Mesh(netGeometry, netMaterial)
+    // playerNet.translateZ(24);
+    // scene.add(playerNet);
+    // netCollidableList.push(playerNet);
+    // var playerNet = new THREE.Mesh(netGeometry, netMaterial);
+    // playerNet.translateZ(24);
+    // scene.add(playerNet);
+
+    // var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
+    // var netMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true }); 
+    // var computerNet = new THREE.Mesh(netGeometry, netMaterial)
+    // computerNet.translateZ(-24);
+    // scene.add(computerNet);
+    // netCollidableList.push(computerNet);
+    // var computerNet = new THREE.Mesh(netGeometry, netMaterial);
+    // computerNet.translateZ(-24);
+    // scene.add(computerNet);
+
+
 
 
     // ** Below code is to enable mouse control of the paddle **
@@ -167,7 +259,7 @@
       )
       vector.unproject(camera);
       var dir = vector.sub(camera.position).normalize();
-      var distance = (10 - camera.position.z) / dir.z;
+      var distance = (9.5 - camera.position.z) / dir.z;
       var pos = camera.position.clone().add(dir.multiplyScalar(distance));
 
       playerPaddle1.position.set(
@@ -208,10 +300,16 @@
     // };
 
 
-    camera.position.z = 24;
+    camera.position.z = 18;
+    // camera.position.z = -18;
+    // camera.rotation.y = 180 * Math.PI / 180
 
-    var computerPaddleXSpeed = 0.2;
-    var computerPaddleYSpeed = 0.2;
+
+    // camera.rotation.y = 3.14159 / 2;
+    // camera.lookAt(scene.sphere);
+
+    var computerPaddleXSpeed = 0.15;
+    var computerPaddleYSpeed = 0.15;
 
     function moveComputerPaddle() {
       if (sphere.position.x > computerPaddle1.position.x) {
@@ -233,9 +331,47 @@
 
     }
 
-    var xBallVelocity = 1;    
-    var yBallVelocity = 1; 
-    var zBallVelocity = -1;  
+    var xBallVelocity = 0.2;    
+    var yBallVelocity = 0.2; 
+    var zBallVelocity = -0.2;  
+
+    function checkPastNet() {
+      if (sphere.position.z > 13) {
+        incrementPoint("computer");
+        resetBall("computer");
+      } else if (sphere.position.z < -13) {
+        incrementPoint("player");
+        resetBall("player");
+      };
+    }
+
+    let playerPoints = 0;
+    let computerPoints = 0;
+
+    function incrementPoint(player) {
+      if (player === "computer") {
+        computerPoints = computerPoints + 1;
+        document.getElementById('comp-score').innerHTML = computerPoints;
+      } else if (player === "player") {
+        playerPoints = playerPoints + 1;
+        document.getElementById('player-score').innerHTML = playerPoints;
+      }
+      // if (playerPoints >= 10) {
+      //   gameOver("player");
+      // } else if (computerPoints >= 10) {
+      //   gameOver("computer");
+      // }
+    }
+
+    function resetBall(side) {
+      if (side === "computer") {
+        sphere.position.set(0, 0, -9.5)
+        zBallVelocity = Math.abs(zBallVelocity);
+      } else if (side === "player") {
+        sphere.position.set(0, 0, 9.5)
+        zBallVelocity = -Math.abs(zBallVelocity);
+      }
+    }
 
     function animate() {
 
@@ -244,6 +380,7 @@
       // update();
 
       moveComputerPaddle();
+      checkPastNet()
 
       var originPoint = sphere.position.clone();
       for (var vertexIndex = 0; vertexIndex < sphere.geometry.vertices.length; vertexIndex++) {
@@ -269,17 +406,17 @@
           zBallVelocity = -zBallVelocity;
         }
 
-        var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-        var netCollisionResults = ray.intersectObjects(netCollidableList);
-        if (netCollisionResults.length > 0 && netCollisionResults[0].distance < directionVector.length()) {
-          zBallVelocity = -zBallVelocity;
-          // scene.remove( sphere );
-          sphere.position.set(0, 0, 0)
-          // sphere.translateX(0);
-          // sphere.translateY(0);
-          // sphere.translateZ(0);
-          // scene.add( sphere );
-        }
+        // var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+        // var netCollisionResults = ray.intersectObjects(netCollidableList);
+        // if (netCollisionResults.length > 0 && netCollisionResults[0].distance < directionVector.length()) {
+        //   zBallVelocity = -zBallVelocity;
+        //   // scene.remove( sphere );
+        //   sphere.position.set(0, 0, 0)
+        //   // sphere.translateX(0);
+        //   // sphere.translateY(0);
+        //   // sphere.translateZ(0);
+        //   // scene.add( sphere );
+        // }
       }
 
       sphere.translateX(xBallVelocity);
