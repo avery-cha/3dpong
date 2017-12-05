@@ -45137,17 +45137,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return sphere; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return playerPaddle1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return playerPaddle2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return sphere; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return playerPaddle1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return playerPaddle2; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return computerPaddle1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return computerPaddle2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return demoPaddle1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return demoPaddle2; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 
 
 const scene = new __WEBPACK_IMPORTED_MODULE_0_three__["Scene"]();
-/* harmony export (immutable) */ __webpack_exports__["h"] = scene;
+/* harmony export (immutable) */ __webpack_exports__["j"] = scene;
 
 const camera = new __WEBPACK_IMPORTED_MODULE_0_three__["PerspectiveCamera"](
   75,
@@ -45158,45 +45160,46 @@ const camera = new __WEBPACK_IMPORTED_MODULE_0_three__["PerspectiveCamera"](
 /* harmony export (immutable) */ __webpack_exports__["a"] = camera;
 
 const renderer = new __WEBPACK_IMPORTED_MODULE_0_three__["WebGLRenderer"]();
-/* harmony export (immutable) */ __webpack_exports__["g"] = renderer;
+/* harmony export (immutable) */ __webpack_exports__["i"] = renderer;
 
-let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](1, 8, 6);
+let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.75, 8, 6);
 let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff });
 
 let sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
 const xCollidableList = [];
-/* harmony export (immutable) */ __webpack_exports__["j"] = xCollidableList;
+/* harmony export (immutable) */ __webpack_exports__["l"] = xCollidableList;
 
 const yCollidableList = [];
-/* harmony export (immutable) */ __webpack_exports__["k"] = yCollidableList;
+/* harmony export (immutable) */ __webpack_exports__["m"] = yCollidableList;
 
 const zCollidableList = [];
-/* harmony export (immutable) */ __webpack_exports__["l"] = zCollidableList;
+/* harmony export (immutable) */ __webpack_exports__["n"] = zCollidableList;
 
 let playerPaddle1 = undefined;
 let playerPaddle2 = undefined;
 let computerPaddle1 = undefined;
 let computerPaddle2 = undefined;
+let demoPaddle1 = undefined;
+let demoPaddle2 = undefined;
 
 const init = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-
   // ** Create Objects **
+  // ** Sphere **
   // var sphereGeometry = new THREE.SphereGeometry(1, 8, 6);
   // var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
   // sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
   scene.add(sphere);
 
-  // ** Create Walls **
+  // ** Walls **
   var planeGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20.25, 20.25, 32, 32);
   // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
   var planeMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff, wireframe: true, transparent: true });
 
   var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 20, 16, 20);
   var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 9, 20, 9);
-
 
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8);
@@ -45258,110 +45261,114 @@ const init = () => {
   // frontPlane.translateZ( 10 );
   // scene.add(frontPlane);
 
-  // ** Create paddles **
+
+  // ** Paddles **
   var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](3, 2, 32, 32);
   var playerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x0000ee, wireframe: true, transparent: true });
 
-  playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial)
+  playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
   playerPaddle1.translateZ(9.5);
-  scene.add(playerPaddle1);
+  // scene.add(playerPaddle1);
   zCollidableList.push(playerPaddle1);
   playerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
   playerPaddle2.translateZ(9.5);
-  scene.add(playerPaddle2);
+  // scene.add(playerPaddle2);
 
   var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
-  computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial)
+  computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
   computerPaddle1.translateZ(-9.5);
   scene.add(computerPaddle1);
   zCollidableList.push(computerPaddle1);
   computerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
   computerPaddle2.translateZ(-9.5);
   scene.add(computerPaddle2);
+  
+  demoPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
+  demoPaddle1.translateZ(9.5);
+  scene.add(demoPaddle1);
+  zCollidableList.push(demoPaddle1);
+  demoPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
+  demoPaddle2.translateZ(9.5);
+  scene.add(demoPaddle2);
 
-      // ** Create 'nets' behind player paddles **
-      // var vertNetGeometry = new THREE.PlaneGeometry(7, 9, 7, 9);
-      // var horizNetGeometry = new THREE.PlaneGeometry(16, 7, 16, 7);
-      // var netMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true, transparent: true });
+  // ** Create 'nets' behind player paddles **
+  // var vertNetGeometry = new THREE.PlaneGeometry(7, 9, 7, 9);
+  // var horizNetGeometry = new THREE.PlaneGeometry(16, 7, 16, 7);
+  // var netMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true, transparent: true });
 
-      // var rightPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
-      // rightPlayerNet.translateX(8);
-      // rightPlayerNet.translateZ(13.5);
-      // rightPlayerNet.rotation.y = 3.14159 / 2;
-      // scene.add(rightPlayerNet);
-      // netCollidableList.push(rightPlayerNet);
-      // var rightPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
-      // rightPlayerNet.translateX(8);
-      // rightPlayerNet.translateZ(13.5);
-      // rightPlayerNet.rotation.y = 3.14159 / 2;
-      // scene.add(rightPlayerNet);
+  // var rightPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+  // rightPlayerNet.translateX(8);
+  // rightPlayerNet.translateZ(13.5);
+  // rightPlayerNet.rotation.y = 3.14159 / 2;
+  // scene.add(rightPlayerNet);
+  // netCollidableList.push(rightPlayerNet);
+  // var rightPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+  // rightPlayerNet.translateX(8);
+  // rightPlayerNet.translateZ(13.5);
+  // rightPlayerNet.rotation.y = 3.14159 / 2;
+  // scene.add(rightPlayerNet);
 
-      // var leftPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
-      // leftPlayerNet.translateX(-8);
-      // leftPlayerNet.translateZ(0);
-      // leftPlayerNet.rotation.y = 3.14159 / 2;
-      // scene.add(leftPlayerNet);
-      // yCollidableList.push(leftPlayerNet);
-      // var leftPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
-      // leftPlayerNet.translateX(-8);
-      // leftPlayerNet.translateZ(0);
-      // leftPlayerNet.rotation.y = 3.14159 / 2;
-      // scene.add(leftPlayerNet);
+  // var leftPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+  // leftPlayerNet.translateX(-8);
+  // leftPlayerNet.translateZ(0);
+  // leftPlayerNet.rotation.y = 3.14159 / 2;
+  // scene.add(leftPlayerNet);
+  // yCollidableList.push(leftPlayerNet);
+  // var leftPlayerNet = new THREE.Mesh(vertNetGeometry, netMaterial);
+  // leftPlayerNet.translateX(-8);
+  // leftPlayerNet.translateZ(0);
+  // leftPlayerNet.rotation.y = 3.14159 / 2;
+  // scene.add(leftPlayerNet);
 
-      // var topPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
-      // topPlayerNet.translateY(4.5);
-      // topPlayerNet.rotation.x = 3.14159 / 2;
-      // scene.add(topPlayerNet);
-      // xCollidableList.push(topPlayerNet);
-      // var topPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
-      // topPlayerNet.translateY(4.5);
-      // topPlayerNet.rotation.x = 3.14159 / 2;
-      // scene.add(topPlayerNet);
+  // var topPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+  // topPlayerNet.translateY(4.5);
+  // topPlayerNet.rotation.x = 3.14159 / 2;
+  // scene.add(topPlayerNet);
+  // xCollidableList.push(topPlayerNet);
+  // var topPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+  // topPlayerNet.translateY(4.5);
+  // topPlayerNet.rotation.x = 3.14159 / 2;
+  // scene.add(topPlayerNet);
 
-      // var bottomPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
-      // bottomPlayerNet.translateY(-4.5);
-      // bottomPlayerNet.rotation.x = 3.14159 / 2;
-      // scene.add(bottomPlayerNet);
-      // xCollidableList.push(bottomPlayerNet);
-      // var bottomPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
-      // bottomPlayerNet.translateY(4.5);
-      // bottomPlayerNet.rotation.x = 3.14159 / 2;
-      // scene.add(bottomPlayerNet);
+  // var bottomPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+  // bottomPlayerNet.translateY(-4.5);
+  // bottomPlayerNet.rotation.x = 3.14159 / 2;
+  // scene.add(bottomPlayerNet);
+  // xCollidableList.push(bottomPlayerNet);
+  // var bottomPlayerNet = new THREE.Mesh(horizNetGeometry, netMaterial);
+  // bottomPlayerNet.translateY(4.5);
+  // bottomPlayerNet.rotation.x = 3.14159 / 2;
+  // scene.add(bottomPlayerNet);
 
-      // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-      // backPlane.translateZ( -10 );
-      // scene.add(backPlane);
-      // zCollidableList.push(backPlane);
-      // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-      // backPlane.translateZ( -10 );
-      // scene.add(backPlane);
-
-
+  // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+  // backPlane.translateZ( -10 );
+  // scene.add(backPlane);
+  // zCollidableList.push(backPlane);
+  // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+  // backPlane.translateZ( -10 );
+  // scene.add(backPlane);
 
 
+  // var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
+  // var playerNet = new THREE.Mesh(netGeometry, netMaterial)
+  // playerNet.translateZ(24);
+  // scene.add(playerNet);
+  // netCollidableList.push(playerNet);
+  // var playerNet = new THREE.Mesh(netGeometry, netMaterial);
+  // playerNet.translateZ(24);
+  // scene.add(playerNet);
 
-
-
-      // var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
-      // var playerNet = new THREE.Mesh(netGeometry, netMaterial)
-      // playerNet.translateZ(24);
-      // scene.add(playerNet);
-      // netCollidableList.push(playerNet);
-      // var playerNet = new THREE.Mesh(netGeometry, netMaterial);
-      // playerNet.translateZ(24);
-      // scene.add(playerNet);
-
-      // var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
-      // var netMaterial = new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true, transparent: true });
-      // var computerNet = new THREE.Mesh(netGeometry, netMaterial)
-      // computerNet.translateZ(-24);
-      // scene.add(computerNet);
-      // netCollidableList.push(computerNet);
-      // var computerNet = new THREE.Mesh(netGeometry, netMaterial);
-      // computerNet.translateZ(-24);
-      // scene.add(computerNet);
-}
-/* harmony export (immutable) */ __webpack_exports__["d"] = init;
+  // var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
+  // var netMaterial = new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true, transparent: true });
+  // var computerNet = new THREE.Mesh(netGeometry, netMaterial)
+  // computerNet.translateZ(-24);
+  // scene.add(computerNet);
+  // netCollidableList.push(computerNet);
+  // var computerNet = new THREE.Mesh(netGeometry, netMaterial);
+  // computerNet.translateZ(-24);
+  // scene.add(computerNet);
+};
+/* harmony export (immutable) */ __webpack_exports__["f"] = init;
 
 
 /***/ }),
@@ -45384,7 +45391,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     
 
 document.addEventListener("DOMContentLoaded", function() {
-  Object(__WEBPACK_IMPORTED_MODULE_1__init__["d" /* init */])();
+  Object(__WEBPACK_IMPORTED_MODULE_1__init__["f" /* init */])();
   Object(__WEBPACK_IMPORTED_MODULE_2__render__["a" /* renderContainer */])();
 });
 
@@ -45431,9 +45438,9 @@ const renderContainer = () => {
     var distance = (9.5 - __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.z) / dir.z;
     var pos = __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.clone().add(dir.multiplyScalar(distance));
 
-    __WEBPACK_IMPORTED_MODULE_1__init__["e" /* playerPaddle1 */].position.set(
+    __WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.set(
       pos.x, -pos.y, pos.z);
-    __WEBPACK_IMPORTED_MODULE_1__init__["f" /* playerPaddle2 */].position.set(
+    __WEBPACK_IMPORTED_MODULE_1__init__["h" /* playerPaddle2 */].position.set(
       pos.x, -pos.y, pos.z);
   }
 
@@ -45468,8 +45475,10 @@ const renderContainer = () => {
   //   }
   // };
 
-
+  // normal camera view
   __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.z = 18;
+
+  // opponent camera view
   // camera.position.z = -18;
   // camera.rotation.y = 180 * Math.PI / 180
 
@@ -45477,101 +45486,187 @@ const renderContainer = () => {
   // camera.rotation.y = 3.14159 / 2;
   // camera.lookAt(scene.sphere);
 
-  var computerPaddleXSpeed = 0.15;
-  var computerPaddleYSpeed = 0.15;
+  var computerPaddleSpeed = 0.28;
 
   function moveComputerPaddle() {
-    if (__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x) {
-      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateX(computerPaddleXSpeed);
-      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateX(computerPaddleXSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x) {
+      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateX(computerPaddleSpeed);
+      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateX(computerPaddleSpeed);
     }
-    if (__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.y > __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.y) {
-      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateY(computerPaddleYSpeed);
-      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateY(computerPaddleYSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y > __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.y) {
+      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateY(computerPaddleSpeed);
+      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateY(computerPaddleSpeed);
     }
-    if (__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.x < __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x) {
-      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateX(-computerPaddleXSpeed);
-      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateX(-computerPaddleXSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x < __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x) {
+      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateX(-computerPaddleSpeed);
+      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateX(-computerPaddleSpeed);
     }
-    if (__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.y < __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.y) {
-      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateY(-computerPaddleYSpeed);
-      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateY(-computerPaddleYSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y < __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.y) {
+      __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateY(-computerPaddleSpeed);
+      __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateY(-computerPaddleSpeed);
     }
 
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */] && __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]) {
+      if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x) {
+        __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].translateX(computerPaddleSpeed);
+        __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */].translateX(computerPaddleSpeed);
+      }
+      if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y > __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.y) {
+        __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].translateY(computerPaddleSpeed);
+        __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */].translateY(computerPaddleSpeed);
+      }
+      if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x < __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x) {
+        __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].translateX(-computerPaddleSpeed);
+        __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */].translateX(-computerPaddleSpeed);
+      }
+      if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y < __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.y) {
+        __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].translateY(-computerPaddleSpeed);
+        __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */].translateY(-computerPaddleSpeed);
+      }
+    }
   }
 
-  var xBallVelocity = 0.2;
-  var yBallVelocity = 0.2;
-  var zBallVelocity = -0.2;
-  // debugger;
+  var xBallVelocity = 0.3;
+  var yBallVelocity = 0.3;
+  var zBallVelocity = -0.3;
 
   function checkPastNet() {
-    if (__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.z > 13) {
-      incrementPoint("computer");
-      resetBall("computer");
-    } else if (__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.z < -13) {
-      incrementPoint("player");
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z < -13) {
+      if (gameMode === "play") {
+        decrementLife("computer");
+      }
       resetBall("player");
+    } else if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z > 13) {
+      if (gameMode === "play") {
+        decrementLife("player");
+      }
+      resetBall("computer");
     }
   }
 
-  let playerPoints = 0;
-  let computerPoints = 0;
+  document.getElementById("play-button").onclick = () => {
+    startGame();
+    resetCamera();
+  };
 
-  function incrementPoint(player) {
+  function resetCamera() {
+    camera_pivot.rotation.set( 0, 0, 0);
+  }
+
+  let playerLives = 3;
+  let computerLives = 3;
+
+  function decrementLife(player) {
     if (player === "computer") {
-      computerPoints = computerPoints + 1;
-      document.getElementById('comp-score').innerHTML = computerPoints;
+      computerLives = computerLives - 1;
+      document.getElementById('comp-score').innerHTML = computerLives;
     } else if (player === "player") {
-      playerPoints = playerPoints + 1;
-      document.getElementById('player-score').innerHTML = playerPoints;
+      if (playerLives > 0) {
+        playerLives = playerLives - 1;
+      }
+      document.getElementById('player-score').innerHTML = playerLives;
     }
-    // if (playerPoints >= 10) {
-    //   gameOver("player");
-    // } else if (computerPoints >= 10) {
-    //   gameOver("computer");
-    // }
+    if (playerLives <= 0) {
+      gameOver();
+    } else if (computerLives <= 0) {
+      nextLevel();
+    }
+  }
+
+  function nextLevel() {
+    computerLives = 3;
+    computerPaddleSpeed *= 1.085;
+    xBallVelocity *= 1.08;
+    yBallVelocity *= 1.08;
+    zBallVelocity *= 1.08;
+  }
+
+  let gameOverBool = false;
+  function gameOver() {
+    gameOverBool = true;
+    // cancelAnimationFrame(id);
+    document.getElementById("game-over-message").classList.remove("hide");
+  }
+
+  let gameMode = "demo";
+  function startGame() {
+    document.getElementById("game-over-message").classList.add("hide");
+    resetGame();
+    gameMode = "play";
+    __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */]);
+    __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]);
+    __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].add(__WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */]);
+    __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].add(__WEBPACK_IMPORTED_MODULE_1__init__["h" /* playerPaddle2 */]);
+    requestAnimationFrame(render);
+  }
+
+  function resetGame() {
+    gameOverBool = false;
+    playerLives = 3;
+    computerLives = 3;
+    computerPaddleSpeed = 0.16;
+    xBallVelocity = 0.2;
+    yBallVelocity = 0.2;
+    zBallVelocity = -0.2;
+    __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, 9.5);
+    document.getElementById('comp-score').innerHTML = computerLives;
+    document.getElementById('player-score').innerHTML = playerLives;
   }
 
   function resetBall(side) {
     if (side === "computer") {
-      __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.set(0, 0, -9.5);
+      __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, -9.5);
       zBallVelocity = Math.abs(zBallVelocity);
     } else if (side === "player") {
-      __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.set(0, 0, 9.5);
+      __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, 9.5);
       zBallVelocity = -Math.abs(zBallVelocity);
     }
   }
+  var camera_pivot = new __WEBPACK_IMPORTED_MODULE_0_three__["Object3D"]();
+  var Y_AXIS = new __WEBPACK_IMPORTED_MODULE_0_three__["Vector3"](0, 1, 0);
 
+  // camera pivot
+  __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].add(camera_pivot);
+  camera_pivot.add(__WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */]);
+  __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].lookAt(camera_pivot.position);
+  
+  // camera.position.set(23, 0, 0);
+
+  let id;
   function animate() {
 
-    requestAnimationFrame(animate);
+    id = requestAnimationFrame(animate);
     render();
     // update();
+
+    // camera pivot
+    if (gameMode === "demo") {
+      camera_pivot.rotateOnAxis(Y_AXIS, 0.01);
+    }
 
     moveComputerPaddle();
     checkPastNet();
 
-    var originPoint = __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position.clone();
-    for (var vertexIndex = 0; vertexIndex < __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].geometry.vertices.length; vertexIndex++) {
-      var localVertex = __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].geometry.vertices[vertexIndex].clone();
-      var globalVertex = localVertex.applyMatrix4(__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].matrix);
-      var directionVector = globalVertex.sub(__WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].position);
+    var originPoint = __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.clone();
+    for (var vertexIndex = 0; vertexIndex < __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].geometry.vertices.length; vertexIndex++) {
+      var localVertex = __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].geometry.vertices[vertexIndex].clone();
+      var globalVertex = localVertex.applyMatrix4(__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].matrix);
+      var directionVector = globalVertex.sub(__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position);
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
-      var xCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["j" /* xCollidableList */]);
+      var xCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["l" /* xCollidableList */]);
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
         yBallVelocity = -yBallVelocity;
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
-      var yCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["k" /* yCollidableList */]);
+      var yCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["m" /* yCollidableList */]);
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
         xBallVelocity = -xBallVelocity;
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
-      var zCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["l" /* zCollidableList */]);
+      var zCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["n" /* zCollidableList */]);
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         zBallVelocity = -zBallVelocity;
       }
@@ -45589,13 +45684,14 @@ const renderContainer = () => {
       // }
     }
 
-    __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].translateX(xBallVelocity);
-    __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].translateY(yBallVelocity);
-    __WEBPACK_IMPORTED_MODULE_1__init__["i" /* sphere */].translateZ(zBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].translateX(xBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].translateY(yBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].translateZ(zBallVelocity);
   }
 
   function render() {
-    __WEBPACK_IMPORTED_MODULE_1__init__["g" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__init__["h" /* scene */], __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */]);
+    if (gameOverBool) return;
+    __WEBPACK_IMPORTED_MODULE_1__init__["i" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */], __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */]);
   }
 
   // function update() {
@@ -45603,7 +45699,7 @@ const renderContainer = () => {
   // }
 
   animate();
-}
+};
 /* harmony export (immutable) */ __webpack_exports__["a"] = renderContainer;
 
 

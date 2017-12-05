@@ -53,3 +53,25 @@ canvas {
   bottom: -200px;
   left: 0;
 }
+
+#game-over-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: black;
+  background: white;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.scores-content {
+  font-size: 24px;
+  margin: 20px 0;
+}

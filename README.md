@@ -36,11 +36,11 @@ In addition to the webpack entry file, there will be three scripts involved in t
 - [x] Adding ball bouncing in 1D, 2D and 3D
 
 **Day 1**:
-- [ ] Add paddle and mouse event listener to make the paddle follow the cursor
-- [ ] On 'loss' (ball gets past your paddle) ball is reset to center and point is scored
+- [x] Add paddle and mouse event listener to make the paddle follow the cursor
+- [x] On 'loss' (ball gets past your paddle) ball is reset to center and point is scored
 
 **Day 2**:
-- [ ] Add computer player that attempts to deflect the ball with its paddle
+- [x] Add computer player that attempts to deflect the ball with its paddle
 
 **Day 3**:
 - [ ] Add game start button and lives (3 lives before the game ends)

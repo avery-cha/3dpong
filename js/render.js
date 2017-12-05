@@ -12,6 +12,8 @@ import {
   playerPaddle2,
   computerPaddle1,
   computerPaddle2,
+  demoPaddle1,
+  demoPaddle2,
 } from './init';
 
 export const renderContainer = () => {
@@ -79,8 +81,10 @@ export const renderContainer = () => {
   //   }
   // };
 
-
+  // normal camera view
   camera.position.z = 18;
+
+  // opponent camera view
   // camera.position.z = -18;
   // camera.rotation.y = 180 * Math.PI / 180
 
@@ -88,60 +92,131 @@ export const renderContainer = () => {
   // camera.rotation.y = 3.14159 / 2;
   // camera.lookAt(scene.sphere);
 
-  var computerPaddleXSpeed = 0.15;
-  var computerPaddleYSpeed = 0.15;
+  var computerPaddleSpeed = 0.28;
 
   function moveComputerPaddle() {
     if (sphere.position.x > computerPaddle1.position.x) {
-      computerPaddle1.translateX(computerPaddleXSpeed);
-      computerPaddle2.translateX(computerPaddleXSpeed);
+      computerPaddle1.translateX(computerPaddleSpeed);
+      computerPaddle2.translateX(computerPaddleSpeed);
     }
     if (sphere.position.y > computerPaddle1.position.y) {
-      computerPaddle1.translateY(computerPaddleYSpeed);
-      computerPaddle2.translateY(computerPaddleYSpeed);
+      computerPaddle1.translateY(computerPaddleSpeed);
+      computerPaddle2.translateY(computerPaddleSpeed);
     }
     if (sphere.position.x < computerPaddle1.position.x) {
-      computerPaddle1.translateX(-computerPaddleXSpeed);
-      computerPaddle2.translateX(-computerPaddleXSpeed);
+      computerPaddle1.translateX(-computerPaddleSpeed);
+      computerPaddle2.translateX(-computerPaddleSpeed);
     }
     if (sphere.position.y < computerPaddle1.position.y) {
-      computerPaddle1.translateY(-computerPaddleYSpeed);
-      computerPaddle2.translateY(-computerPaddleYSpeed);
+      computerPaddle1.translateY(-computerPaddleSpeed);
+      computerPaddle2.translateY(-computerPaddleSpeed);
     }
 
+    if (demoPaddle1 && demoPaddle2) {
+      if (sphere.position.x > demoPaddle1.position.x) {
+        demoPaddle1.translateX(computerPaddleSpeed);
+        demoPaddle2.translateX(computerPaddleSpeed);
+      }
+      if (sphere.position.y > demoPaddle1.position.y) {
+        demoPaddle1.translateY(computerPaddleSpeed);
+        demoPaddle2.translateY(computerPaddleSpeed);
+      }
+      if (sphere.position.x < demoPaddle1.position.x) {
+        demoPaddle1.translateX(-computerPaddleSpeed);
+        demoPaddle2.translateX(-computerPaddleSpeed);
+      }
+      if (sphere.position.y < demoPaddle1.position.y) {
+        demoPaddle1.translateY(-computerPaddleSpeed);
+        demoPaddle2.translateY(-computerPaddleSpeed);
+      }
+    }
   }
 
-  var xBallVelocity = 0.2;
-  var yBallVelocity = 0.2;
-  var zBallVelocity = -0.2;
-  // debugger;
+  var xBallVelocity = 0.3;
+  var yBallVelocity = 0.3;
+  var zBallVelocity = -0.3;
 
   function checkPastNet() {
-    if (sphere.position.z > 13) {
-      incrementPoint("computer");
-      resetBall("computer");
-    } else if (sphere.position.z < -13) {
-      incrementPoint("player");
+    if (sphere.position.z < -13) {
+      if (gameMode === "play") {
+        decrementLife("computer");
+      }
       resetBall("player");
+    } else if (sphere.position.z > 13) {
+      if (gameMode === "play") {
+        decrementLife("player");
+      }
+      resetBall("computer");
     }
   }
 
-  let playerPoints = 0;
-  let computerPoints = 0;
+  document.getElementById("play-button").onclick = () => {
+    startGame();
+    resetCamera();
+  };
 
-  function incrementPoint(player) {
+  function resetCamera() {
+    camera_pivot.rotation.set( 0, 0, 0);
+  }
+
+  let playerLives = 3;
+  let computerLives = 3;
+
+  function decrementLife(player) {
     if (player === "computer") {
-      computerPoints = computerPoints + 1;
-      document.getElementById('comp-score').innerHTML = computerPoints;
+      computerLives = computerLives - 1;
+      document.getElementById('comp-score').innerHTML = computerLives;
     } else if (player === "player") {
-      playerPoints = playerPoints + 1;
-      document.getElementById('player-score').innerHTML = playerPoints;
+      if (playerLives > 0) {
+        playerLives = playerLives - 1;
+      }
+      document.getElementById('player-score').innerHTML = playerLives;
     }
-    // if (playerPoints >= 10) {
-    //   gameOver("player");
-    // } else if (computerPoints >= 10) {
-    //   gameOver("computer");
-    // }
+    if (playerLives <= 0) {
+      gameOver();
+    } else if (computerLives <= 0) {
+      nextLevel();
+    }
+  }
+
+  function nextLevel() {
+    computerLives = 3;
+    computerPaddleSpeed *= 1.085;
+    xBallVelocity *= 1.08;
+    yBallVelocity *= 1.08;
+    zBallVelocity *= 1.08;
+  }
+
+  let gameOverBool = false;
+  function gameOver() {
+    gameOverBool = true;
+    // cancelAnimationFrame(id);
+    document.getElementById("game-over-message").classList.remove("hide");
+  }
+
+  let gameMode = "demo";
+  function startGame() {
+    document.getElementById("game-over-message").classList.add("hide");
+    resetGame();
+    gameMode = "play";
+    scene.remove(demoPaddle1);
+    scene.remove(demoPaddle2);
+    scene.add(playerPaddle1);
+    scene.add(playerPaddle2);
+    requestAnimationFrame(render);
+  }
+
+  function resetGame() {
+    gameOverBool = false;
+    playerLives = 3;
+    computerLives = 3;
+    computerPaddleSpeed = 0.16;
+    xBallVelocity = 0.2;
+    yBallVelocity = 0.2;
+    zBallVelocity = -0.2;
+    sphere.position.set(0, 0, 9.5);
+    document.getElementById('comp-score').innerHTML = computerLives;
+    document.getElementById('player-score').innerHTML = playerLives;
   }
 
   function resetBall(side) {
@@ -153,12 +228,27 @@ export const renderContainer = () => {
       zBallVelocity = -Math.abs(zBallVelocity);
     }
   }
+  var camera_pivot = new THREE.Object3D();
+  var Y_AXIS = new THREE.Vector3(0, 1, 0);
 
+  // camera pivot
+  scene.add(camera_pivot);
+  camera_pivot.add(camera);
+  camera.lookAt(camera_pivot.position);
+  
+  // camera.position.set(23, 0, 0);
+
+  let id;
   function animate() {
 
-    requestAnimationFrame(animate);
+    id = requestAnimationFrame(animate);
     render();
     // update();
+
+    // camera pivot
+    if (gameMode === "demo") {
+      camera_pivot.rotateOnAxis(Y_AXIS, 0.01);
+    }
 
     moveComputerPaddle();
     checkPastNet();
@@ -206,6 +296,7 @@ export const renderContainer = () => {
   }
 
   function render() {
+    if (gameOverBool) return;
     renderer.render(scene, camera);
   }
 
@@ -214,4 +305,4 @@ export const renderContainer = () => {
   // }
 
   animate();
-}
+};
