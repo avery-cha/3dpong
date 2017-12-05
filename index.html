@@ -35,7 +35,7 @@
 
     // ** Create Objects **
     var sphereGeometry = new THREE.SphereGeometry(1, 8, 6);
-    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
+    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0xcc00ff} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     scene.add( sphere );
 
@@ -84,13 +84,13 @@
     bottomPlane.rotation.x = 3.14159 / 2;
     scene.add(bottomPlane);
 
-    var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    backPlane.translateZ( -10 );
-    scene.add(backPlane);
-    zCollidableList.push(backPlane);
-    var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    backPlane.translateZ( -10 );
-    scene.add(backPlane);
+    // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // backPlane.translateZ( -10 );
+    // scene.add(backPlane);
+    // zCollidableList.push(backPlane);
+    // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+    // backPlane.translateZ( -10 );
+    // scene.add(backPlane);
 
     // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
     // frontPlane.translateZ( 10 );
@@ -102,26 +102,45 @@
 
     // ** Create paddles **
     var paddleGeometry = new THREE.PlaneGeometry(5, 3, 32, 32);
-    var paddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true }); 
+    var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true }); 
 
-    var playerPaddle1 = new THREE.Mesh(paddleGeometry, paddleMaterial)
+    var playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial)
     playerPaddle1.translateZ( 10 );
     scene.add(playerPaddle1);
     zCollidableList.push(playerPaddle1);
-    var playerPaddle2 = new THREE.Mesh(paddleGeometry, paddleMaterial);
+    var playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
     playerPaddle2.translateZ( 10 );
     scene.add(playerPaddle2);
 
+    var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true }); 
+    var computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial)
+    computerPaddle1.translateZ(-10);
+    scene.add(computerPaddle1);
+    zCollidableList.push(computerPaddle1);
+    var computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+    computerPaddle2.translateZ(-10);
+    scene.add(computerPaddle2);
+
     // ** Create 'nets' behind player paddles **
     var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
-    var netMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true }); 
+    var netMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true }); 
     var playerNet = new THREE.Mesh(netGeometry, netMaterial)
-    playerNet.translateZ(23);
+    playerNet.translateZ(24);
     scene.add(playerNet);
     netCollidableList.push(playerNet);
     var playerNet = new THREE.Mesh(netGeometry, netMaterial);
-    playerNet.translateZ(23);
+    playerNet.translateZ(24);
     scene.add(playerNet);
+
+    var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
+    var netMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true }); 
+    var computerNet = new THREE.Mesh(netGeometry, netMaterial)
+    computerNet.translateZ(-24);
+    scene.add(computerNet);
+    netCollidableList.push(computerNet);
+    var computerNet = new THREE.Mesh(netGeometry, netMaterial);
+    computerNet.translateZ(-24);
+    scene.add(computerNet);
 
 
     // ** Below code is to enable mouse control of the paddle **
@@ -189,18 +208,42 @@
     // };
 
 
-    camera.position.z = 23;
+    camera.position.z = 24;
 
+    var computerPaddleXSpeed = 0.2;
+    var computerPaddleYSpeed = 0.2;
 
-    var xBallVelocity = 0.3;    
-    var yBallVelocity = 0.3; 
-    var zBallVelocity = -0.3;  
+    function moveComputerPaddle() {
+      if (sphere.position.x > computerPaddle1.position.x) {
+        computerPaddle1.translateX(computerPaddleXSpeed);
+        computerPaddle2.translateX(computerPaddleXSpeed);
+      }
+      if (sphere.position.y > computerPaddle1.position.y) {
+        computerPaddle1.translateY(computerPaddleYSpeed);
+        computerPaddle2.translateY(computerPaddleYSpeed);
+      }
+      if (sphere.position.x < computerPaddle1.position.x) {
+        computerPaddle1.translateX(-computerPaddleXSpeed);
+        computerPaddle2.translateX(-computerPaddleXSpeed);
+      }
+      if (sphere.position.y < computerPaddle1.position.y) {
+        computerPaddle1.translateY(-computerPaddleYSpeed);
+        computerPaddle2.translateY(-computerPaddleYSpeed);
+      }
+
+    }
+
+    var xBallVelocity = 1;    
+    var yBallVelocity = 1; 
+    var zBallVelocity = -1;  
 
     function animate() {
 
       requestAnimationFrame(animate);
       render();
       // update();
+
+      moveComputerPaddle();
 
       var originPoint = sphere.position.clone();
       for (var vertexIndex = 0; vertexIndex < sphere.geometry.vertices.length; vertexIndex++) {
