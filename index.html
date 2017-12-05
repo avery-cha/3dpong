@@ -22,6 +22,7 @@
     var xCollidableList = [];
     var yCollidableList = [];
     var zCollidableList = [];
+    var netCollidableList = [];
       
     
     var scene = new THREE.Scene();
@@ -111,13 +112,30 @@
     playerPaddle2.translateZ( 10 );
     scene.add(playerPaddle2);
 
+    // ** Create 'nets' behind player paddles **
+    var netGeometry = new THREE.PlaneGeometry(60, 60, 60, 120);
+    var netMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true }); 
+    var playerNet = new THREE.Mesh(netGeometry, netMaterial)
+    playerNet.translateZ(23);
+    scene.add(playerNet);
+    netCollidableList.push(playerNet);
+    var playerNet = new THREE.Mesh(netGeometry, netMaterial);
+    playerNet.translateZ(23);
+    scene.add(playerNet);
+
 
     // ** Below code is to enable mouse control of the paddle **
+    // Code created with the help of Stack Overflow question
+    // https://stackoverflow.com/questions/13055214/mouse-canvas-x-y-to-three-js-world-x-y-z
+    // Question by Rob Evans:
+    // https://stackoverflow.com/users/599020/rob-evans
+    // Answer by WestLangley:
+    // https://stackoverflow.com/users/1461008/westlangley
+
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
     var vector = new THREE.Vector3();
 
-    // when the mouse moves, call the given function
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 
     function onDocumentMouseMove(event) {
@@ -171,20 +189,18 @@
     // };
 
 
-    camera.position.z = 25;
+    camera.position.z = 23;
 
 
-    var xBallVelocity = 0.2;    
-    var yBallVelocity = 0.2; 
-    var zBallVelocity = -0.15;  
+    var xBallVelocity = 0.3;    
+    var yBallVelocity = 0.3; 
+    var zBallVelocity = -0.3;  
 
     function animate() {
 
       requestAnimationFrame(animate);
       render();
       // update();
-      // console.log(sphere.position);
-      // console.log(xBallVelocity);
 
       var originPoint = sphere.position.clone();
       for (var vertexIndex = 0; vertexIndex < sphere.geometry.vertices.length; vertexIndex++) {
@@ -195,30 +211,31 @@
         var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
         var xCollisionResults = ray.intersectObjects(xCollidableList);
         if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
-          // sphere.position.x = 5;
-          // xBallVelocity = -xBallVelocity;
           yBallVelocity = -yBallVelocity;
-          // console.log(xBallVelocity);
         }
 
         var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
         var yCollisionResults = ray.intersectObjects(yCollidableList);
         if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
-          // sphere.position.x = 5;
           xBallVelocity = -xBallVelocity;
-          // yBallVelocity = -yBallVelocity;
-          // console.log(xBallVelocity);
         }
         
         var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
         var zCollisionResults = ray.intersectObjects(zCollidableList);
         if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
-          // sphere.position.x = 5;
-          // xBallVelocity = -xBallVelocity;
-          // yBallVelocity = -yBallVelocity;
           zBallVelocity = -zBallVelocity;
-          
-          // console.log(xBallVelocity);
+        }
+
+        var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
+        var netCollisionResults = ray.intersectObjects(netCollidableList);
+        if (netCollisionResults.length > 0 && netCollisionResults[0].distance < directionVector.length()) {
+          zBallVelocity = -zBallVelocity;
+          // scene.remove( sphere );
+          sphere.position.set(0, 0, 0)
+          // sphere.translateX(0);
+          // sphere.translateY(0);
+          // sphere.translateZ(0);
+          // scene.add( sphere );
         }
       }
 
