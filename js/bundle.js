@@ -45163,7 +45163,7 @@ const renderer = new __WEBPACK_IMPORTED_MODULE_0_three__["WebGLRenderer"]();
 /* harmony export (immutable) */ __webpack_exports__["i"] = renderer;
 
 let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.75, 8, 6);
-let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff });
+let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ff00 });
 
 let sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
 const xCollidableList = [];
@@ -45194,12 +45194,12 @@ const init = () => {
   scene.add(sphere);
 
   // ** Walls **
-  var planeGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20.25, 20.25, 32, 32);
+  // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
   // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
   var planeMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 20, 16, 20);
-  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 9, 20, 9);
+  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 20, 32, 40);
+  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 9, 40, 18);
 
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8);
@@ -45486,7 +45486,7 @@ const renderContainer = () => {
   // camera.rotation.y = 3.14159 / 2;
   // camera.lookAt(scene.sphere);
 
-  var computerPaddleSpeed = 0.28;
+  var computerPaddleSpeed = 0.225;
 
   function moveComputerPaddle() {
     if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x) {
@@ -45526,9 +45526,11 @@ const renderContainer = () => {
     }
   }
 
-  var xBallVelocity = 0.3;
-  var yBallVelocity = 0.3;
-  var zBallVelocity = -0.3;
+  // demo ball speed
+  var baseBallSpeed = 0.25;
+  var xBallVelocity = 0.25;
+  var yBallVelocity = 0.25;
+  var zBallVelocity = -0.25;
 
   function checkPastNet() {
     if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z < -13) {
@@ -45576,6 +45578,7 @@ const renderContainer = () => {
   function nextLevel() {
     computerLives = 3;
     computerPaddleSpeed *= 1.085;
+    baseBallSpeed *= 1.08;
     xBallVelocity *= 1.08;
     yBallVelocity *= 1.08;
     zBallVelocity *= 1.08;
@@ -45604,7 +45607,8 @@ const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.16;
+    computerPaddleSpeed = 0.165;
+    baseBallSpeed = 0.2;
     xBallVelocity = 0.2;
     yBallVelocity = 0.2;
     zBallVelocity = -0.2;
@@ -45615,12 +45619,15 @@ const renderContainer = () => {
 
   function resetBall(side) {
     if (side === "computer") {
-      __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, -9.5);
+      __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, -9);
       zBallVelocity = Math.abs(zBallVelocity);
     } else if (side === "player") {
-      __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, 9.5);
+      __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, 9);
       zBallVelocity = -Math.abs(zBallVelocity);
     }
+    xBallVelocity = baseBallSpeed;
+    yBallVelocity = baseBallSpeed;
+    zBallVelocity = -baseBallSpeed;
   }
   var camera_pivot = new __WEBPACK_IMPORTED_MODULE_0_three__["Object3D"]();
   var Y_AXIS = new __WEBPACK_IMPORTED_MODULE_0_three__["Vector3"](0, 1, 0);
@@ -45633,6 +45640,10 @@ const renderContainer = () => {
   // camera.position.set(23, 0, 0);
 
   let id;
+  let xDirection;
+  let yDirection;
+  let xPaddleBallDiff;
+  let yPaddleBallDiff;
   function animate() {
 
     id = requestAnimationFrame(animate);
@@ -45669,6 +45680,44 @@ const renderContainer = () => {
       var zCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_1__init__["n" /* zCollidableList */]);
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         zBallVelocity = -zBallVelocity;
+        console.log("sphere", __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z);
+        // console.log("paddle", demoPaddle1.position);
+        // console.log("x diff", demoPaddle1.position.x - sphere.position.x);
+        // console.log("y diff", demoPaddle1.position.y - sphere.position.y);
+        if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z > 0) {
+          // player side
+          if (__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */] && __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]) {
+            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x);
+            // TODO Divide above by length (x) of paddle. do the same for y and below 3 equations
+            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+
+            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            yPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y;
+            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
+            // debugger;
+          }
+          if (__WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */] && __WEBPACK_IMPORTED_MODULE_1__init__["h" /* playerPaddle2 */]) {
+            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x;
+            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+
+            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            yPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y;
+            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
+          }
+        } else {
+          // comp side
+          if (__WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */] && __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */]) {
+            // xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            // xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
+            // xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+
+            // yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            // yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
+            // yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
+          }
+        }
       }
 
       // var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
@@ -45682,6 +45731,9 @@ const renderContainer = () => {
       //   // sphere.translateZ(0);
       //   // scene.add( sphere );
       // }
+      if (xBallVelocity > 5 || yBallVelocity > 5 || zBallVelocity > 5) {
+        debugger;
+      }
     }
 
     __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].translateX(xBallVelocity);

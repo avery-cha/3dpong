@@ -92,7 +92,7 @@ export const renderContainer = () => {
   // camera.rotation.y = 3.14159 / 2;
   // camera.lookAt(scene.sphere);
 
-  var computerPaddleSpeed = 0.28;
+  var computerPaddleSpeed = 0.225;
 
   function moveComputerPaddle() {
     if (sphere.position.x > computerPaddle1.position.x) {
@@ -132,9 +132,11 @@ export const renderContainer = () => {
     }
   }
 
-  var xBallVelocity = 0.3;
-  var yBallVelocity = 0.3;
-  var zBallVelocity = -0.3;
+  // demo ball speed
+  var baseBallSpeed = 0.25;
+  var xBallVelocity = 0.25;
+  var yBallVelocity = 0.25;
+  var zBallVelocity = -0.25;
 
   function checkPastNet() {
     if (sphere.position.z < -13) {
@@ -182,6 +184,7 @@ export const renderContainer = () => {
   function nextLevel() {
     computerLives = 3;
     computerPaddleSpeed *= 1.085;
+    baseBallSpeed *= 1.08;
     xBallVelocity *= 1.08;
     yBallVelocity *= 1.08;
     zBallVelocity *= 1.08;
@@ -210,7 +213,8 @@ export const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.16;
+    computerPaddleSpeed = 0.165;
+    baseBallSpeed = 0.2;
     xBallVelocity = 0.2;
     yBallVelocity = 0.2;
     zBallVelocity = -0.2;
@@ -221,12 +225,15 @@ export const renderContainer = () => {
 
   function resetBall(side) {
     if (side === "computer") {
-      sphere.position.set(0, 0, -9.5);
+      sphere.position.set(0, 0, -9);
       zBallVelocity = Math.abs(zBallVelocity);
     } else if (side === "player") {
-      sphere.position.set(0, 0, 9.5);
+      sphere.position.set(0, 0, 9);
       zBallVelocity = -Math.abs(zBallVelocity);
     }
+    xBallVelocity = baseBallSpeed;
+    yBallVelocity = baseBallSpeed;
+    zBallVelocity = -baseBallSpeed;
   }
   var camera_pivot = new THREE.Object3D();
   var Y_AXIS = new THREE.Vector3(0, 1, 0);
@@ -239,6 +246,10 @@ export const renderContainer = () => {
   // camera.position.set(23, 0, 0);
 
   let id;
+  let xDirection;
+  let yDirection;
+  let xPaddleBallDiff;
+  let yPaddleBallDiff;
   function animate() {
 
     id = requestAnimationFrame(animate);
@@ -275,6 +286,44 @@ export const renderContainer = () => {
       var zCollisionResults = ray.intersectObjects(zCollidableList);
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         zBallVelocity = -zBallVelocity;
+        console.log("sphere", sphere.position.z);
+        // console.log("paddle", demoPaddle1.position);
+        // console.log("x diff", demoPaddle1.position.x - sphere.position.x);
+        // console.log("y diff", demoPaddle1.position.y - sphere.position.y);
+        if (sphere.position.z > 0) {
+          // player side
+          if (demoPaddle1 && demoPaddle2) {
+            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x);
+            // TODO Divide above by length (x) of paddle. do the same for y and below 3 equations
+            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+
+            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            yPaddleBallDiff = demoPaddle1.position.y - sphere.position.y;
+            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
+            // debugger;
+          }
+          if (playerPaddle1 && playerPaddle2) {
+            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xPaddleBallDiff = playerPaddle1.position.x - sphere.position.x;
+            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+
+            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            yPaddleBallDiff = playerPaddle1.position.y - sphere.position.y;
+            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
+          }
+        } else {
+          // comp side
+          if (computerPaddle1 && computerPaddle2) {
+            // xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            // xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
+            // xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+
+            // yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            // yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
+            // yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
+          }
+        }
       }
 
       // var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
@@ -288,6 +337,9 @@ export const renderContainer = () => {
       //   // sphere.translateZ(0);
       //   // scene.add( sphere );
       // }
+      if (xBallVelocity > 5 || yBallVelocity > 5 || zBallVelocity > 5) {
+        debugger;
+      }
     }
 
     sphere.translateX(xBallVelocity);

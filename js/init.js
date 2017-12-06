@@ -9,7 +9,7 @@ export const camera = new THREE.PerspectiveCamera(
 );
 export const renderer = new THREE.WebGLRenderer();
 let sphereGeometry = new THREE.SphereGeometry(0.75, 8, 6);
-let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
 export let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 export const xCollidableList = [];
@@ -34,12 +34,12 @@ export const init = () => {
   scene.add(sphere);
 
   // ** Walls **
-  var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
+  // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
   // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
   var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 16, 20);
-  var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 20, 9);
+  var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 32, 40);
+  var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 40, 18);
 
   var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8);
