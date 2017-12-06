@@ -15,6 +15,7 @@ import {
   demoPaddle1,
   demoPaddle2,
 } from './init';
+import { setTimeout } from 'timers';
 
 export const renderContainer = () => {
   // ** Below code is to enable mouse control of the paddle **
@@ -95,45 +96,79 @@ export const renderContainer = () => {
   var computerPaddleSpeed = 0.225;
 
   function moveComputerPaddle() {
-    if (sphere.position.x > computerPaddle1.position.x) {
+    if (sphere.position.x > computerPaddle1.position.x && computerPaddle1.position.x < 6.5) {
       computerPaddle1.translateX(computerPaddleSpeed);
       computerPaddle2.translateX(computerPaddleSpeed);
     }
-    if (sphere.position.y > computerPaddle1.position.y) {
+    if (sphere.position.y > computerPaddle1.position.y && computerPaddle1.position.y < 3.5) {
       computerPaddle1.translateY(computerPaddleSpeed);
       computerPaddle2.translateY(computerPaddleSpeed);
     }
-    if (sphere.position.x < computerPaddle1.position.x) {
+    if (sphere.position.x < computerPaddle1.position.x && computerPaddle1.position.x > -6.5) {
       computerPaddle1.translateX(-computerPaddleSpeed);
       computerPaddle2.translateX(-computerPaddleSpeed);
     }
-    if (sphere.position.y < computerPaddle1.position.y) {
+    if (sphere.position.y < computerPaddle1.position.y && computerPaddle1.position.y > -3.5) {
       computerPaddle1.translateY(-computerPaddleSpeed);
       computerPaddle2.translateY(-computerPaddleSpeed);
     }
+    // if (sphere.position.x > computerPaddle1.position.x) {
+    //   computerPaddle1.translateX(computerPaddleSpeed);
+    //   computerPaddle2.translateX(computerPaddleSpeed);
+    // }
+    // if (sphere.position.y > computerPaddle1.position.y) {
+    //   computerPaddle1.translateY(computerPaddleSpeed);
+    //   computerPaddle2.translateY(computerPaddleSpeed);
+    // }
+    // if (sphere.position.x < computerPaddle1.position.x) {
+    //   computerPaddle1.translateX(-computerPaddleSpeed);
+    //   computerPaddle2.translateX(-computerPaddleSpeed);
+    // }
+    // if (sphere.position.y < computerPaddle1.position.y) {
+    //   computerPaddle1.translateY(-computerPaddleSpeed);
+    //   computerPaddle2.translateY(-computerPaddleSpeed);
+    // }
 
     if (demoPaddle1 && demoPaddle2) {
-      if (sphere.position.x > demoPaddle1.position.x) {
+      if (sphere.position.x > demoPaddle1.position.x& demoPaddle1.position.x < 6.5) {
         demoPaddle1.translateX(computerPaddleSpeed);
         demoPaddle2.translateX(computerPaddleSpeed);
       }
-      if (sphere.position.y > demoPaddle1.position.y) {
+      if (sphere.position.y > demoPaddle1.position.y && demoPaddle1.position.y < 3.5) {
         demoPaddle1.translateY(computerPaddleSpeed);
         demoPaddle2.translateY(computerPaddleSpeed);
       }
-      if (sphere.position.x < demoPaddle1.position.x) {
+      if (sphere.position.x < demoPaddle1.position.x && demoPaddle1.position.x > -6.5) {
         demoPaddle1.translateX(-computerPaddleSpeed);
         demoPaddle2.translateX(-computerPaddleSpeed);
       }
-      if (sphere.position.y < demoPaddle1.position.y) {
+      if (sphere.position.y < demoPaddle1.position.y && demoPaddle1.position.y > -3.5) {
         demoPaddle1.translateY(-computerPaddleSpeed);
         demoPaddle2.translateY(-computerPaddleSpeed);
       }
     }
+    // if (demoPaddle1 && demoPaddle2) {
+    //   if (sphere.position.x > demoPaddle1.position.x) {
+    //     demoPaddle1.translateX(computerPaddleSpeed);
+    //     demoPaddle2.translateX(computerPaddleSpeed);
+    //   }
+    //   if (sphere.position.y > demoPaddle1.position.y) {
+    //     demoPaddle1.translateY(computerPaddleSpeed);
+    //     demoPaddle2.translateY(computerPaddleSpeed);
+    //   }
+    //   if (sphere.position.x < demoPaddle1.position.x) {
+    //     demoPaddle1.translateX(-computerPaddleSpeed);
+    //     demoPaddle2.translateX(-computerPaddleSpeed);
+    //   }
+    //   if (sphere.position.y < demoPaddle1.position.y) {
+    //     demoPaddle1.translateY(-computerPaddleSpeed);
+    //     demoPaddle2.translateY(-computerPaddleSpeed);
+    //   }
+    // }
   }
 
   // demo ball speed
-  var baseBallSpeed = 0.25;
+  var baseBallSpeed = 0.2;
   var xBallVelocity = 0.25;
   var yBallVelocity = 0.25;
   var zBallVelocity = -0.25;
@@ -224,17 +259,21 @@ export const renderContainer = () => {
   }
 
   function resetBall(side) {
-    if (side === "computer") {
-      sphere.position.set(0, 0, -9);
-      zBallVelocity = Math.abs(zBallVelocity);
-    } else if (side === "player") {
-      sphere.position.set(0, 0, 9);
-      zBallVelocity = -Math.abs(zBallVelocity);
-    }
-    xBallVelocity = baseBallSpeed;
-    yBallVelocity = baseBallSpeed;
-    zBallVelocity = -baseBallSpeed;
+    // setTimeout(() => {
+      if (side === "computer") {
+        sphere.position.set(0, 0, -9);
+        zBallVelocity = Math.abs(zBallVelocity);
+      } else if (side === "player") {
+        sphere.position.set(0, 0, 9);
+        zBallVelocity = -Math.abs(zBallVelocity);
+      }
+      xBallVelocity = baseBallSpeed;
+      yBallVelocity = baseBallSpeed;
+      // zBallVelocity = -baseBallSpeed;
+    // }, 1500);
   }
+
+
   var camera_pivot = new THREE.Object3D();
   var Y_AXIS = new THREE.Vector3(0, 1, 0);
 
@@ -286,43 +325,36 @@ export const renderContainer = () => {
       var zCollisionResults = ray.intersectObjects(zCollidableList);
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         zBallVelocity = -zBallVelocity;
-        console.log("sphere", sphere.position.z);
-        // console.log("paddle", demoPaddle1.position);
-        // console.log("x diff", demoPaddle1.position.x - sphere.position.x);
-        // console.log("y diff", demoPaddle1.position.y - sphere.position.y);
         if (sphere.position.z > 0) {
           // player side
-          if (demoPaddle1 && demoPaddle2) {
+          if (gameMode === "demo") {
             xDirection = xBallVelocity / Math.abs(xBallVelocity);
-            xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x);
-            // TODO Divide above by length (x) of paddle. do the same for y and below 3 equations
-            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+            xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x) / 1.5;
+            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
+            
+            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            yPaddleBallDiff = (demoPaddle1.position.y - sphere.position.y);
+            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+          }
+          if (gameMode === "play") {
+            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
+            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
 
             yDirection = yBallVelocity / Math.abs(yBallVelocity);
-            yPaddleBallDiff = demoPaddle1.position.y - sphere.position.y;
-            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
-            // debugger;
+            yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
+            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            console.log("FUHHHH");
           }
-          if (playerPaddle1 && playerPaddle2) {
-            xDirection = xBallVelocity / Math.abs(xBallVelocity);
-            xPaddleBallDiff = playerPaddle1.position.x - sphere.position.x;
-            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
-
-            yDirection = yBallVelocity / Math.abs(yBallVelocity);
-            yPaddleBallDiff = playerPaddle1.position.y - sphere.position.y;
-            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
-          }
-        } else {
+        } else if (sphere.position.z < 0) {
           // comp side
-          if (computerPaddle1 && computerPaddle2) {
-            // xDirection = xBallVelocity / Math.abs(xBallVelocity);
-            // xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
-            // xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.05;
+          xDirection = xBallVelocity / Math.abs(xBallVelocity);
+          xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
+          xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
 
-            // yDirection = yBallVelocity / Math.abs(yBallVelocity);
-            // yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
-            // yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.05;
-          }
+          yDirection = yBallVelocity / Math.abs(yBallVelocity);
+          yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
+          yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
         }
       }
 
@@ -337,9 +369,6 @@ export const renderContainer = () => {
       //   // sphere.translateZ(0);
       //   // scene.add( sphere );
       // }
-      if (xBallVelocity > 5 || yBallVelocity > 5 || zBallVelocity > 5) {
-        debugger;
-      }
     }
 
     sphere.translateX(xBallVelocity);
