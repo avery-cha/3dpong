@@ -45512,22 +45512,6 @@ const renderContainer = () => {
       __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].translateY(-computerPaddleSpeed);
       __WEBPACK_IMPORTED_MODULE_1__init__["c" /* computerPaddle2 */].translateY(-computerPaddleSpeed);
     }
-    // if (sphere.position.x > computerPaddle1.position.x) {
-    //   computerPaddle1.translateX(computerPaddleSpeed);
-    //   computerPaddle2.translateX(computerPaddleSpeed);
-    // }
-    // if (sphere.position.y > computerPaddle1.position.y) {
-    //   computerPaddle1.translateY(computerPaddleSpeed);
-    //   computerPaddle2.translateY(computerPaddleSpeed);
-    // }
-    // if (sphere.position.x < computerPaddle1.position.x) {
-    //   computerPaddle1.translateX(-computerPaddleSpeed);
-    //   computerPaddle2.translateX(-computerPaddleSpeed);
-    // }
-    // if (sphere.position.y < computerPaddle1.position.y) {
-    //   computerPaddle1.translateY(-computerPaddleSpeed);
-    //   computerPaddle2.translateY(-computerPaddleSpeed);
-    // }
 
     if (__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */] && __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]) {
       if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x < 6.5) {
@@ -45547,24 +45531,6 @@ const renderContainer = () => {
         __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */].translateY(-computerPaddleSpeed);
       }
     }
-    // if (demoPaddle1 && demoPaddle2) {
-    //   if (sphere.position.x > demoPaddle1.position.x) {
-    //     demoPaddle1.translateX(computerPaddleSpeed);
-    //     demoPaddle2.translateX(computerPaddleSpeed);
-    //   }
-    //   if (sphere.position.y > demoPaddle1.position.y) {
-    //     demoPaddle1.translateY(computerPaddleSpeed);
-    //     demoPaddle2.translateY(computerPaddleSpeed);
-    //   }
-    //   if (sphere.position.x < demoPaddle1.position.x) {
-    //     demoPaddle1.translateX(-computerPaddleSpeed);
-    //     demoPaddle2.translateX(-computerPaddleSpeed);
-    //   }
-    //   if (sphere.position.y < demoPaddle1.position.y) {
-    //     demoPaddle1.translateY(-computerPaddleSpeed);
-    //     demoPaddle2.translateY(-computerPaddleSpeed);
-    //   }
-    // }
   }
 
   // demo ball speed
@@ -45573,17 +45539,32 @@ const renderContainer = () => {
   var yBallVelocity = 0.25;
   var zBallVelocity = -0.25;
 
+  let pauseGame = false;
+
+  function pauseGameOn() {
+    pauseGame = true;
+  }
+
+  function pauseGameOff() {
+    pauseGame = false;
+    requestAnimationFrame(render);
+  }
+
   function checkPastNet() {
-    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z < -13) {
+    if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z < -10) {
       if (gameMode === "play") {
         decrementLife("computer");
       }
       resetBall("player");
-    } else if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z > 13) {
+    } else if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z > 10) {
       if (gameMode === "play") {
         decrementLife("player");
       }
       resetBall("computer");
+      // setTimeout(() => gameOverBool = true, 1);
+      // setTimeout(() => gameOverBool = false, 1);
+      // setTimeout(() => resetBall("computer"), 1000);
+      // setTimeout()
     }
   }
 
@@ -45674,6 +45655,8 @@ const renderContainer = () => {
       yBallVelocity = baseBallSpeed;
       // zBallVelocity = -baseBallSpeed;
     // }, 1000);
+    // pauseGameOn();
+    // setTimeout(pauseGameOff, 1000);
   }
 
 
@@ -45788,7 +45771,7 @@ const renderContainer = () => {
   }
 
   function render() {
-    if (gameOverBool) return;
+    if (gameOverBool || pauseGame) return;
     __WEBPACK_IMPORTED_MODULE_1__init__["i" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */], __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */]);
   }
 

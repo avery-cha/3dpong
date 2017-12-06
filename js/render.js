@@ -114,22 +114,6 @@ export const renderContainer = () => {
       computerPaddle1.translateY(-computerPaddleSpeed);
       computerPaddle2.translateY(-computerPaddleSpeed);
     }
-    // if (sphere.position.x > computerPaddle1.position.x) {
-    //   computerPaddle1.translateX(computerPaddleSpeed);
-    //   computerPaddle2.translateX(computerPaddleSpeed);
-    // }
-    // if (sphere.position.y > computerPaddle1.position.y) {
-    //   computerPaddle1.translateY(computerPaddleSpeed);
-    //   computerPaddle2.translateY(computerPaddleSpeed);
-    // }
-    // if (sphere.position.x < computerPaddle1.position.x) {
-    //   computerPaddle1.translateX(-computerPaddleSpeed);
-    //   computerPaddle2.translateX(-computerPaddleSpeed);
-    // }
-    // if (sphere.position.y < computerPaddle1.position.y) {
-    //   computerPaddle1.translateY(-computerPaddleSpeed);
-    //   computerPaddle2.translateY(-computerPaddleSpeed);
-    // }
 
     if (demoPaddle1 && demoPaddle2) {
       if (sphere.position.x > demoPaddle1.position.x && demoPaddle1.position.x < 6.5) {
@@ -149,24 +133,6 @@ export const renderContainer = () => {
         demoPaddle2.translateY(-computerPaddleSpeed);
       }
     }
-    // if (demoPaddle1 && demoPaddle2) {
-    //   if (sphere.position.x > demoPaddle1.position.x) {
-    //     demoPaddle1.translateX(computerPaddleSpeed);
-    //     demoPaddle2.translateX(computerPaddleSpeed);
-    //   }
-    //   if (sphere.position.y > demoPaddle1.position.y) {
-    //     demoPaddle1.translateY(computerPaddleSpeed);
-    //     demoPaddle2.translateY(computerPaddleSpeed);
-    //   }
-    //   if (sphere.position.x < demoPaddle1.position.x) {
-    //     demoPaddle1.translateX(-computerPaddleSpeed);
-    //     demoPaddle2.translateX(-computerPaddleSpeed);
-    //   }
-    //   if (sphere.position.y < demoPaddle1.position.y) {
-    //     demoPaddle1.translateY(-computerPaddleSpeed);
-    //     demoPaddle2.translateY(-computerPaddleSpeed);
-    //   }
-    // }
   }
 
   // demo ball speed
@@ -175,17 +141,32 @@ export const renderContainer = () => {
   var yBallVelocity = 0.25;
   var zBallVelocity = -0.25;
 
+  let pauseGame = false;
+
+  function pauseGameOn() {
+    pauseGame = true;
+  }
+
+  function pauseGameOff() {
+    pauseGame = false;
+    requestAnimationFrame(render);
+  }
+
   function checkPastNet() {
-    if (sphere.position.z < -13) {
+    if (sphere.position.z < -10) {
       if (gameMode === "play") {
         decrementLife("computer");
       }
       resetBall("player");
-    } else if (sphere.position.z > 13) {
+    } else if (sphere.position.z > 10) {
       if (gameMode === "play") {
         decrementLife("player");
       }
       resetBall("computer");
+      // setTimeout(() => gameOverBool = true, 1);
+      // setTimeout(() => gameOverBool = false, 1);
+      // setTimeout(() => resetBall("computer"), 1000);
+      // setTimeout()
     }
   }
 
@@ -276,6 +257,8 @@ export const renderContainer = () => {
       yBallVelocity = baseBallSpeed;
       // zBallVelocity = -baseBallSpeed;
     // }, 1000);
+    // pauseGameOn();
+    // setTimeout(pauseGameOff, 1000);
   }
 
 
@@ -390,7 +373,7 @@ export const renderContainer = () => {
   }
 
   function render() {
-    if (gameOverBool) return;
+    if (gameOverBool || pauseGame) return;
     renderer.render(scene, camera);
   }
 
