@@ -1,5 +1,20 @@
 import * as THREE from 'three';
 import initSphere from './sphere';
+import {
+  initWall,
+  xCollidableList,
+  yCollidableList,
+  zCollidableList,
+} from './walls';
+import {
+  initPaddle,
+  playerPaddle1,
+  playerPaddle2,
+  computerPaddle1,
+  computerPaddle2,
+  demoPaddle1,
+  demoPaddle2,
+} from './paddles';
 
 export const scene = new THREE.Scene();
 export const camera = new THREE.PerspectiveCamera(
@@ -9,15 +24,8 @@ export const camera = new THREE.PerspectiveCamera(
   1000
 );
 export const renderer = new THREE.WebGLRenderer();
-export const xCollidableList = [];
-export const yCollidableList = [];
-export const zCollidableList = [];
-export let playerPaddle1 = undefined;
-export let playerPaddle2 = undefined;
-export let computerPaddle1 = undefined;
-export let computerPaddle2 = undefined;
-export let demoPaddle1 = undefined;
-export let demoPaddle2 = undefined;
+
+
 
 export const init = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -25,106 +33,12 @@ export const init = () => {
 
   // ** Create Objects **
   initSphere();
-
-  // ** Walls **
-  // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
-  // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
-  var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true });
-
-  var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 24, 30);
-  var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 30, 14);
-
-  var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  rightPlane.translateX(8);
-  rightPlane.translateZ(0);
-  rightPlane.rotation.y = 3.14159 / 2;
-  scene.add(rightPlane);
-  yCollidableList.push(rightPlane);
-  var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  rightPlane.translateX(8);
-  rightPlane.translateZ(0);
-  rightPlane.rotation.y = 3.14159 / 2;
-  scene.add(rightPlane);
-
-  var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  leftPlane.translateX(-8);
-  leftPlane.translateZ(0);
-  leftPlane.rotation.y = 3.14159 / 2;
-  scene.add(leftPlane);
-  yCollidableList.push(leftPlane);
-  var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  leftPlane.translateX(-8);
-  leftPlane.translateZ(0);
-  leftPlane.rotation.y = 3.14159 / 2;
-  scene.add(leftPlane);
-
-  var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  topPlane.translateY(4.5);
-  topPlane.rotation.x = 3.14159 / 2;
-  scene.add(topPlane);
-  xCollidableList.push(topPlane);
-  var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  topPlane.translateY(4.5);
-  topPlane.rotation.x = 3.14159 / 2;
-  scene.add(topPlane);
-
-  var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  bottomPlane.translateY(-4.5);
-  bottomPlane.rotation.x = 3.14159 / 2;
-  scene.add(bottomPlane);
-  xCollidableList.push(bottomPlane);
-  var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  bottomPlane.translateY(4.5);
-  bottomPlane.rotation.x = 3.14159 / 2;
-  scene.add(bottomPlane);
-
-  // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // backPlane.translateZ( -10 );
-  // scene.add(backPlane);
-  // zCollidableList.push(backPlane);
-  // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // backPlane.translateZ( -10 );
-  // scene.add(backPlane);
-
-  // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // frontPlane.translateZ( 10 );
-  // scene.add(frontPlane);
-  // zCollidableList.push(frontPlane);
-  // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // frontPlane.translateZ( 10 );
-  // scene.add(frontPlane);
-
-
-  // ** Paddles **
-  var paddleGeometry = new THREE.PlaneGeometry(3, 2, 32, 32);
-  var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true });
-
-  playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  playerPaddle1.translateX(1000);
-  playerPaddle1.translateZ(9.5);
-  scene.add(playerPaddle1);
-  zCollidableList.push(playerPaddle1);
-  playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  playerPaddle2.translateX(1000);
-  playerPaddle2.translateZ(9.5);
-  scene.add(playerPaddle2);
-
-  var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
-  computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-  computerPaddle1.translateZ(-9.5);
-  scene.add(computerPaddle1);
-  zCollidableList.push(computerPaddle1);
-  computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-  computerPaddle2.translateZ(-9.5);
-  scene.add(computerPaddle2);
+  initWall();
+  initPaddle();
   
-  demoPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  demoPaddle1.translateZ(9.5);
-  scene.add(demoPaddle1);
-  zCollidableList.push(demoPaddle1);
-  demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  demoPaddle2.translateZ(9.5);
-  scene.add(demoPaddle2);
+
+
+  
 
   // ** Create 'nets' behind player paddles **
   // var vertNetGeometry = new THREE.PlaneGeometry(7, 9, 7, 9);

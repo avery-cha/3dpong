@@ -4,19 +4,23 @@ import {
   scene,
   camera,
   renderer,
+} from './initialize/init';
+import {
+  sphere,
+} from './initialize/sphere';
+import {
   xCollidableList,
   yCollidableList,
   zCollidableList,
+} from './initialize/walls';
+import {
   playerPaddle1,
   playerPaddle2,
   computerPaddle1,
   computerPaddle2,
   demoPaddle1,
   demoPaddle2,
-} from './initialize/init';
-import {
-  sphere,
-} from './initialize/sphere';
+} from './initialize/paddles';
 import { setTimeout } from 'timers';
 
 export const renderContainer = () => {
