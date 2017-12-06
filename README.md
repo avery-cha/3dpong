@@ -43,10 +43,10 @@ In addition to the webpack entry file, there will be three scripts involved in t
 - [x] Add computer player that attempts to deflect the ball with its paddle
 
 **Day 3**:
-- [ ] Add game start button and lives (3 lives before the game ends)
+- [x] Add game start button and lives (3 lives before the game ends)
 
 **Day 4**:
-- [ ] Increment level and increase difficulty after beating the computer 3 times
+- [x] Increment level and increase difficulty after beating the computer 3 times
 
 ### Bonus Features
 - [ ] Websockets for multiplayer
