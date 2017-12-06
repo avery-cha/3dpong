@@ -33,22 +33,24 @@ export const renderContainer = () => {
   document.addEventListener('mousemove', onDocumentMouseMove, false);
 
   function onDocumentMouseMove(event) {
-    event.preventDefault();
+    if (gameMode === "play") {
+      event.preventDefault();
 
-    vector.set(
-      (event.clientX / window.innerWidth) * 2 - 1,
-      (event.clientY / window.innerHeight) * 2 - 1,
-      0.5
-    );
-    vector.unproject(camera);
-    var dir = vector.sub(camera.position).normalize();
-    var distance = (9.5 - camera.position.z) / dir.z;
-    var pos = camera.position.clone().add(dir.multiplyScalar(distance));
+      vector.set(
+        (event.clientX / window.innerWidth) * 2 - 1,
+        (event.clientY / window.innerHeight) * 2 - 1,
+        0.5
+      );
+      vector.unproject(camera);
+      var dir = vector.sub(camera.position).normalize();
+      var distance = (9.5 - camera.position.z) / dir.z;
+      var pos = camera.position.clone().add(dir.multiplyScalar(distance));
 
-    playerPaddle1.position.set(
-      pos.x, -pos.y, pos.z);
-    playerPaddle2.position.set(
-      pos.x, -pos.y, pos.z);
+      playerPaddle1.position.set(
+        pos.x, -pos.y, pos.z);
+      playerPaddle2.position.set(
+        pos.x, -pos.y, pos.z);
+    }
   }
 
   // ** Below code is to enable WASD keyboard control of the paddle **
@@ -239,8 +241,10 @@ export const renderContainer = () => {
     gameMode = "play";
     scene.remove(demoPaddle1);
     scene.remove(demoPaddle2);
-    scene.add(playerPaddle1);
-    scene.add(playerPaddle2);
+    // scene.add(playerPaddle1);
+    // scene.add(playerPaddle2);
+    // playerPaddle1.position.set(0, 0, 9.5);
+    // playerPaddle2.position.set(0, 0, 9.5);
     requestAnimationFrame(render);
   }
 
@@ -270,7 +274,7 @@ export const renderContainer = () => {
       xBallVelocity = baseBallSpeed;
       yBallVelocity = baseBallSpeed;
       // zBallVelocity = -baseBallSpeed;
-    // }, 1500);
+    // }, 1000);
   }
 
 
@@ -344,7 +348,6 @@ export const renderContainer = () => {
             yDirection = yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
             yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
-            console.log("FUHHHH");
           }
         } else if (sphere.position.z < 0) {
           // comp side

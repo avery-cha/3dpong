@@ -8,7 +8,7 @@ export const camera = new THREE.PerspectiveCamera(
   1000
 );
 export const renderer = new THREE.WebGLRenderer();
-let sphereGeometry = new THREE.SphereGeometry(0.75, 8, 6);
+let sphereGeometry = new THREE.SphereGeometry(0.8, 8, 6);
 let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
 export let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
@@ -38,8 +38,8 @@ export const init = () => {
   // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
   var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 32, 40);
-  var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 40, 18);
+  var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 24, 30);
+  var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 30, 14);
 
   var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8);
@@ -107,12 +107,14 @@ export const init = () => {
   var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true });
 
   playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  playerPaddle1.translateX(1000);
   playerPaddle1.translateZ(9.5);
-  // scene.add(playerPaddle1);
+  scene.add(playerPaddle1);
   zCollidableList.push(playerPaddle1);
   playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  playerPaddle2.translateX(1000);
   playerPaddle2.translateZ(9.5);
-  // scene.add(playerPaddle2);
+  scene.add(playerPaddle2);
 
   var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);

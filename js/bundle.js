@@ -45162,7 +45162,7 @@ const camera = new __WEBPACK_IMPORTED_MODULE_0_three__["PerspectiveCamera"](
 const renderer = new __WEBPACK_IMPORTED_MODULE_0_three__["WebGLRenderer"]();
 /* harmony export (immutable) */ __webpack_exports__["i"] = renderer;
 
-let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.75, 8, 6);
+let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.8, 8, 6);
 let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ff00 });
 
 let sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
@@ -45198,8 +45198,8 @@ const init = () => {
   // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
   var planeMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 20, 32, 40);
-  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 9, 40, 18);
+  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 20, 24, 30);
+  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 9, 30, 14);
 
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8);
@@ -45267,12 +45267,14 @@ const init = () => {
   var playerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x0000ee, wireframe: true, transparent: true });
 
   playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
+  playerPaddle1.translateX(1000);
   playerPaddle1.translateZ(9.5);
-  // scene.add(playerPaddle1);
+  scene.add(playerPaddle1);
   zCollidableList.push(playerPaddle1);
   playerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
+  playerPaddle2.translateX(1000);
   playerPaddle2.translateZ(9.5);
-  // scene.add(playerPaddle2);
+  scene.add(playerPaddle2);
 
   var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
@@ -45429,22 +45431,24 @@ const renderContainer = () => {
   document.addEventListener('mousemove', onDocumentMouseMove, false);
 
   function onDocumentMouseMove(event) {
-    event.preventDefault();
+    if (gameMode === "play") {
+      event.preventDefault();
 
-    vector.set(
-      (event.clientX / window.innerWidth) * 2 - 1,
-      (event.clientY / window.innerHeight) * 2 - 1,
-      0.5
-    );
-    vector.unproject(__WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */]);
-    var dir = vector.sub(__WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position).normalize();
-    var distance = (9.5 - __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.z) / dir.z;
-    var pos = __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.clone().add(dir.multiplyScalar(distance));
+      vector.set(
+        (event.clientX / window.innerWidth) * 2 - 1,
+        (event.clientY / window.innerHeight) * 2 - 1,
+        0.5
+      );
+      vector.unproject(__WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */]);
+      var dir = vector.sub(__WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position).normalize();
+      var distance = (9.5 - __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.z) / dir.z;
+      var pos = __WEBPACK_IMPORTED_MODULE_1__init__["a" /* camera */].position.clone().add(dir.multiplyScalar(distance));
 
-    __WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.set(
-      pos.x, -pos.y, pos.z);
-    __WEBPACK_IMPORTED_MODULE_1__init__["h" /* playerPaddle2 */].position.set(
-      pos.x, -pos.y, pos.z);
+      __WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.set(
+        pos.x, -pos.y, pos.z);
+      __WEBPACK_IMPORTED_MODULE_1__init__["h" /* playerPaddle2 */].position.set(
+        pos.x, -pos.y, pos.z);
+    }
   }
 
   // ** Below code is to enable WASD keyboard control of the paddle **
@@ -45635,8 +45639,10 @@ const renderContainer = () => {
     gameMode = "play";
     __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */]);
     __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]);
-    __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].add(__WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */]);
-    __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].add(__WEBPACK_IMPORTED_MODULE_1__init__["h" /* playerPaddle2 */]);
+    // scene.add(playerPaddle1);
+    // scene.add(playerPaddle2);
+    // playerPaddle1.position.set(0, 0, 9.5);
+    // playerPaddle2.position.set(0, 0, 9.5);
     requestAnimationFrame(render);
   }
 
@@ -45666,7 +45672,7 @@ const renderContainer = () => {
       xBallVelocity = baseBallSpeed;
       yBallVelocity = baseBallSpeed;
       // zBallVelocity = -baseBallSpeed;
-    // }, 1500);
+    // }, 1000);
   }
 
 
@@ -45740,7 +45746,6 @@ const renderContainer = () => {
             yDirection = yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y);
             yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
-            console.log("FUHHHH");
           }
         } else if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z < 0) {
           // comp side
