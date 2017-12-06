@@ -33,6 +33,18 @@ import {
   resetCamera,
   demoCameraPivot,
 } from './camera';
+import {
+  resetBall,
+  moveBall,
+  updateBallSpeed,
+  updateXBallVelocity,
+  updateYBallVelocity,
+  updateZBallVelocity,
+  baseBallSpeed,
+  xBallVelocity,
+  yBallVelocity,
+  zBallVelocity,
+} from './ball';
 import { setTimeout } from 'timers';
 
 export let gameMode;
@@ -40,14 +52,6 @@ export let gameMode;
 export const renderContainer = () => {
   userControls();
   initCamera();
-  
-
-
-  // demo ball speed
-  var baseBallSpeed = 0.3;
-  var xBallVelocity = 0.25;
-  var yBallVelocity = 0.25;
-  var zBallVelocity = -0.25;
 
   // let pauseGame = false;
 
@@ -108,10 +112,7 @@ export const renderContainer = () => {
   function nextLevel() {
     computerLives = 3;
     computerPaddleSpeed *= 1.08;
-    baseBallSpeed *= 1.07;
-    xBallVelocity *= 1.07;
-    yBallVelocity *= 1.07;
-    zBallVelocity *= 1.07;
+    updateBallSpeed(baseBallSpeed * 1.07);
     level += 1;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
   }
@@ -140,10 +141,7 @@ export const renderContainer = () => {
     playerLives = 3;
     computerLives = 3;
     computerPaddleSpeed = 0.165;
-    baseBallSpeed = 0.2;
-    xBallVelocity = 0.2;
-    yBallVelocity = 0.2;
-    zBallVelocity = -0.2;
+    updateBallSpeed(0.2);
     level = 1;
     sphere.position.set(0, 0, 9.5);
     document.getElementById('comp-score').innerHTML = computerLives;
@@ -151,26 +149,7 @@ export const renderContainer = () => {
     document.getElementById("game-level").innerHTML = `Level ${level}`;
   }
 
-  function resetBall(side) {
-    // setTimeout(() => {
-      if (side === "computer") {
-        sphere.position.set(0, 0, -9);
-        zBallVelocity = Math.abs(zBallVelocity);
-      } else if (side === "player") {
-        sphere.position.set(0, 0, 9);
-        zBallVelocity = -Math.abs(zBallVelocity);
-      }
-      xBallVelocity = baseBallSpeed;
-      yBallVelocity = baseBallSpeed;
-      // zBallVelocity = -baseBallSpeed;
-    // }, 1000);
-    // pauseGameOn();
-    // setTimeout(pauseGameOff, 1000);
-  }
 
-
-  
-  
   let id;
   let xDirection;
   let yDirection;
@@ -198,54 +177,67 @@ export const renderContainer = () => {
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
       var xCollisionResults = ray.intersectObjects(xCollidableList);
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
-        yBallVelocity = -yBallVelocity;
+        // yBallVelocity = -yBallVelocity;
+        updateYBallVelocity(-yBallVelocity);
       }
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
       var yCollisionResults = ray.intersectObjects(yCollidableList);
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
-        xBallVelocity = -xBallVelocity;
+        // xBallVelocity = -xBallVelocity;
+        updateXBallVelocity(-xBallVelocity);
       }
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
       var zCollisionResults = ray.intersectObjects(zCollidableList);
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
-        zBallVelocity = -zBallVelocity;
+        // zBallVelocity = -zBallVelocity;
+        updateZBallVelocity(-zBallVelocity);
         if (sphere.position.z > 0) {
           // player side
           // BUG look here for sticky ball issues
           sphere.position.z = 8.7;
           if (gameMode === "demo") {
             // sphere.position.z = demoPaddle1.position.z - (2 * sphere.position.z) - (sphere.radius * 2);
-            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x) / 1.5;
-            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
-            
-            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
+            updateXBallVelocity(newXBallVelocity);
+
+            yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (demoPaddle1.position.y - sphere.position.y);
-            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            updateYBallVelocity(newYBallVelocity);
+
           }
           if (gameMode === "play") {
             // sphere.position.z -= playerPaddle1.position.z - sphere.position.z - (sphere.radius * 2)
-            xDirection = xBallVelocity / Math.abs(xBallVelocity);
+            xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
-            xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
-            
-            yDirection = yBallVelocity / Math.abs(yBallVelocity);
+            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
+            updateXBallVelocity(newXBallVelocity);
+
+
+            yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
-            yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            updateYBallVelocity(newYBallVelocity);
+
           }
         } else if (sphere.position.z < 0) {
           // comp side
           // sphere.position.z += computerPaddle1.position.z - sphere.position.z + (sphere.radius * 2);
-          xDirection = xBallVelocity / Math.abs(xBallVelocity);
+          xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
           xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
-          xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
-          
-          yDirection = yBallVelocity / Math.abs(yBallVelocity);
+          let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
+          updateXBallVelocity(newXBallVelocity);
+
+          yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
           yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
-          yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
-          
+          let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
+          updateYBallVelocity(newYBallVelocity);
+
+
           // BUG look here for sticky ball issues
           
           sphere.position.z = -8.7;
@@ -265,9 +257,7 @@ export const renderContainer = () => {
       // }
     }
 
-    sphere.translateX(xBallVelocity);
-    sphere.translateY(yBallVelocity);
-    sphere.translateZ(zBallVelocity);
+    moveBall();
   }
 
   function render() {
