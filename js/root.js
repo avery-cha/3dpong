@@ -14,7 +14,7 @@ import {
   // playerPaddle2,
   // computerPaddle1,
   // computerPaddle2,
-} from './init';
+} from './initialize/init';
 
 import {
   renderContainer,

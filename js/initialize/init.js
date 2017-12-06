@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import initSphere from './sphere';
 
 export const scene = new THREE.Scene();
 export const camera = new THREE.PerspectiveCamera(
@@ -8,10 +9,6 @@ export const camera = new THREE.PerspectiveCamera(
   1000
 );
 export const renderer = new THREE.WebGLRenderer();
-let sphereGeometry = new THREE.SphereGeometry(0.8, 8, 6);
-let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-
-export let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 export const xCollidableList = [];
 export const yCollidableList = [];
 export const zCollidableList = [];
@@ -27,11 +24,7 @@ export const init = () => {
   document.body.appendChild(renderer.domElement);
 
   // ** Create Objects **
-  // ** Sphere **
-  // var sphereGeometry = new THREE.SphereGeometry(1, 8, 6);
-  // var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-  // sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-  scene.add(sphere);
+  initSphere();
 
   // ** Walls **
   // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);

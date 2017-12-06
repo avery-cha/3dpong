@@ -4,7 +4,6 @@ import {
   scene,
   camera,
   renderer,
-  sphere,
   xCollidableList,
   yCollidableList,
   zCollidableList,
@@ -14,7 +13,10 @@ import {
   computerPaddle2,
   demoPaddle1,
   demoPaddle2,
-} from './init';
+} from './initialize/init';
+import {
+  sphere,
+} from './initialize/sphere';
 import { setTimeout } from 'timers';
 
 export const renderContainer = () => {
@@ -31,7 +33,8 @@ export const renderContainer = () => {
   var vector = new THREE.Vector3();
 
   document.addEventListener('mousemove', onDocumentMouseMove, false);
-
+  let previousMousePos = [0, 0];
+  let mouseSpeed = [0, 0];
   function onDocumentMouseMove(event) {
     if (gameMode === "play") {
       event.preventDefault();
@@ -50,6 +53,17 @@ export const renderContainer = () => {
         pos.x, -pos.y, pos.z);
       playerPaddle2.position.set(
         pos.x, -pos.y, pos.z);
+      
+      // calculate mouse speed
+      mouseSpeed = [
+        event.clientX - previousMousePos[0],
+        -(event.clientY - previousMousePos[1])
+      ];
+      previousMousePos = [
+        event.clientX,
+        event.clientY
+      ];
+      console.log("mouseSpeed", mouseSpeed);
     }
   }
 
@@ -233,7 +247,7 @@ export const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.152;
+    computerPaddleSpeed = 0.165;
     baseBallSpeed = 0.2;
     xBallVelocity = 0.2;
     yBallVelocity = 0.2;
@@ -242,6 +256,7 @@ export const renderContainer = () => {
     sphere.position.set(0, 0, 9.5);
     document.getElementById('comp-score').innerHTML = computerLives;
     document.getElementById('player-score').innerHTML = playerLives;
+    document.getElementById("game-level").innerHTML = `Level ${level}`;
   }
 
   function resetBall(side) {
