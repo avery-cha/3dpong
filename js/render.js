@@ -95,7 +95,7 @@ export const renderContainer = () => {
   // camera.rotation.y = 3.14159 / 2;
   // camera.lookAt(scene.sphere);
 
-  var computerPaddleSpeed = 0.225;
+  var computerPaddleSpeed = 0.29;
 
   function moveComputerPaddle() {
     if (sphere.position.x > computerPaddle1.position.x && computerPaddle1.position.x < 6.5) {
@@ -132,7 +132,7 @@ export const renderContainer = () => {
     // }
 
     if (demoPaddle1 && demoPaddle2) {
-      if (sphere.position.x > demoPaddle1.position.x& demoPaddle1.position.x < 6.5) {
+      if (sphere.position.x > demoPaddle1.position.x && demoPaddle1.position.x < 6.5) {
         demoPaddle1.translateX(computerPaddleSpeed);
         demoPaddle2.translateX(computerPaddleSpeed);
       }
@@ -170,7 +170,7 @@ export const renderContainer = () => {
   }
 
   // demo ball speed
-  var baseBallSpeed = 0.2;
+  var baseBallSpeed = 0.3;
   var xBallVelocity = 0.25;
   var yBallVelocity = 0.25;
   var zBallVelocity = -0.25;
@@ -220,11 +220,13 @@ export const renderContainer = () => {
 
   function nextLevel() {
     computerLives = 3;
-    computerPaddleSpeed *= 1.085;
-    baseBallSpeed *= 1.08;
-    xBallVelocity *= 1.08;
-    yBallVelocity *= 1.08;
-    zBallVelocity *= 1.08;
+    computerPaddleSpeed *= 1.08;
+    baseBallSpeed *= 1.07;
+    xBallVelocity *= 1.07;
+    yBallVelocity *= 1.07;
+    zBallVelocity *= 1.07;
+    level += 1;
+    document.getElementById("game-level").innerHTML = `Level ${level}`;
   }
 
   let gameOverBool = false;
@@ -233,18 +235,16 @@ export const renderContainer = () => {
     // cancelAnimationFrame(id);
     document.getElementById("game-over-message").classList.remove("hide");
   }
-
+  
+  let level = 1;
   let gameMode = "demo";
   function startGame() {
     document.getElementById("game-over-message").classList.add("hide");
+    document.getElementById("game-level").innerHTML = `Level ${level}`;
     resetGame();
     gameMode = "play";
     scene.remove(demoPaddle1);
     scene.remove(demoPaddle2);
-    // scene.add(playerPaddle1);
-    // scene.add(playerPaddle2);
-    // playerPaddle1.position.set(0, 0, 9.5);
-    // playerPaddle2.position.set(0, 0, 9.5);
     requestAnimationFrame(render);
   }
 
@@ -252,11 +252,12 @@ export const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.165;
+    computerPaddleSpeed = 0.152;
     baseBallSpeed = 0.2;
     xBallVelocity = 0.2;
     yBallVelocity = 0.2;
     zBallVelocity = -0.2;
+    level = 1;
     sphere.position.set(0, 0, 9.5);
     document.getElementById('comp-score').innerHTML = computerLives;
     document.getElementById('player-score').innerHTML = playerLives;
@@ -331,7 +332,10 @@ export const renderContainer = () => {
         zBallVelocity = -zBallVelocity;
         if (sphere.position.z > 0) {
           // player side
+          // BUG look here for sticky ball issues
+          sphere.position.z = 8.7;
           if (gameMode === "demo") {
+            // sphere.position.z = demoPaddle1.position.z - (2 * sphere.position.z) - (sphere.radius * 2);
             xDirection = xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x) / 1.5;
             xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
@@ -341,23 +345,29 @@ export const renderContainer = () => {
             yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
           }
           if (gameMode === "play") {
+            // sphere.position.z -= playerPaddle1.position.z - sphere.position.z - (sphere.radius * 2)
             xDirection = xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
             xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
-
+            
             yDirection = yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
             yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
           }
         } else if (sphere.position.z < 0) {
           // comp side
+          // sphere.position.z += computerPaddle1.position.z - sphere.position.z + (sphere.radius * 2);
           xDirection = xBallVelocity / Math.abs(xBallVelocity);
           xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
           xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
-
+          
           yDirection = yBallVelocity / Math.abs(yBallVelocity);
           yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
           yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
+          
+          // BUG look here for sticky ball issues
+          
+          sphere.position.z = -8.7;
         }
       }
 

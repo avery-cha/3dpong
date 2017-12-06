@@ -45493,7 +45493,7 @@ const renderContainer = () => {
   // camera.rotation.y = 3.14159 / 2;
   // camera.lookAt(scene.sphere);
 
-  var computerPaddleSpeed = 0.225;
+  var computerPaddleSpeed = 0.29;
 
   function moveComputerPaddle() {
     if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x < 6.5) {
@@ -45530,7 +45530,7 @@ const renderContainer = () => {
     // }
 
     if (__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */] && __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]) {
-      if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x& __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x < 6.5) {
+      if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x < 6.5) {
         __WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].translateX(computerPaddleSpeed);
         __WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */].translateX(computerPaddleSpeed);
       }
@@ -45568,7 +45568,7 @@ const renderContainer = () => {
   }
 
   // demo ball speed
-  var baseBallSpeed = 0.2;
+  var baseBallSpeed = 0.3;
   var xBallVelocity = 0.25;
   var yBallVelocity = 0.25;
   var zBallVelocity = -0.25;
@@ -45618,11 +45618,13 @@ const renderContainer = () => {
 
   function nextLevel() {
     computerLives = 3;
-    computerPaddleSpeed *= 1.085;
-    baseBallSpeed *= 1.08;
-    xBallVelocity *= 1.08;
-    yBallVelocity *= 1.08;
-    zBallVelocity *= 1.08;
+    computerPaddleSpeed *= 1.08;
+    baseBallSpeed *= 1.07;
+    xBallVelocity *= 1.07;
+    yBallVelocity *= 1.07;
+    zBallVelocity *= 1.07;
+    level += 1;
+    document.getElementById("game-level").innerHTML = `Level ${level}`;
   }
 
   let gameOverBool = false;
@@ -45631,18 +45633,16 @@ const renderContainer = () => {
     // cancelAnimationFrame(id);
     document.getElementById("game-over-message").classList.remove("hide");
   }
-
+  
+  let level = 1;
   let gameMode = "demo";
   function startGame() {
     document.getElementById("game-over-message").classList.add("hide");
+    document.getElementById("game-level").innerHTML = `Level ${level}`;
     resetGame();
     gameMode = "play";
     __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */]);
     __WEBPACK_IMPORTED_MODULE_1__init__["j" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_1__init__["e" /* demoPaddle2 */]);
-    // scene.add(playerPaddle1);
-    // scene.add(playerPaddle2);
-    // playerPaddle1.position.set(0, 0, 9.5);
-    // playerPaddle2.position.set(0, 0, 9.5);
     requestAnimationFrame(render);
   }
 
@@ -45650,11 +45650,12 @@ const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.165;
+    computerPaddleSpeed = 0.152;
     baseBallSpeed = 0.2;
     xBallVelocity = 0.2;
     yBallVelocity = 0.2;
     zBallVelocity = -0.2;
+    level = 1;
     __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.set(0, 0, 9.5);
     document.getElementById('comp-score').innerHTML = computerLives;
     document.getElementById('player-score').innerHTML = playerLives;
@@ -45729,7 +45730,10 @@ const renderContainer = () => {
         zBallVelocity = -zBallVelocity;
         if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z > 0) {
           // player side
+          // BUG look here for sticky ball issues
+          __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z = 8.7;
           if (gameMode === "demo") {
+            // sphere.position.z = demoPaddle1.position.z - (2 * sphere.position.z) - (sphere.radius * 2);
             xDirection = xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_1__init__["d" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x) / 1.5;
             xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
@@ -45739,23 +45743,29 @@ const renderContainer = () => {
             yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
           }
           if (gameMode === "play") {
+            // sphere.position.z -= playerPaddle1.position.z - sphere.position.z - (sphere.radius * 2)
             xDirection = xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x) / 1.5;
             xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
-
+            
             yDirection = yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_1__init__["g" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y);
             yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
           }
         } else if (__WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z < 0) {
           // comp side
+          // sphere.position.z += computerPaddle1.position.z - sphere.position.z + (sphere.radius * 2);
           xDirection = xBallVelocity / Math.abs(xBallVelocity);
           xPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.x;
           xBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
-
+          
           yDirection = yBallVelocity / Math.abs(yBallVelocity);
           yPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_1__init__["b" /* computerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.y;
           yBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
+          
+          // BUG look here for sticky ball issues
+          
+          __WEBPACK_IMPORTED_MODULE_1__init__["k" /* sphere */].position.z = -8.7;
         }
       }
 
