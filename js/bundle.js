@@ -45864,8 +45864,10 @@ function initPaddle() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__userControls__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__computerPaddle__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_timers__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_timers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_timers__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__camera__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_timers__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_timers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_timers__);
+
 
 
 
@@ -45879,17 +45881,8 @@ let gameMode;
 
 const renderContainer = () => {
   Object(__WEBPACK_IMPORTED_MODULE_5__userControls__["a" /* userControls */])();
-
-  // normal camera view
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].position.z = 18;
-
-  // opponent camera view
-  // camera.position.z = -18;
-  // camera.rotation.y = 180 * Math.PI / 180
-
-
-  // camera.rotation.y = 3.14159 / 2;
-  // camera.lookAt(scene.sphere);
+  Object(__WEBPACK_IMPORTED_MODULE_7__camera__["b" /* initCamera */])();
+  
 
 
   // demo ball speed
@@ -45929,12 +45922,10 @@ const renderContainer = () => {
 
   document.getElementById("play-button").onclick = () => {
     startGame();
-    resetCamera();
+    Object(__WEBPACK_IMPORTED_MODULE_7__camera__["c" /* resetCamera */])();
   };
 
-  function resetCamera() {
-    camera_pivot.rotation.set( 0, 0, 0);
-  }
+  
 
   let playerLives = 3;
   let computerLives = 3;
@@ -46020,13 +46011,7 @@ const renderContainer = () => {
   }
 
 
-  var camera_pivot = new __WEBPACK_IMPORTED_MODULE_0_three__["Object3D"]();
-  var Y_AXIS = new __WEBPACK_IMPORTED_MODULE_0_three__["Vector3"](0, 1, 0);
-
-  // camera pivot
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].add(camera_pivot);
-  camera_pivot.add(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */]);
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].lookAt(camera_pivot.position);
+  
   
   let id;
   let xDirection;
@@ -46041,9 +46026,7 @@ const renderContainer = () => {
     // update();
 
     // camera pivot
-    if (gameMode === "demo") {
-      camera_pivot.rotateOnAxis(Y_AXIS, 0.01);
-    }
+    Object(__WEBPACK_IMPORTED_MODULE_7__camera__["a" /* demoCameraPivot */])();
 
     Object(__WEBPACK_IMPORTED_MODULE_6__computerPaddle__["a" /* moveComputerPaddle */])(computerPaddleSpeed);
     checkPastNet();
@@ -46297,6 +46280,61 @@ const moveComputerPaddle = (paddleSpeed = demoPaddleSpeed) => {
   }
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = moveComputerPaddle;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export camera_pivot */
+/* unused harmony export Y_AXIS */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render__ = __webpack_require__(13);
+
+
+
+
+let camera_pivot;
+let Y_AXIS;
+
+const initCamera = () => {
+  // normal camera view
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].position.z = 18;
+
+  // opponent camera view
+  // camera.position.z = -18;
+  // camera.rotation.y = 180 * Math.PI / 180
+
+
+  // camera.rotation.y = 3.14159 / 2;
+  // camera.lookAt(scene.sphere);
+
+  camera_pivot = new __WEBPACK_IMPORTED_MODULE_0_three__["Object3D"]();
+  Y_AXIS = new __WEBPACK_IMPORTED_MODULE_0_three__["Vector3"](0, 1, 0);
+
+  // camera pivot
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].add(camera_pivot);
+  camera_pivot.add(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */]);
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].lookAt(camera_pivot.position);
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = initCamera;
+
+
+const resetCamera = () => {
+  camera_pivot.rotation.set(0, 0, 0);
+};
+/* harmony export (immutable) */ __webpack_exports__["c"] = resetCamera;
+
+
+const demoCameraPivot = () => {
+  if (__WEBPACK_IMPORTED_MODULE_2__render__["a" /* gameMode */] === "demo") {
+    camera_pivot.rotateOnAxis(Y_AXIS, 0.01);
+  }
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = demoCameraPivot;
 
 
 /***/ })

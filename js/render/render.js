@@ -28,23 +28,19 @@ import {
   demoPaddleSpeed,
   moveComputerPaddle
 } from './computerPaddle';
+import {
+  initCamera,
+  resetCamera,
+  demoCameraPivot,
+} from './camera';
 import { setTimeout } from 'timers';
 
 export let gameMode;
 
 export const renderContainer = () => {
   userControls();
-
-  // normal camera view
-  camera.position.z = 18;
-
-  // opponent camera view
-  // camera.position.z = -18;
-  // camera.rotation.y = 180 * Math.PI / 180
-
-
-  // camera.rotation.y = 3.14159 / 2;
-  // camera.lookAt(scene.sphere);
+  initCamera();
+  
 
 
   // demo ball speed
@@ -87,9 +83,7 @@ export const renderContainer = () => {
     resetCamera();
   };
 
-  function resetCamera() {
-    camera_pivot.rotation.set( 0, 0, 0);
-  }
+  
 
   let playerLives = 3;
   let computerLives = 3;
@@ -175,13 +169,7 @@ export const renderContainer = () => {
   }
 
 
-  var camera_pivot = new THREE.Object3D();
-  var Y_AXIS = new THREE.Vector3(0, 1, 0);
-
-  // camera pivot
-  scene.add(camera_pivot);
-  camera_pivot.add(camera);
-  camera.lookAt(camera_pivot.position);
+  
   
   let id;
   let xDirection;
@@ -196,9 +184,7 @@ export const renderContainer = () => {
     // update();
 
     // camera pivot
-    if (gameMode === "demo") {
-      camera_pivot.rotateOnAxis(Y_AXIS, 0.01);
-    }
+    demoCameraPivot();
 
     moveComputerPaddle(computerPaddleSpeed);
     checkPastNet();
