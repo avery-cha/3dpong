@@ -69,6 +69,7 @@ export const renderContainer = () => {
 
   function checkPastNet() {
     if (sphere.position.z <= -11) {
+      document.getElementById("beep5").play();
       if (gameMode === "play" && pauseGame === false) {
         decrementLife("computer");
       }
@@ -76,7 +77,9 @@ export const renderContainer = () => {
       pauseGameOn();
       setTimeout(pauseGameOff, 1000);
     } else if (sphere.position.z >= 11) {
-      if (gameMode === "play" && pauseGame === false) {
+      document.getElementById("shut-down2").play();
+
+      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
         decrementLife("player");
       }
       resetBall("player");
@@ -181,6 +184,7 @@ export const renderContainer = () => {
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
         // yBallVelocity = -yBallVelocity;
         updateYBallVelocity(-yBallVelocity);
+        document.getElementById("beep1").play();
       }
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
@@ -188,6 +192,7 @@ export const renderContainer = () => {
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
         // xBallVelocity = -xBallVelocity;
         updateXBallVelocity(-xBallVelocity);
+        document.getElementById("beep1").play();
       }
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
@@ -195,6 +200,7 @@ export const renderContainer = () => {
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         // zBallVelocity = -zBallVelocity;
         updateZBallVelocity(-zBallVelocity);
+        document.getElementById("beep2").play();
         if (sphere.position.z > 0) {
           // player side
           // BUG look here for sticky ball issues

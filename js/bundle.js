@@ -45673,12 +45673,12 @@ const init = () => {
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
   // initNets();
 
-  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 1, 100);
-  light1.position.set(0, 0, 10);
+  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
+  light1.position.set(0, 0, 12);
   scene.add(light1);
   
-  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 1, 100);
-  light2.position.set(0, 0, -10);
+  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
+  light2.position.set(0, 0, -12);
   scene.add(light2);
 
 };
@@ -45702,6 +45702,7 @@ let sphere;
 
 function initSphere() {
   let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.8, 8, 6);
+  // let sphereMaterial = new THREE.MeshMaterial({ color: 0x00ff00 });
   let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshPhongMaterial"]({ color: 0x00ff00 });
 
   sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
@@ -45913,6 +45914,7 @@ const renderContainer = () => {
 
   function checkPastNet() {
     if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
+      document.getElementById("beep5").play();
       if (gameMode === "play" && pauseGame === false) {
         decrementLife("computer");
       }
@@ -45920,7 +45922,9 @@ const renderContainer = () => {
       pauseGameOn();
       Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
     } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
-      if (gameMode === "play" && pauseGame === false) {
+      document.getElementById("shut-down2").play();
+
+      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
         decrementLife("player");
       }
       Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("player");
@@ -46025,6 +46029,7 @@ const renderContainer = () => {
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
         // yBallVelocity = -yBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
+        document.getElementById("beep1").play();
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
@@ -46032,6 +46037,7 @@ const renderContainer = () => {
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
         // xBallVelocity = -xBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
+        document.getElementById("beep1").play();
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
@@ -46039,6 +46045,7 @@ const renderContainer = () => {
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         // zBallVelocity = -zBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["g" /* updateZBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["j" /* zBallVelocity */]);
+        document.getElementById("beep2").play();
         if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z > 0) {
           // player side
           // BUG look here for sticky ball issues
