@@ -4,7 +4,8 @@
   "description": "### Background and Overview 3D Pong is a modern take on the classic arcade video game Pong.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "webpack"
   },
   "repository": {
     "type": "git",
@@ -26,8 +27,5 @@
   "engines": {
     "node": "6.10.1",
     "npm": "3.10.10"
-  },
-  "scripts": {
-    "postinstall": "webpack"
   }
 }
