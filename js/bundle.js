@@ -45335,8 +45335,8 @@ function initWall() {
 
   var planeMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](17, 20, 1, 17, 20);
-  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](20, 10, 1, 20, 10);
+  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](18, 21, 1, 17, 20);
+  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](21, 11, 1, 20, 10);
 
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8.5);
@@ -45957,10 +45957,10 @@ let Y_AXIS;
 
 const initCamera = () => {
   // normal camera view
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].position.z = 19;
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].position.z = 19.5;
 
   // opponent camera view
-  // camera.position.z = -19;
+  // camera.position.z = -19.5;
   // camera.rotation.y = 180 * Math.PI / 180
 
 

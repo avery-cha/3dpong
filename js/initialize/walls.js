@@ -81,8 +81,8 @@ export function initWall() {
 
   var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new THREE.BoxGeometry(17, 20, 1, 17, 20);
-  var vertPlaneGeometry = new THREE.BoxGeometry(20, 10, 1, 20, 10);
+  var horizPlaneGeometry = new THREE.BoxGeometry(18, 21, 1, 17, 20);
+  var vertPlaneGeometry = new THREE.BoxGeometry(21, 11, 1, 20, 10);
 
   var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8.5);
