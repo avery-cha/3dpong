@@ -48,7 +48,7 @@ import {
 import {
   moveOutline,
 } from './outline';
-import { setTimeout } from 'timers';
+
 
 export let gameMode;
 
