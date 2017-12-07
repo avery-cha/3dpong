@@ -45898,6 +45898,9 @@ function initPaddle() {
 let gameMode;
 
 const renderContainer = () => {
+
+  let muteBool = true;
+
   Object(__WEBPACK_IMPORTED_MODULE_5__userControls__["a" /* userControls */])();
   Object(__WEBPACK_IMPORTED_MODULE_7__camera__["b" /* initCamera */])();
 
@@ -45912,31 +45915,38 @@ const renderContainer = () => {
     requestAnimationFrame(render);
   }
 
-  function checkPastNet() {
-    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
-      document.getElementById("beep5").play();
-      if (gameMode === "play" && pauseGame === false) {
-        decrementLife("computer");
-      }
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("computer");
-      pauseGameOn();
-      Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
-    } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
-      document.getElementById("shut-down2").play();
-
-      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
-        decrementLife("player");
-      }
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("player");
-      pauseGameOn();
-      Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
-    }
-  }
-
   document.getElementById("play-button").onclick = () => {
     startGame();
     Object(__WEBPACK_IMPORTED_MODULE_7__camera__["c" /* resetCamera */])();
   };
+
+  document.getElementById("mute-button").onclick = () => {
+    muteBool = muteBool ? false : true;
+  };
+
+  function checkPastNet() {
+    if (playerLives > 0 && computerLives > 0 ) {
+      if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
+        if (!muteBool) document.getElementById("beep5").play();
+        if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
+          decrementLife("computer");
+        }
+        Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("computer");
+        pauseGameOn();
+        Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
+      } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
+        if (!muteBool) document.getElementById("shut-down2").play();
+
+        if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
+          decrementLife("player");
+        }
+        Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("player");
+        pauseGameOn();
+        Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
+      }
+    }
+  }
+
 
   
 
@@ -46029,7 +46039,7 @@ const renderContainer = () => {
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
         // yBallVelocity = -yBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
-        document.getElementById("beep1").play();
+        if (!muteBool) document.getElementById("beep1").play();
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
@@ -46037,7 +46047,7 @@ const renderContainer = () => {
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
         // xBallVelocity = -xBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
-        document.getElementById("beep1").play();
+        if (!muteBool) document.getElementById("beep1").play();
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
@@ -46045,7 +46055,7 @@ const renderContainer = () => {
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         // zBallVelocity = -zBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["g" /* updateZBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["j" /* zBallVelocity */]);
-        document.getElementById("beep2").play();
+        if (!muteBool) document.getElementById("beep2").play();
         if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z > 0) {
           // player side
           // BUG look here for sticky ball issues
