@@ -280,6 +280,9 @@ export const renderContainer = () => {
     moveBall();
     moveOutline();
     console.log(sphere.position);
+    if (sphere.position.x > 9 || sphere.position.x < -9 || sphere.position.y > 16 || sphere.position.y < -16) {
+      // debugger;
+    }
   }
 
   function render() {

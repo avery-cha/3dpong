@@ -46150,6 +46150,9 @@ const renderContainer = () => {
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
     Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
     console.log(__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position);
+    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x > 9 || __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x < -9 || __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y > 16 || __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y < -16) {
+      // debugger;
+    }
   }
 
   function render() {
@@ -46204,7 +46207,7 @@ const userControls = () => {
       );
       vector.unproject(__WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */]);
       var dir = vector.sub(__WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */].position).normalize();
-      var distance = (9.5 - __WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */].position.z) / dir.z;
+      var distance = (10 - __WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */].position.z) / dir.z;
       var pos = __WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */].position.clone().add(dir.multiplyScalar(distance));
 
       __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["f" /* playerPaddle1 */].position.set(
@@ -46409,9 +46412,11 @@ const resetBall = side => {
   if (side === "computer") {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
+    console.log("reset on comp side");
   } else if (side === "player") {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
+    console.log("reset on hooman side");
   }
   xBallVelocity = 0;
   yBallVelocity = 0;

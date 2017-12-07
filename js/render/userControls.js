@@ -37,7 +37,7 @@ export const userControls = () => {
       );
       vector.unproject(camera);
       var dir = vector.sub(camera.position).normalize();
-      var distance = (9.5 - camera.position.z) / dir.z;
+      var distance = (10 - camera.position.z) / dir.z;
       var pos = camera.position.clone().add(dir.multiplyScalar(distance));
 
       playerPaddle1.position.set(
