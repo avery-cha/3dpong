@@ -39,6 +39,8 @@ export const moveBall = () => {
 };
 
 export function updateBallSpeed(newBaseBallSpeed) {
+  // if (newBaseBallSpeed > 2) debugger;
+
   baseBallSpeed = newBaseBallSpeed;
   xBallVelocity = baseBallSpeed;
   yBallVelocity = baseBallSpeed;
@@ -46,18 +48,22 @@ export function updateBallSpeed(newBaseBallSpeed) {
 }
 
 export function updateXBallVelocity(newXBallVelocity) {
+  // if (newXBallVelocity > 2) debugger;
   xBallVelocity = newXBallVelocity;
 }
 
 export function updateYBallVelocity(newYBallVelocity) {
-  if (newYBallVelocity === -0) {
-    yBallVelocity = 0;
-  } else {
-    yBallVelocity = newYBallVelocity;
-  }
+  // if (newYBallVelocity > 2) debugger;
 
+  // if (newYBallVelocity === -0) {
+    yBallVelocity = 0;
+  // } else {
+    yBallVelocity = newYBallVelocity;
+  // }
 }
 
 export function updateZBallVelocity(newZBallVelocity) {
+  // if (newZBallVelocity > 2) debugger;
+
   zBallVelocity = newZBallVelocity;
 }

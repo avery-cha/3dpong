@@ -232,12 +232,14 @@ export const renderContainer = () => {
             xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
             let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
+            // if (newXBallVelocity > 3) debugger;
             updateXBallVelocity(newXBallVelocity);
             
             
             yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
             let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed;
+            // if (newYBallVelocity > 3) debugger;
             updateYBallVelocity(newYBallVelocity);
             
           }
@@ -280,9 +282,6 @@ export const renderContainer = () => {
     moveBall();
     moveOutline();
     console.log(sphere.position);
-    if (sphere.position.x > 9 || sphere.position.x < -9 || sphere.position.y > 16 || sphere.position.y < -16) {
-      // debugger;
-    }
   }
 
   function render() {

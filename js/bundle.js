@@ -45727,13 +45727,81 @@ const zCollidableList = [];
 
 
 function initWall() {
-  // ** Walls **
-  // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
-  // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
+  // // ** Walls **
+  // // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
+  // // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
+  // var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true });
+
+  // var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 24, 30);
+  // var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 30, 14);
+
+  // var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // rightPlane.translateX(8);
+  // rightPlane.translateZ(0);
+  // rightPlane.rotation.y = 3.14159 / 2;
+  // scene.add(rightPlane);
+  // yCollidableList.push(rightPlane);
+  // var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // rightPlane.translateX(8);
+  // rightPlane.translateZ(0);
+  // rightPlane.rotation.y = 3.14159 / 2;
+  // scene.add(rightPlane);
+
+  // var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // leftPlane.translateX(-8);
+  // leftPlane.translateZ(0);
+  // leftPlane.rotation.y = 3.14159 / 2;
+  // scene.add(leftPlane);
+  // yCollidableList.push(leftPlane);
+  // var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // leftPlane.translateX(-8);
+  // leftPlane.translateZ(0);
+  // leftPlane.rotation.y = 3.14159 / 2;
+  // scene.add(leftPlane);
+
+  // var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // topPlane.translateY(4.5);
+  // topPlane.rotation.x = 3.14159 / 2;
+  // scene.add(topPlane);
+  // xCollidableList.push(topPlane);
+  // var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // topPlane.translateY(4.5);
+  // topPlane.rotation.x = 3.14159 / 2;
+  // scene.add(topPlane);
+
+  // var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // bottomPlane.translateY(-4.5);
+  // bottomPlane.rotation.x = 3.14159 / 2;
+  // scene.add(bottomPlane);
+  // xCollidableList.push(bottomPlane);
+  // var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // bottomPlane.translateY(4.5);
+  // bottomPlane.rotation.x = 3.14159 / 2;
+  // scene.add(bottomPlane);
+  
+  //   // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+  //   // backPlane.translateZ( -10 );
+  //   // scene.add(backPlane);
+  //   // zCollidableList.push(backPlane);
+  //   // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+  //   // backPlane.translateZ( -10 );
+  //   // scene.add(backPlane);
+
+  //   // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+  //   // frontPlane.translateZ( 10 );
+  //   // scene.add(frontPlane);
+  //   // zCollidableList.push(frontPlane);
+  //   // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+  //   // frontPlane.translateZ( 10 );
+  //   // scene.add(frontPlane);
+
+
+
+
   var planeMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff, wireframe: true, transparent: true });
 
-  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 20, 24, 30);
-  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](20, 9, 30, 14);
+  var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](17, 20, 1, 17, 20);
+  var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](20, 10, 1, 20, 10);
 
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
   rightPlane.translateX(8);
@@ -45779,22 +45847,6 @@ function initWall() {
   bottomPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
 
-  
-    // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    // backPlane.translateZ( -10 );
-    // scene.add(backPlane);
-    // zCollidableList.push(backPlane);
-    // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    // backPlane.translateZ( -10 );
-    // scene.add(backPlane);
-
-    // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    // frontPlane.translateZ( 10 );
-    // scene.add(frontPlane);
-    // zCollidableList.push(frontPlane);
-    // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-    // frontPlane.translateZ( 10 );
-    // scene.add(frontPlane);
 }
 
 /***/ }),
@@ -46102,12 +46154,14 @@ const renderContainer = () => {
             xDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
             xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
             let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
+            // if (newXBallVelocity > 3) debugger;
             Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
             
             
             yDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
             yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y);
             let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
+            // if (newYBallVelocity > 3) debugger;
             Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
             
           }
@@ -46150,9 +46204,6 @@ const renderContainer = () => {
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
     Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
     console.log(__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position);
-    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x > 9 || __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x < -9 || __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y > 16 || __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y < -16) {
-      // debugger;
-    }
   }
 
   function render() {
@@ -46435,6 +46486,8 @@ const moveBall = () => {
 
 
 function updateBallSpeed(newBaseBallSpeed) {
+  // if (newBaseBallSpeed > 2) debugger;
+
   baseBallSpeed = newBaseBallSpeed;
   xBallVelocity = baseBallSpeed;
   yBallVelocity = baseBallSpeed;
@@ -46442,19 +46495,23 @@ function updateBallSpeed(newBaseBallSpeed) {
 }
 
 function updateXBallVelocity(newXBallVelocity) {
+  // if (newXBallVelocity > 2) debugger;
   xBallVelocity = newXBallVelocity;
 }
 
 function updateYBallVelocity(newYBallVelocity) {
-  if (newYBallVelocity === -0) {
-    yBallVelocity = 0;
-  } else {
-    yBallVelocity = newYBallVelocity;
-  }
+  // if (newYBallVelocity > 2) debugger;
 
+  // if (newYBallVelocity === -0) {
+    yBallVelocity = 0;
+  // } else {
+    yBallVelocity = newYBallVelocity;
+  // }
 }
 
 function updateZBallVelocity(newZBallVelocity) {
+  // if (newZBallVelocity > 2) debugger;
+
   zBallVelocity = newZBallVelocity;
 }
 
