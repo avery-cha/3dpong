@@ -37,14 +37,10 @@ export const init = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  // ** Create Objects **
   initSphere();
   initWall();
   initPaddle();
   initOutline();
-  initLight();
+  // initLight();
   // initNets();
-
-  
-
 };

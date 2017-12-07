@@ -45668,16 +45668,12 @@ const init = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  // ** Create Objects **
   Object(__WEBPACK_IMPORTED_MODULE_1__sphere__["a" /* default */])();
   Object(__WEBPACK_IMPORTED_MODULE_2__walls__["a" /* initWall */])();
   Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["e" /* initPaddle */])();
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
-  Object(__WEBPACK_IMPORTED_MODULE_5__lights__["a" /* initLight */])();
+  // initLight();
   // initNets();
-
-  
-
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = init;
 
@@ -45699,8 +45695,8 @@ let sphere;
 
 function initSphere() {
   let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.8, 8, 6);
-  // let sphereMaterial = new THREE.MeshMaterial({ color: 0x00ff00 });
-  let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshPhongMaterial"]({ color: 0x00ff00 });
+  let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ff00 });
+  // let sphereMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
 
   sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
 
@@ -45830,35 +45826,67 @@ let demoPaddle2 = undefined;
 
 function initPaddle() {
   // ** Paddles **
-  var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](3, 2, 32, 32);
+  // var paddleGeometry = new THREE.PlaneGeometry(3, 2, 32, 32);
+  // var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true });
+
+  // playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle1.translateX(1000);
+  // playerPaddle1.translateZ(9.5);
+  // scene.add(playerPaddle1);
+  // zCollidableList.push(playerPaddle1);
+  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle2.translateX(1000);
+  // playerPaddle2.translateZ(9.5);
+  // scene.add(playerPaddle2);
+  
+  // var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
+  // computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle1.translateZ(-9.5);
+  // scene.add(computerPaddle1);
+  // zCollidableList.push(computerPaddle1);
+  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle2.translateZ(-9.5);
+  // scene.add(computerPaddle2);
+  
+  // demoPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle1.translateZ(9.5);
+  // scene.add(demoPaddle1);
+  // zCollidableList.push(demoPaddle1);
+  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle2.translateZ(9.5);
+  // scene.add(demoPaddle2);
+
+  // Creating paddles with cubes instead
+  var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](3, 2, 1, 16, 16);
   var playerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x0000ee, wireframe: true, transparent: true });
 
   playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
   playerPaddle1.translateX(1000);
-  playerPaddle1.translateZ(9.5);
+  playerPaddle1.translateZ(10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle1);
   __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(playerPaddle1);
   playerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
   playerPaddle2.translateX(1000);
-  playerPaddle2.translateZ(9.5);
+  playerPaddle2.translateZ(10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle2);
-  
+
   var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
-  computerPaddle1.translateZ(-9.5);
+  computerPaddle1.translateZ(-10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle1);
   __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(computerPaddle1);
   computerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
-  computerPaddle2.translateZ(-9.5);
+  computerPaddle2.translateZ(-10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle2);
-  
+
   demoPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
-  demoPaddle1.translateZ(9.5);
+  demoPaddle1.translateZ(10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle1);
   __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(demoPaddle1);
   demoPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
-  demoPaddle2.translateZ(9.5);
+  demoPaddle2.translateZ(10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle2);
+
 }
 
 /***/ }),
@@ -46121,6 +46149,7 @@ const renderContainer = () => {
 
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
     Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
+    console.log(__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position);
   }
 
   function render() {
@@ -46192,7 +46221,7 @@ const userControls = () => {
         event.clientX,
         event.clientY
       ];
-      console.log("mouseSpeed", mouseSpeed);
+      // console.log("mouseSpeed", mouseSpeed);
     }
   }
 
@@ -46510,15 +46539,15 @@ const moveOutline = () => {
 
 
 const initLight = () => {
-  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
-  light1.position.set(0, 0, 14);
+  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 3, 30);
+  light1.position.set(0, 5, 14);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light1);
 
-  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
-  light2.position.set(0, 0, -14);
+  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 3, 30);
+  light2.position.set(0, 5, -14);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light2);
 };
-/* harmony export (immutable) */ __webpack_exports__["a"] = initLight;
+/* unused harmony export initLight */
 
 
 /***/ })

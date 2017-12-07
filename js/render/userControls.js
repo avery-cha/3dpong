@@ -54,7 +54,7 @@ export const userControls = () => {
         event.clientX,
         event.clientY
       ];
-      console.log("mouseSpeed", mouseSpeed);
+      // console.log("mouseSpeed", mouseSpeed);
     }
   }
 
