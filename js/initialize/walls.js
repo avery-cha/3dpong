@@ -60,6 +60,7 @@ export function initWall() {
   bottomPlane.rotation.x = 3.14159 / 2;
   scene.add(bottomPlane);
 
+  
     // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
     // backPlane.translateZ( -10 );
     // scene.add(backPlane);

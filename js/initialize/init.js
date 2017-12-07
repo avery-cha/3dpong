@@ -15,6 +15,9 @@ import {
   demoPaddle1,
   demoPaddle2,
 } from './paddles';
+import {
+  initOutline
+} from './outline';
 
 export const scene = new THREE.Scene();
 export const camera = new THREE.PerspectiveCamera(
@@ -35,5 +38,6 @@ export const init = () => {
   initSphere();
   initWall();
   initPaddle();
+  initOutline();
   // initNets();
 };

@@ -45638,6 +45638,8 @@ process.umask = function() { return 0; };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sphere__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__walls__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__paddles__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__outline__ = __webpack_require__(19);
+
 
 
 
@@ -45668,6 +45670,7 @@ const init = () => {
   Object(__WEBPACK_IMPORTED_MODULE_1__sphere__["a" /* default */])();
   Object(__WEBPACK_IMPORTED_MODULE_2__walls__["a" /* initWall */])();
   Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["e" /* initPaddle */])();
+  Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
   // initNets();
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = init;
@@ -45690,7 +45693,7 @@ let sphere;
 
 function initSphere() {
   let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.8, 8, 6);
-  let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ff00 });
+  let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ee00 });
 
   sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
 
@@ -45773,6 +45776,7 @@ function initWall() {
   bottomPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
 
+  
     // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
     // backPlane.translateZ( -10 );
     // scene.add(backPlane);
@@ -45866,8 +45870,10 @@ function initPaddle() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__computerPaddle__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__camera__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ball__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_timers__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_timers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_timers__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__outline__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_timers__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_timers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_timers__);
+
 
 
 
@@ -45982,7 +45988,6 @@ const renderContainer = () => {
   }
 
 
-  let id;
   let xDirection;
   let yDirection;
   let xPaddleBallDiff;
@@ -45990,9 +45995,8 @@ const renderContainer = () => {
 
   function animate() {
 
-    id = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
     render();
-    // update();
 
     // camera pivot
     Object(__WEBPACK_IMPORTED_MODULE_7__camera__["a" /* demoCameraPivot */])();
@@ -46090,16 +46094,13 @@ const renderContainer = () => {
     }
 
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
+    Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
   }
 
   function render() {
     if (gameOverBool) return;
     __WEBPACK_IMPORTED_MODULE_1__initialize_init__["c" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */], __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */]);
   }
-
-  // function update() {
-
-  // }
 
   animate();
 };
@@ -46399,6 +46400,80 @@ function updateYBallVelocity(newYBallVelocity) {
 function updateZBallVelocity(newZBallVelocity) {
   zBallVelocity = newZBallVelocity;
 }
+
+/***/ }),
+/* 18 */,
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return topOutline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return bottomOutline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return rightOutline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return leftOutline; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
+
+
+
+let topOutline;
+let bottomOutline;
+let rightOutline;
+let leftOutline;
+
+const initOutline = () => {
+  var outlineMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ee00, side: __WEBPACK_IMPORTED_MODULE_0_three__["DoubleSide"] });
+
+  var horizOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 0.6);
+  var vertOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](0.6, 9);
+
+  topOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
+  topOutline.translateY(4.5);
+  topOutline.rotation.x = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topOutline);
+
+  bottomOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
+  bottomOutline.translateY(-4.5);
+  bottomOutline.rotation.x = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomOutline);
+
+  leftOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertOutline, outlineMaterial);
+  leftOutline.translateX(-8);
+  leftOutline.rotation.y = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftOutline);
+
+  rightOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertOutline, outlineMaterial);
+  rightOutline.translateX(8);
+  rightOutline.rotation.y = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightOutline);
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = initOutline;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_outline__ = __webpack_require__(19);
+
+
+
+
+
+
+const moveOutline = () => {
+  __WEBPACK_IMPORTED_MODULE_2__initialize_outline__["e" /* topOutline */].position.z = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z;
+  __WEBPACK_IMPORTED_MODULE_2__initialize_outline__["a" /* bottomOutline */].position.z = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z;
+  __WEBPACK_IMPORTED_MODULE_2__initialize_outline__["d" /* rightOutline */].position.z = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z;
+  __WEBPACK_IMPORTED_MODULE_2__initialize_outline__["c" /* leftOutline */].position.z = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z;
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = moveOutline;
+
 
 /***/ })
 /******/ ]);

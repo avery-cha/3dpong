@@ -45,6 +45,9 @@ import {
   yBallVelocity,
   zBallVelocity,
 } from './ball';
+import {
+  moveOutline,
+} from './outline';
 import { setTimeout } from 'timers';
 
 export let gameMode;
@@ -150,7 +153,6 @@ export const renderContainer = () => {
   }
 
 
-  let id;
   let xDirection;
   let yDirection;
   let xPaddleBallDiff;
@@ -158,9 +160,8 @@ export const renderContainer = () => {
 
   function animate() {
 
-    id = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
     render();
-    // update();
 
     // camera pivot
     demoCameraPivot();
@@ -258,16 +259,13 @@ export const renderContainer = () => {
     }
 
     moveBall();
+    moveOutline();
   }
 
   function render() {
     if (gameOverBool) return;
     renderer.render(scene, camera);
   }
-
-  // function update() {
-
-  // }
 
   animate();
 };
