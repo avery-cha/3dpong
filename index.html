@@ -3,11 +3,12 @@
 <head>
   <meta charset=utf-8>
   <title>3D Pong</title>
-  <link rel="stylesheet" type="text/css" href="./css/style.scss" />
   <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AFdWVgDr6+sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAADAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzADAAAAAAADEgMAAAAAAAAiAwAAAAAAAAADAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    rel="icon" type="image/x-icon" />
+  rel="icon" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <script src="https://use.fontawesome.com/1fe5e60235.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./css/style.scss" />
 </head>
 
 <body id="main">
@@ -24,7 +25,12 @@
       <!-- Use your mouse to control your paddle. Hit the ball onto your opponents
       side and prevent it from getting past your paddle. Score points by hitting the ball past your opponent.
       Advance to the next level by scoring three points. The game is over if three points are scored against you. -->
-      Control the paddle using your mouse. Points are scored when your opponent misses the ball. 
+      Control the paddle using your mouse.
+      <br>
+      <br>
+      Points are scored when your opponent misses the ball. 
+      <br>
+      <br>
       Advance to the next level by scoring three points.
       
       <br>
@@ -33,19 +39,21 @@
     </div>
   </div>
   <div class="right-aside">
-    <div class="score-title">
-      Lives
-    </div>
     <div class="scores-content">
+      <div class="score-title">
+        Lives
+      </div>
+      <br>
       Player: <span id="player-score">3</span>
       <br>
       Comp: <span id="comp-score">3</span>
-      <br>
-      <br>
-      <button id="play-button" class="button">New Game</button>
-      <br>
-      <button id="mute-button" class="button">Mute</button>
     </div>
+  </div>
+
+  <div class="buttons-container">
+    <button id="play-button" class="button">New Game</button>
+    <br>
+    <button id="mute-button" class="button">Mute</button>
   </div>
 
   <div class="right-aside-bottom">
@@ -62,7 +70,8 @@
   <div
     id="game-over-message"
     class="hide">
-    GAME OVER
+    <span class="blink-me">GAME OVER</span>
+    
   </div>
 
   <div

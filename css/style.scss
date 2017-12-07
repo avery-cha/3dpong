@@ -42,7 +42,7 @@ canvas {
   right: 0;
   color: #ffffff;
   font-size: 22px;
-  margin: 40px 20px 0 0;
+  margin: 40px 0px 0 0;
   font-weight: bold;
   z-index: 100;
 }
@@ -58,10 +58,23 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 27px;
+  padding: 30px;
+  border-radius: 5px;
+  border: 5px solid #000000;
+  font-size: 32px;
+  font-family: 'Press Start 2p', sans-serif;
   font-weight: bold;
   color: black;
   background: white;
+  outline: 5px solid white;
+}
+
+.blink-me {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
 }
 
 .hide {
@@ -69,9 +82,15 @@ canvas {
   visibility: hidden;
 }
 
+.score-title {
+  // text-align: center;
+  font-size: 24px;
+}
+
 .scores-content {
   font-size: 18px;
-  margin: 20px 0;
+  margin: 20px 10px 20px 0;
+  text-align: center;
 }
 
 #game-level {
@@ -83,14 +102,30 @@ canvas {
   font-size: 34px;
 }
 
+.buttons-container {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translate(20%, -50%);
+  margin-right: 0;
+}
+
 .button {
   margin-top: 15px;
   box-sizing: border-box;
   width: 75%;
-  font-size: 16px;
-  padding: 4px;
+  font-size: 20px;
+  padding: 5px;
   border-radius: 5px;
   font-family: 'Press Start 2p', sans-serif;
+  // border-bottom: 5px solid #aaaaaa;
+  // border-right: 5px solid #aaaaaa;
+  // text-shadow: 0px -2px #aaaaaa;
+  border: 2px solid #aaaaaa;
+}
+
+.button:focus {
+  outline:0;
 }
 
 .right-aside-bottom {
@@ -105,7 +140,7 @@ canvas {
   padding: 5px;
   height: 53px;
   width: 53px;
-  font-size: 24px;
+  // font-size: 24px;
   border-radius: 5px;
 }
 
@@ -113,3 +148,14 @@ a {
   text-decoration: none;
   color: black;
 }
+
+// .game-over-message:before {
+//   content: " ";
+//   position: absolute;
+//   z-index: -1;
+//   top: 5px;
+//   left: 5px;
+//   right: 5px;
+//   bottom: 5px;
+//   border: 5px solid #ffffff;
+// }
