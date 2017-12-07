@@ -104,7 +104,14 @@ export const renderContainer = () => {
     }
   }
 
-
+  const blinkText = domElement => {
+    for (let i = 0; i < 8; i++) {
+      setTimeout( () => {
+        domElement.style.visibility = domElement.style.visibility === 'hidden' ? "" : 'hidden';
+      },
+      200 * i);
+      }
+  };
   
 
   let playerLives = 3;
@@ -114,11 +121,23 @@ export const renderContainer = () => {
     if (player === "computer") {
       computerLives = computerLives - 1;
       document.getElementById('comp-score').innerHTML = computerLives;
+      // document.getElementById('comp-score').classList.add("blink-me");
+      // setTimeout(
+      //   document.getElementById('comp-score').classList.remove("blink-me"),
+      //   3000
+      // );
+      blinkText(document.getElementById('comp-score'));
     } else if (player === "player") {
       if (playerLives > 0) {
         playerLives = playerLives - 1;
       }
       document.getElementById('player-score').innerHTML = playerLives;
+      // document.getElementById('player-score').classList.add("blink-me");
+      // setTimeout(
+      //   document.getElementById('player-score').classList.remove("blink-me"),
+      //   3000
+      // );
+      blinkText(document.getElementById('player-score'));
     }
 
     if (playerLives <= 0) {
@@ -127,13 +146,21 @@ export const renderContainer = () => {
       nextLevel();
     }
   }
+
   let computerPaddleSpeed;
+
   function nextLevel() {
     computerLives = 3;
-    computerPaddleSpeed *= 1.08;
+    computerPaddleSpeed *= 1.09;
     updateBallSpeed(baseBallSpeed * 1.07);
     level += 1;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
+    // document.getElementById("game-level").classList.add('blink-me');
+    // setTimeout(
+    //   document.getElementById("game-level").classList.remove('blink-me'),
+    //   3000
+    // );
+    blinkText(document.getElementById('game-level'));
   }
 
   let gameOverBool = false;
@@ -148,6 +175,7 @@ export const renderContainer = () => {
   function startGame() {
     document.getElementById("game-over-message").classList.add("hide");
     document.getElementById("game-level").innerHTML = `Level ${level}`;
+    
     resetGame();
     gameMode = "play";
     scene.remove(demoPaddle1);
@@ -159,8 +187,10 @@ export const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.163;
+    computerPaddleSpeed = 0.158;
     updateBallSpeed(0.2);
+    updateXBallVelocity(0.02);
+    updateYBallVelocity(0.02);
     level = 1;
     sphere.position.set(0, 0, 9);
     document.getElementById('comp-score').innerHTML = computerLives;

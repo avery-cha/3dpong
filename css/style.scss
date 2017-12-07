@@ -83,7 +83,6 @@ canvas {
 }
 
 .score-title {
-  // text-align: center;
   font-size: 24px;
 }
 
@@ -118,9 +117,6 @@ canvas {
   padding: 5px;
   border-radius: 5px;
   font-family: 'Press Start 2p', sans-serif;
-  // border-bottom: 5px solid #aaaaaa;
-  // border-right: 5px solid #aaaaaa;
-  // text-shadow: 0px -2px #aaaaaa;
   border: 2px solid #aaaaaa;
 }
 
@@ -148,14 +144,3 @@ a {
   text-decoration: none;
   color: black;
 }
-
-// .game-over-message:before {
-//   content: " ";
-//   position: absolute;
-//   z-index: -1;
-//   top: 5px;
-//   left: 5px;
-//   right: 5px;
-//   bottom: 5px;
-//   border: 5px solid #ffffff;
-// }
