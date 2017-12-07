@@ -45639,6 +45639,8 @@ process.umask = function() { return 0; };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__walls__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__paddles__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__outline__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lights__ = __webpack_require__(21);
+
 
 
 
@@ -45671,15 +45673,10 @@ const init = () => {
   Object(__WEBPACK_IMPORTED_MODULE_2__walls__["a" /* initWall */])();
   Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["e" /* initPaddle */])();
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
+  Object(__WEBPACK_IMPORTED_MODULE_5__lights__["a" /* initLight */])();
   // initNets();
 
-  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
-  light1.position.set(0, 0, 12);
-  scene.add(light1);
   
-  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
-  light2.position.set(0, 0, -12);
-  scene.add(light2);
 
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = init;
@@ -46499,6 +46496,29 @@ const moveOutline = () => {
   __WEBPACK_IMPORTED_MODULE_2__initialize_outline__["c" /* leftOutline */].position.z = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z;
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = moveOutline;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
+
+
+
+const initLight = () => {
+  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
+  light1.position.set(0, 0, 14);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light1);
+
+  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 2, 30);
+  light2.position.set(0, 0, -14);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light2);
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = initLight;
 
 
 /***/ })
