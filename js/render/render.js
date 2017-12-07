@@ -48,7 +48,9 @@ import {
 import {
   moveOutline,
 } from './outline';
-
+// import {
+// for game por
+// }
 
 export let gameMode;
 
@@ -157,7 +159,7 @@ export const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.165;
+    computerPaddleSpeed = 0.163;
     updateBallSpeed(0.2);
     level = 1;
     sphere.position.set(0, 0, 9);
@@ -174,6 +176,7 @@ export const renderContainer = () => {
 
   function animate() {
 
+    // setTimeout(() => requestAnimationFrame(animate), 1000/30);
     requestAnimationFrame(animate);
     render();
 

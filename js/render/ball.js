@@ -28,12 +28,14 @@ export const resetBall = side => {
   yBallVelocity = 0;
     // pauseGameOn();
     // setTimeout(pauseGameOff, 1000);
-};
+  };
+  
+  export const moveBall = () => {
+    sphere.translateX(xBallVelocity);
+    sphere.translateY(yBallVelocity);
+    sphere.translateZ(zBallVelocity);
 
-export const moveBall = () => {
-  sphere.translateX(xBallVelocity);
-  sphere.translateY(yBallVelocity);
-  sphere.translateZ(zBallVelocity);
+    // resetInBounds();
 };
 
 export function updateBallSpeed(newBaseBallSpeed) {
@@ -54,7 +56,7 @@ export function updateYBallVelocity(newYBallVelocity) {
   // if (newYBallVelocity > 2) debugger;
 
   // if (newYBallVelocity === -0) {
-    yBallVelocity = 0;
+    // yBallVelocity = 0;
   // } else {
     yBallVelocity = newYBallVelocity;
   // }
@@ -65,3 +67,22 @@ export function updateZBallVelocity(newZBallVelocity) {
 
   zBallVelocity = newZBallVelocity;
 }
+
+// export const resetInBounds = () => {
+//   if (sphere.position.x > 9) {
+//     sphere.position.set( 7, sphere.position.y, sphere.position.z);
+//   }
+//   if (sphere.position.x < -9) {
+//     sphere.position.set( -7, sphere.position.y, sphere.position.z);
+//   }
+//   if (sphere.position.y > 5) {
+//     sphere.position.set(sphere.position.x, 3.5, sphere.position.y);
+//   }
+//   if (sphere.position.y < -5) {
+//     sphere.position.set(sphere.position.x, -3.5, sphere.position.y);
+//   }
+
+//   xBallVelocity = xBallVelocity % 1;
+//   yBallVelocity = yBallVelocity % 1;
+//   zBallVelocity = zBallVelocity % 1;
+// };

@@ -4,8 +4,10 @@
   <meta charset=utf-8>
   <title>3D Pong</title>
   <link rel="stylesheet" type="text/css" href="./css/style.scss" />
-  <!-- <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AFdWVgDr6+sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAADAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzADAAAAAAADEgMAAAAAAAAiAwAAAAAAAAADAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    rel="icon" type="image/x-icon" /> -->
+  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AFdWVgDr6+sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAADAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzADAAAAAAADEgMAAAAAAAAiAwAAAAAAAAADAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    rel="icon" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script src="https://use.fontawesome.com/1fe5e60235.js"></script>
 </head>
 
 <body id="main">
@@ -13,13 +15,21 @@
   <div class="left-aside">
     3D Pong
     <br>
+    <br>
+    <br>
     <div class="instructions-title">
       How To Play:
     </div>
     <div class="instructions-text">
-       The rules are the same as the classic game of pong. Use your mouse to control your paddle. Hit the ball onto your opponents
+      <!-- Use your mouse to control your paddle. Hit the ball onto your opponents
       side and prevent it from getting past your paddle. Score points by hitting the ball past your opponent.
-      Advance to the next level by scoring three points. The game is over if three points are scored against you.
+      Advance to the next level by scoring three points. The game is over if three points are scored against you. -->
+      Control the paddle using your mouse. Points are scored when your opponent misses the ball. 
+      Advance to the next level by scoring three points.
+      
+      <br>
+      <br>
+      Good luck!
     </div>
   </div>
   <div class="right-aside">
@@ -31,9 +41,22 @@
       <br>
       Comp: <span id="comp-score">3</span>
       <br>
-      <button id="play-button">New Game</button>
-      <button id="mute-button">Mute</button>
+      <br>
+      <button id="play-button" class="button">New Game</button>
+      <br>
+      <button id="mute-button" class="button">Mute</button>
     </div>
+  </div>
+
+  <div class="right-aside-bottom">
+    <a href="https://github.com/trwong/3dpong">
+      <i class="fa fa-github-alt fa-3x" aria-hidden="true"></i>
+    </a>
+    <br>
+    <br>
+    <a href="https://www.linkedin.com/in/taylor-reed-wong/">
+      <i class="fa fa-linkedin fa-3x" aria-hidden="true"></i>
+    </a>
   </div>
 
   <div

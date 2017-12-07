@@ -12,10 +12,10 @@ export let Y_AXIS;
 
 export const initCamera = () => {
   // normal camera view
-  camera.position.z = 18;
+  camera.position.z = 19;
 
   // opponent camera view
-  // camera.position.z = -18;
+  // camera.position.z = -19;
   // camera.rotation.y = 180 * Math.PI / 180
 
 

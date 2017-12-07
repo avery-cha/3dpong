@@ -45189,7 +45189,7 @@ const camera = new __WEBPACK_IMPORTED_MODULE_0_three__["PerspectiveCamera"](
   75,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  50
 );
 /* harmony export (immutable) */ __webpack_exports__["a"] = camera;
 
@@ -45503,7 +45503,9 @@ function initPaddle() {
 
 
 
-
+// import {
+// for game por
+// }
 
 let gameMode;
 
@@ -45612,7 +45614,7 @@ const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.165;
+    computerPaddleSpeed = 0.163;
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["d" /* updateBallSpeed */])(0.2);
     level = 1;
     __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
@@ -45629,6 +45631,7 @@ const renderContainer = () => {
 
   function animate() {
 
+    // setTimeout(() => requestAnimationFrame(animate), 1000/30);
     requestAnimationFrame(animate);
     render();
 
@@ -45924,10 +45927,10 @@ let Y_AXIS;
 
 const initCamera = () => {
   // normal camera view
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].position.z = 18;
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */].position.z = 19;
 
   // opponent camera view
-  // camera.position.z = -18;
+  // camera.position.z = -19;
   // camera.rotation.y = 180 * Math.PI / 180
 
 
@@ -46003,14 +46006,16 @@ const resetBall = side => {
   yBallVelocity = 0;
     // pauseGameOn();
     // setTimeout(pauseGameOff, 1000);
-};
+  };
 /* harmony export (immutable) */ __webpack_exports__["c"] = resetBall;
 
+  
+  const moveBall = () => {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateX(xBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
 
-const moveBall = () => {
-  __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateX(xBallVelocity);
-  __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
-  __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
+    // resetInBounds();
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = moveBall;
 
@@ -46033,7 +46038,7 @@ function updateYBallVelocity(newYBallVelocity) {
   // if (newYBallVelocity > 2) debugger;
 
   // if (newYBallVelocity === -0) {
-    yBallVelocity = 0;
+    // yBallVelocity = 0;
   // } else {
     yBallVelocity = newYBallVelocity;
   // }
@@ -46044,6 +46049,25 @@ function updateZBallVelocity(newZBallVelocity) {
 
   zBallVelocity = newZBallVelocity;
 }
+
+// export const resetInBounds = () => {
+//   if (sphere.position.x > 9) {
+//     sphere.position.set( 7, sphere.position.y, sphere.position.z);
+//   }
+//   if (sphere.position.x < -9) {
+//     sphere.position.set( -7, sphere.position.y, sphere.position.z);
+//   }
+//   if (sphere.position.y > 5) {
+//     sphere.position.set(sphere.position.x, 3.5, sphere.position.y);
+//   }
+//   if (sphere.position.y < -5) {
+//     sphere.position.set(sphere.position.x, -3.5, sphere.position.y);
+//   }
+
+//   xBallVelocity = xBallVelocity % 1;
+//   yBallVelocity = yBallVelocity % 1;
+//   zBallVelocity = zBallVelocity % 1;
+// };
 
 /***/ }),
 /* 18 */,
