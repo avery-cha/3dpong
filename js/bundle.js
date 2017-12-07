@@ -45804,46 +45804,46 @@ function initWall() {
   var vertPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](20, 10, 1, 20, 10);
 
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
-  rightPlane.translateX(8);
+  rightPlane.translateX(8.5);
   rightPlane.translateZ(0);
   rightPlane.rotation.y = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightPlane);
   yCollidableList.push(rightPlane);
   var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
-  rightPlane.translateX(8);
+  rightPlane.translateX(8.5);
   rightPlane.translateZ(0);
   rightPlane.rotation.y = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightPlane);
 
   var leftPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
-  leftPlane.translateX(-8);
+  leftPlane.translateX(-8.5);
   leftPlane.translateZ(0);
   leftPlane.rotation.y = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftPlane);
   yCollidableList.push(leftPlane);
   var leftPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
-  leftPlane.translateX(-8);
+  leftPlane.translateX(-8.5);
   leftPlane.translateZ(0);
   leftPlane.rotation.y = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftPlane);
 
   var topPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
-  topPlane.translateY(4.5);
+  topPlane.translateY(5);
   topPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topPlane);
   xCollidableList.push(topPlane);
   var topPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
-  topPlane.translateY(4.5);
+  topPlane.translateY(5);
   topPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topPlane);
 
   var bottomPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
-  bottomPlane.translateY(-4.5);
+  bottomPlane.translateY(-5);
   bottomPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
   xCollidableList.push(bottomPlane);
   var bottomPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
-  bottomPlane.translateY(4.5);
+  bottomPlane.translateY(5);
   bottomPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
 
@@ -46203,7 +46203,6 @@ const renderContainer = () => {
 
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
     Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
-    console.log(__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position);
   }
 
   function render() {
@@ -46463,11 +46462,9 @@ const resetBall = side => {
   if (side === "computer") {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
-    console.log("reset on comp side");
   } else if (side === "player") {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
-    console.log("reset on hooman side");
   }
   xBallVelocity = 0;
   yBallVelocity = 0;

@@ -281,7 +281,6 @@ export const renderContainer = () => {
 
     moveBall();
     moveOutline();
-    console.log(sphere.position);
   }
 
   function render() {

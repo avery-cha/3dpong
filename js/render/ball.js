@@ -20,11 +20,9 @@ export const resetBall = side => {
   if (side === "computer") {
     sphere.position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
-    console.log("reset on comp side");
   } else if (side === "player") {
     sphere.position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
-    console.log("reset on hooman side");
   }
   xBallVelocity = 0;
   yBallVelocity = 0;
