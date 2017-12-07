@@ -27,7 +27,7 @@ export function initPaddle() {
   playerPaddle2.translateX(1000);
   playerPaddle2.translateZ(9.5);
   scene.add(playerPaddle2);
-
+  
   var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
   computerPaddle1.translateZ(-9.5);
@@ -36,7 +36,7 @@ export function initPaddle() {
   computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
   computerPaddle2.translateZ(-9.5);
   scene.add(computerPaddle2);
-
+  
   demoPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
   demoPaddle1.translateZ(9.5);
   scene.add(demoPaddle1);

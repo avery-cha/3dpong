@@ -9,7 +9,7 @@ import {
   demoPaddle2,
 } from './../initialize/paddles';
 
-export let demoPaddleSpeed = .2;
+export let demoPaddleSpeed = .25;
 
 export const moveComputerPaddle = (paddleSpeed = demoPaddleSpeed) => {
   if (sphere.position.x > computerPaddle1.position.x && computerPaddle1.position.x < 6.5) {

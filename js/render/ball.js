@@ -10,14 +10,13 @@ import {
 // } from './render';
 
 
-export let baseBallSpeed = 0.2;
-export let xBallVelocity = 0.2;
-export let yBallVelocity = 0.2;
-export let zBallVelocity = 0.2;
+export let baseBallSpeed = 0.275;
+export let xBallVelocity = 0.275;
+export let yBallVelocity = 0.275;
+export let zBallVelocity = 0.275;
 
 
 export const resetBall = side => {
-  // setTimeout(() => {
   if (side === "computer") {
     sphere.position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
@@ -25,10 +24,8 @@ export const resetBall = side => {
     sphere.position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
   }
-  xBallVelocity = baseBallSpeed;
-  yBallVelocity = baseBallSpeed;
-      // zBallVelocity = -baseBallSpeed;
-    // }, 1000);
+  xBallVelocity = 0;
+  yBallVelocity = 0;
     // pauseGameOn();
     // setTimeout(pauseGameOff, 1000);
 };
@@ -43,7 +40,7 @@ export function updateBallSpeed(newBaseBallSpeed) {
   baseBallSpeed = newBaseBallSpeed;
   xBallVelocity = baseBallSpeed;
   yBallVelocity = baseBallSpeed;
-  zBallVelocity = baseBallSpeed;
+  zBallVelocity = -baseBallSpeed;
 }
 
 export function updateXBallVelocity(newXBallVelocity) {

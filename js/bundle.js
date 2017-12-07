@@ -45672,6 +45672,15 @@ const init = () => {
   Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["e" /* initPaddle */])();
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
   // initNets();
+
+  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 1, 100);
+  light1.position.set(0, 0, 10);
+  scene.add(light1);
+  
+  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 1, 100);
+  light2.position.set(0, 0, -10);
+  scene.add(light2);
+
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = init;
 
@@ -45693,7 +45702,7 @@ let sphere;
 
 function initSphere() {
   let sphereGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["SphereGeometry"](0.8, 8, 6);
-  let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ee00 });
+  let sphereMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshPhongMaterial"]({ color: 0x00ff00 });
 
   sphere = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](sphereGeometry, sphereMaterial);
 
@@ -45835,7 +45844,7 @@ function initPaddle() {
   playerPaddle2.translateX(1000);
   playerPaddle2.translateZ(9.5);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle2);
-
+  
   var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
   computerPaddle1.translateZ(-9.5);
@@ -45844,7 +45853,7 @@ function initPaddle() {
   computerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
   computerPaddle2.translateZ(-9.5);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle2);
-
+  
   demoPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
   demoPaddle1.translateZ(9.5);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle1);
@@ -45891,32 +45900,32 @@ const renderContainer = () => {
   Object(__WEBPACK_IMPORTED_MODULE_5__userControls__["a" /* userControls */])();
   Object(__WEBPACK_IMPORTED_MODULE_7__camera__["b" /* initCamera */])();
 
-  // let pauseGame = false;
+  let pauseGame = false;
 
-  // function pauseGameOn() {
-  //   pauseGame = true;
-  // }
+  function pauseGameOn() {
+    pauseGame = true;
+  }
 
-  // function pauseGameOff() {
-  //   pauseGame = false;
-  //   requestAnimationFrame(render);
-  // }
+  function pauseGameOff() {
+    pauseGame = false;
+    requestAnimationFrame(render);
+  }
 
   function checkPastNet() {
-    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z < -10) {
-      if (gameMode === "play") {
+    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
+      if (gameMode === "play" && pauseGame === false) {
         decrementLife("computer");
       }
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("player");
-    } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z > 10) {
-      if (gameMode === "play") {
+      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("computer");
+      pauseGameOn();
+      Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
+    } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
+      if (gameMode === "play" && pauseGame === false) {
         decrementLife("player");
       }
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("computer");
-      // setTimeout(() => gameOverBool = true, 1);
-      // setTimeout(() => gameOverBool = false, 1);
-      // setTimeout(() => resetBall("computer"), 1000);
-      // setTimeout()
+      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("player");
+      pauseGameOn();
+      Object(__WEBPACK_IMPORTED_MODULE_10_timers__["setTimeout"])(pauseGameOff, 1000);
     }
   }
 
@@ -45940,6 +45949,7 @@ const renderContainer = () => {
       }
       document.getElementById('player-score').innerHTML = playerLives;
     }
+
     if (playerLives <= 0) {
       gameOver();
     } else if (computerLives <= 0) {
@@ -45981,7 +45991,7 @@ const renderContainer = () => {
     computerPaddleSpeed = 0.165;
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["d" /* updateBallSpeed */])(0.2);
     level = 1;
-    __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9.5);
+    __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
     document.getElementById('comp-score').innerHTML = computerLives;
     document.getElementById('player-score').innerHTML = playerLives;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
@@ -46032,34 +46042,36 @@ const renderContainer = () => {
         if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z > 0) {
           // player side
           // BUG look here for sticky ball issues
-          __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z = 8.7;
           if (gameMode === "demo") {
             // sphere.position.z = demoPaddle1.position.z - (2 * sphere.position.z) - (sphere.radius * 2);
             xDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
             xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
-            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1;
+            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
             Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
-
+            
             yDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
             yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y);
-            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1;
+            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
             Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
-
+            
           }
           if (gameMode === "play") {
             // sphere.position.z -= playerPaddle1.position.z - sphere.position.z - (sphere.radius * 2)
             xDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
             xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
-            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1;
+            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
             Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
-
-
+            
+            
             yDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
             yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y);
-            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1;
+            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
             Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
-
+            
           }
+
+          __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z = 8.7;
+
         } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z < 0) {
           // comp side
           // sphere.position.z += computerPaddle1.position.z - sphere.position.z + (sphere.radius * 2);
@@ -46098,7 +46110,7 @@ const renderContainer = () => {
   }
 
   function render() {
-    if (gameOverBool) return;
+    if (gameOverBool || pauseGame) return;
     __WEBPACK_IMPORTED_MODULE_1__initialize_init__["c" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */], __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */]);
   }
 
@@ -46221,7 +46233,7 @@ const userControls = () => {
 
 
 
-let demoPaddleSpeed = .2;
+let demoPaddleSpeed = .25;
 
 const moveComputerPaddle = (paddleSpeed = demoPaddleSpeed) => {
   if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.x < 6.5) {
@@ -46344,14 +46356,13 @@ const demoCameraPivot = () => {
 // } from './render';
 
 
-let baseBallSpeed = 0.2;
-let xBallVelocity = 0.2;
-let yBallVelocity = 0.2;
-let zBallVelocity = 0.2;
+let baseBallSpeed = 0.275;
+let xBallVelocity = 0.275;
+let yBallVelocity = 0.275;
+let zBallVelocity = 0.275;
 
 
 const resetBall = side => {
-  // setTimeout(() => {
   if (side === "computer") {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
@@ -46359,10 +46370,8 @@ const resetBall = side => {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
   }
-  xBallVelocity = baseBallSpeed;
-  yBallVelocity = baseBallSpeed;
-      // zBallVelocity = -baseBallSpeed;
-    // }, 1000);
+  xBallVelocity = 0;
+  yBallVelocity = 0;
     // pauseGameOn();
     // setTimeout(pauseGameOff, 1000);
 };
@@ -46381,7 +46390,7 @@ function updateBallSpeed(newBaseBallSpeed) {
   baseBallSpeed = newBaseBallSpeed;
   xBallVelocity = baseBallSpeed;
   yBallVelocity = baseBallSpeed;
-  zBallVelocity = baseBallSpeed;
+  zBallVelocity = -baseBallSpeed;
 }
 
 function updateXBallVelocity(newXBallVelocity) {

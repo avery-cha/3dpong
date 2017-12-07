@@ -56,32 +56,32 @@ export const renderContainer = () => {
   userControls();
   initCamera();
 
-  // let pauseGame = false;
+  let pauseGame = false;
 
-  // function pauseGameOn() {
-  //   pauseGame = true;
-  // }
+  function pauseGameOn() {
+    pauseGame = true;
+  }
 
-  // function pauseGameOff() {
-  //   pauseGame = false;
-  //   requestAnimationFrame(render);
-  // }
+  function pauseGameOff() {
+    pauseGame = false;
+    requestAnimationFrame(render);
+  }
 
   function checkPastNet() {
-    if (sphere.position.z < -10) {
-      if (gameMode === "play") {
+    if (sphere.position.z <= -11) {
+      if (gameMode === "play" && pauseGame === false) {
         decrementLife("computer");
       }
-      resetBall("player");
-    } else if (sphere.position.z > 10) {
-      if (gameMode === "play") {
+      resetBall("computer");
+      pauseGameOn();
+      setTimeout(pauseGameOff, 1000);
+    } else if (sphere.position.z >= 11) {
+      if (gameMode === "play" && pauseGame === false) {
         decrementLife("player");
       }
-      resetBall("computer");
-      // setTimeout(() => gameOverBool = true, 1);
-      // setTimeout(() => gameOverBool = false, 1);
-      // setTimeout(() => resetBall("computer"), 1000);
-      // setTimeout()
+      resetBall("player");
+      pauseGameOn();
+      setTimeout(pauseGameOff, 1000);
     }
   }
 
@@ -105,6 +105,7 @@ export const renderContainer = () => {
       }
       document.getElementById('player-score').innerHTML = playerLives;
     }
+
     if (playerLives <= 0) {
       gameOver();
     } else if (computerLives <= 0) {
@@ -146,7 +147,7 @@ export const renderContainer = () => {
     computerPaddleSpeed = 0.165;
     updateBallSpeed(0.2);
     level = 1;
-    sphere.position.set(0, 0, 9.5);
+    sphere.position.set(0, 0, 9);
     document.getElementById('comp-score').innerHTML = computerLives;
     document.getElementById('player-score').innerHTML = playerLives;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
@@ -197,34 +198,36 @@ export const renderContainer = () => {
         if (sphere.position.z > 0) {
           // player side
           // BUG look here for sticky ball issues
-          sphere.position.z = 8.7;
           if (gameMode === "demo") {
             // sphere.position.z = demoPaddle1.position.z - (2 * sphere.position.z) - (sphere.radius * 2);
             xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x) / 1.5;
-            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
+            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
             updateXBallVelocity(newXBallVelocity);
-
+            
             yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (demoPaddle1.position.y - sphere.position.y);
-            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed;
             updateYBallVelocity(newYBallVelocity);
-
+            
           }
           if (gameMode === "play") {
             // sphere.position.z -= playerPaddle1.position.z - sphere.position.z - (sphere.radius * 2)
             xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
             xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
-            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1;
+            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
             updateXBallVelocity(newXBallVelocity);
-
-
+            
+            
             yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
             yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
-            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1;
+            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed;
             updateYBallVelocity(newYBallVelocity);
-
+            
           }
+
+          sphere.position.z = 8.7;
+
         } else if (sphere.position.z < 0) {
           // comp side
           // sphere.position.z += computerPaddle1.position.z - sphere.position.z + (sphere.radius * 2);
@@ -263,7 +266,7 @@ export const renderContainer = () => {
   }
 
   function render() {
-    if (gameOverBool) return;
+    if (gameOverBool || pauseGame) return;
     renderer.render(scene, camera);
   }
 
