@@ -10,6 +10,7 @@ import {
   updateXBallVelocity,
   updateYBallVelocity,
   baseBallSpeed,
+  resetBall,
 } from './ball';
 import {
   demoPaddle1,
@@ -96,6 +97,29 @@ export function decrementLife(player) {
     gameOver();
   } else if (computerLives <= 0) {
     nextLevel();
+  }
+}
+
+export function checkPastNet() {
+  if (playerLives > 0 && computerLives > 0) {
+    if (sphere.position.z <= -11) {
+      if (!muteBool && !gameOverBool) document.getElementById("beep5").play();
+      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
+        decrementLife("computer");
+      }
+      resetBall("computer");
+      pauseGameOn();
+      setTimeout(pauseGameOff, 1000);
+    } else if (sphere.position.z >= 11) {
+      if (!muteBool && !gameOverBool) document.getElementById("shut-down2").play();
+
+      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
+        decrementLife("player");
+      }
+      resetBall("player");
+      pauseGameOn();
+      setTimeout(pauseGameOff, 1000);
+    }
   }
 }
 
