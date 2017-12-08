@@ -45559,6 +45559,7 @@ const addPlayButtonEventListener = () => {
   document.getElementById("play-button").onclick = () => {
     Object(__WEBPACK_IMPORTED_MODULE_7__game__["g" /* startGame */])();
     Object(__WEBPACK_IMPORTED_MODULE_4__camera__["c" /* resetCamera */])();
+    document.getElementById("play-button-text").classList.remove("blink-me");
   };
 };
 
@@ -46104,6 +46105,8 @@ function pauseGameOff() {
 function gameOver() {
   gameOverBool = true;
   document.getElementById("game-over-message").classList.remove("hide");
+  document.getElementById("play-button-text").classList.add("blink-me");
+
 }
 
 function startGame() {

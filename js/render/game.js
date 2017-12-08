@@ -103,6 +103,8 @@ function pauseGameOff() {
 function gameOver() {
   gameOverBool = true;
   document.getElementById("game-over-message").classList.remove("hide");
+  document.getElementById("play-button-text").classList.add("blink-me");
+
 }
 
 export function startGame() {

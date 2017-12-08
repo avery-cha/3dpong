@@ -64,6 +64,7 @@ const addPlayButtonEventListener = () => {
   document.getElementById("play-button").onclick = () => {
     startGame();
     resetCamera();
+    document.getElementById("play-button-text").classList.remove("blink-me");
   };
 };
 
