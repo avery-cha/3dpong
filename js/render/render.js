@@ -75,6 +75,7 @@ export const renderContainer = () => {
   document.getElementById("play-button").onclick = () => {
     startGame();
     resetCamera();
+    document.getElementById("play-button-text").classList.remove("blink-me");
   };
 
   document.getElementById("mute-button").onclick = () => {
@@ -84,7 +85,7 @@ export const renderContainer = () => {
   function checkPastNet() {
     if (playerLives > 0 && computerLives > 0 ) {
       if (sphere.position.z <= -11) {
-        if (!muteBool) document.getElementById("beep5").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep5").play();
         if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
           decrementLife("computer");
         }
@@ -92,7 +93,7 @@ export const renderContainer = () => {
         pauseGameOn();
         setTimeout(pauseGameOff, 1000);
       } else if (sphere.position.z >= 11) {
-        if (!muteBool) document.getElementById("shut-down2").play();
+        if (!muteBool && !gameOverBool) document.getElementById("shut-down2").play();
 
         if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
           decrementLife("player");
@@ -164,10 +165,12 @@ export const renderContainer = () => {
   }
 
   let gameOverBool = false;
+  
   function gameOver() {
     gameOverBool = true;
     // cancelAnimationFrame(id);
     document.getElementById("game-over-message").classList.remove("hide");
+    document.getElementById("play-button-text").classList.add("blink-me");
   }
   
   let level = 1;
@@ -227,7 +230,7 @@ export const renderContainer = () => {
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
         // yBallVelocity = -yBallVelocity;
         updateYBallVelocity(-yBallVelocity);
-        if (!muteBool) document.getElementById("beep1").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
       }
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
@@ -235,7 +238,7 @@ export const renderContainer = () => {
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
         // xBallVelocity = -xBallVelocity;
         updateXBallVelocity(-xBallVelocity);
-        if (!muteBool) document.getElementById("beep1").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
       }
 
       var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
@@ -243,7 +246,7 @@ export const renderContainer = () => {
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         // zBallVelocity = -zBallVelocity;
         updateZBallVelocity(-zBallVelocity);
-        if (!muteBool) document.getElementById("beep2").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep2").play();
         if (sphere.position.z > 0) {
           // player side
           // BUG look here for sticky ball issues

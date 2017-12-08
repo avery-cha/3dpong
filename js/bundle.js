@@ -45554,6 +45554,7 @@ const renderContainer = () => {
   document.getElementById("play-button").onclick = () => {
     startGame();
     Object(__WEBPACK_IMPORTED_MODULE_7__camera__["c" /* resetCamera */])();
+    document.getElementById("play-button-text").classList.remove("blink-me");
   };
 
   document.getElementById("mute-button").onclick = () => {
@@ -45563,7 +45564,7 @@ const renderContainer = () => {
   function checkPastNet() {
     if (playerLives > 0 && computerLives > 0 ) {
       if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
-        if (!muteBool) document.getElementById("beep5").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep5").play();
         if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
           decrementLife("computer");
         }
@@ -45571,7 +45572,7 @@ const renderContainer = () => {
         pauseGameOn();
         setTimeout(pauseGameOff, 1000);
       } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
-        if (!muteBool) document.getElementById("shut-down2").play();
+        if (!muteBool && !gameOverBool) document.getElementById("shut-down2").play();
 
         if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
           decrementLife("player");
@@ -45643,10 +45644,12 @@ const renderContainer = () => {
   }
 
   let gameOverBool = false;
+  
   function gameOver() {
     gameOverBool = true;
     // cancelAnimationFrame(id);
     document.getElementById("game-over-message").classList.remove("hide");
+    document.getElementById("play-button-text").classList.add("blink-me");
   }
   
   let level = 1;
@@ -45706,7 +45709,7 @@ const renderContainer = () => {
       if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
         // yBallVelocity = -yBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
-        if (!muteBool) document.getElementById("beep1").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
@@ -45714,7 +45717,7 @@ const renderContainer = () => {
       if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
         // xBallVelocity = -xBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
-        if (!muteBool) document.getElementById("beep1").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
       }
 
       var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
@@ -45722,7 +45725,7 @@ const renderContainer = () => {
       if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
         // zBallVelocity = -zBallVelocity;
         Object(__WEBPACK_IMPORTED_MODULE_8__ball__["g" /* updateZBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["j" /* zBallVelocity */]);
-        if (!muteBool) document.getElementById("beep2").play();
+        if (!muteBool && !gameOverBool) document.getElementById("beep2").play();
         if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z > 0) {
           // player side
           // BUG look here for sticky ball issues

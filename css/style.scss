@@ -118,6 +118,11 @@ canvas {
   border-radius: 5px;
   font-family: 'Press Start 2p', sans-serif;
   border: 2px solid #aaaaaa;
+  cursor: pointer;
+}
+
+#mute-button {
+  font-size: 18px;
 }
 
 .button:focus {
@@ -133,7 +138,7 @@ canvas {
 .fa {
   background-color: white;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 3px 4px 5px 6px;
   height: 53px;
   width: 53px;
   // font-size: 24px;
@@ -145,6 +150,11 @@ a {
   color: black;
 }
 
+.fa:hover, .button:hover {
+  transform: scale(1.15);
+}
+
 .fa:hover {
-  transform: 110%;
+  color: white;
+  background-color: black;
 }
