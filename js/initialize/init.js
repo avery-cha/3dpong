@@ -21,6 +21,7 @@ import {
 import {
   initLight,
 } from './lights';
+import Stats from 'stats-js';
 
 export const scene = new THREE.Scene();
 export const camera = new THREE.PerspectiveCamera(
@@ -43,4 +44,25 @@ export const init = () => {
   initOutline();
   // initLight();
   // initNets();
+
+  // STATS
+  var stats = new Stats();
+  stats.setMode(0); // 0: fps, 1: ms 
+
+  // Align top-left 
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.bottom = '0px';
+
+  document.body.appendChild(stats.domElement);
+
+  setInterval(function () {
+
+    stats.begin();
+
+    // your code goes here 
+
+    stats.end();
+
+  }, 1000 / 60);
 };

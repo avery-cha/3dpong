@@ -151,7 +151,7 @@ export const renderContainer = () => {
 
   function nextLevel() {
     computerLives = 3;
-    computerPaddleSpeed *= 1.09;
+    computerPaddleSpeed *= 1.1;
     updateBallSpeed(baseBallSpeed * 1.07);
     level += 1;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
@@ -187,7 +187,7 @@ export const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.158;
+    computerPaddleSpeed = 0.15;
     updateBallSpeed(0.2);
     updateXBallVelocity(0.02);
     updateYBallVelocity(0.02);

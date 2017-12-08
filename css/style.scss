@@ -98,7 +98,7 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 34px;
+  font-size: 38px;
 }
 
 .buttons-container {
@@ -143,4 +143,8 @@ canvas {
 a {
   text-decoration: none;
   color: black;
+}
+
+.fa:hover {
+  transform: 110%;
 }

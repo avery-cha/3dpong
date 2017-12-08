@@ -46,7 +46,7 @@ export function initPaddle() {
   // scene.add(demoPaddle2);
 
   // Creating paddles with cubes instead
-  var paddleGeometry = new THREE.BoxGeometry(3, 2, 1, 16, 16);
+  var paddleGeometry = new THREE.BoxGeometry(3, 2, 1, 9, 6);
   var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true });
 
   playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);

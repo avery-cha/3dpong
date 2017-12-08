@@ -45175,6 +45175,9 @@ document.addEventListener("DOMContentLoaded", function() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__paddles__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__outline__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lights__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stats_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stats_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_stats_js__);
+
 
 
 
@@ -45209,6 +45212,27 @@ const init = () => {
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
   // initLight();
   // initNets();
+
+  // STATS
+  var stats = new __WEBPACK_IMPORTED_MODULE_6_stats_js___default.a();
+  stats.setMode(0); // 0: fps, 1: ms 
+
+  // Align top-left 
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.bottom = '0px';
+
+  document.body.appendChild(stats.domElement);
+
+  setInterval(function () {
+
+    stats.begin();
+
+    // your code goes here 
+
+    stats.end();
+
+  }, 1000 / 60);
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = init;
 
@@ -45444,7 +45468,7 @@ function initPaddle() {
   // scene.add(demoPaddle2);
 
   // Creating paddles with cubes instead
-  var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](3, 2, 1, 16, 16);
+  var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](3, 2, 1, 9, 6);
   var playerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x0000ee, wireframe: true, transparent: true });
 
   playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
@@ -45606,7 +45630,7 @@ const renderContainer = () => {
 
   function nextLevel() {
     computerLives = 3;
-    computerPaddleSpeed *= 1.09;
+    computerPaddleSpeed *= 1.1;
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["d" /* updateBallSpeed */])(__WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1.07);
     level += 1;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
@@ -45642,7 +45666,7 @@ const renderContainer = () => {
     gameOverBool = false;
     playerLives = 3;
     computerLives = 3;
-    computerPaddleSpeed = 0.158;
+    computerPaddleSpeed = 0.15;
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["d" /* updateBallSpeed */])(0.2);
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(0.02);
     Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(0.02);
@@ -46026,17 +46050,17 @@ let zBallVelocity = 0.275;
 
 const resetBall = side => {
   if (side === "computer") {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9.5);
     zBallVelocity = Math.abs(zBallVelocity);
   } else if (side === "player") {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9.5);
     zBallVelocity = -Math.abs(zBallVelocity);
   }
   xBallVelocity = 0;
   yBallVelocity = 0;
-    // pauseGameOn();
-    // setTimeout(pauseGameOff, 1000);
-  };
+
+  // resetInBounds();
+};
 /* harmony export (immutable) */ __webpack_exports__["c"] = resetBall;
 
   
@@ -46045,6 +46069,8 @@ const resetBall = side => {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
 
+    console.log("xBallVelocity", xBallVelocity);
+    console.log("yBallVelocity", yBallVelocity);
     // resetInBounds();
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = moveBall;
@@ -46080,24 +46106,26 @@ function updateZBallVelocity(newZBallVelocity) {
   zBallVelocity = newZBallVelocity;
 }
 
-// export const resetInBounds = () => {
-//   if (sphere.position.x > 9) {
-//     sphere.position.set( 7, sphere.position.y, sphere.position.z);
-//   }
-//   if (sphere.position.x < -9) {
-//     sphere.position.set( -7, sphere.position.y, sphere.position.z);
-//   }
-//   if (sphere.position.y > 5) {
-//     sphere.position.set(sphere.position.x, 3.5, sphere.position.y);
-//   }
-//   if (sphere.position.y < -5) {
-//     sphere.position.set(sphere.position.x, -3.5, sphere.position.y);
-//   }
+const resetInBounds = () => {
+  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > 9) {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( 7, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
+  }
+  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < -9) {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( -7, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
+  }
+  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > 5) {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x, 3.5, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+  }
+  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < -5) {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x, -3.5, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+  }
 
-//   xBallVelocity = xBallVelocity % 1;
-//   yBallVelocity = yBallVelocity % 1;
-//   zBallVelocity = zBallVelocity % 1;
-// };
+  xBallVelocity = xBallVelocity % 1;
+  yBallVelocity = yBallVelocity % 1;
+  zBallVelocity = zBallVelocity % 1;
+};
+/* unused harmony export resetInBounds */
+
 
 /***/ }),
 /* 18 */,
@@ -46194,6 +46222,18 @@ const initLight = () => {
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light2);
 };
 /* unused harmony export initLight */
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+// stats.js - http://github.com/mrdoob/stats.js
+var Stats=function(){var l=Date.now(),m=l,g=0,n=Infinity,o=0,h=0,p=Infinity,q=0,r=0,s=0,f=document.createElement("div");f.id="stats";f.addEventListener("mousedown",function(b){b.preventDefault();t(++s%2)},!1);f.style.cssText="width:80px;opacity:0.9;cursor:pointer";var a=document.createElement("div");a.id="fps";a.style.cssText="padding:0 0 3px 3px;text-align:left;background-color:#002";f.appendChild(a);var i=document.createElement("div");i.id="fpsText";i.style.cssText="color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px";
+i.innerHTML="FPS";a.appendChild(i);var c=document.createElement("div");c.id="fpsGraph";c.style.cssText="position:relative;width:74px;height:30px;background-color:#0ff";for(a.appendChild(c);74>c.children.length;){var j=document.createElement("span");j.style.cssText="width:1px;height:30px;float:left;background-color:#113";c.appendChild(j)}var d=document.createElement("div");d.id="ms";d.style.cssText="padding:0 0 3px 3px;text-align:left;background-color:#020;display:none";f.appendChild(d);var k=document.createElement("div");
+k.id="msText";k.style.cssText="color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px";k.innerHTML="MS";d.appendChild(k);var e=document.createElement("div");e.id="msGraph";e.style.cssText="position:relative;width:74px;height:30px;background-color:#0f0";for(d.appendChild(e);74>e.children.length;)j=document.createElement("span"),j.style.cssText="width:1px;height:30px;float:left;background-color:#131",e.appendChild(j);var t=function(b){s=b;switch(s){case 0:a.style.display=
+"block";d.style.display="none";break;case 1:a.style.display="none",d.style.display="block"}};return{REVISION:12,domElement:f,setMode:t,begin:function(){l=Date.now()},end:function(){var b=Date.now();g=b-l;n=Math.min(n,g);o=Math.max(o,g);k.textContent=g+" MS ("+n+"-"+o+")";var a=Math.min(30,30-30*(g/200));e.appendChild(e.firstChild).style.height=a+"px";r++;b>m+1E3&&(h=Math.round(1E3*r/(b-m)),p=Math.min(p,h),q=Math.max(q,h),i.textContent=h+" FPS ("+p+"-"+q+")",a=Math.min(30,30-30*(h/100)),c.appendChild(c.firstChild).style.height=
+a+"px",m=b,r=0);return b},update:function(){l=this.end()}}};"object"===typeof module&&(module.exports=Stats);
 
 
 /***/ })

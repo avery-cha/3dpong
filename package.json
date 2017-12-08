@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/trwong/3dpong#readme",
   "dependencies": {
+    "stats-js": "^1.0.0-alpha1",
     "three": "^0.88.0",
     "three-obj-loader": "^1.1.3",
     "three-orbit-controls": "^82.1.0",
