@@ -31,7 +31,7 @@ export const resetBall = side => {
     console.log("sphere.position.x", sphere.position.x);
     console.log("sphere.position.y", sphere.position.y);
 
-    // resetInBounds();
+    resetInBounds();
 };
 
 export function updateBallSpeed(newBaseBallSpeed) {
@@ -56,20 +56,31 @@ export function updateZBallVelocity(newZBallVelocity) {
 }
 
 export const resetInBounds = () => {
-  if (sphere.position.x > 9) {
-    sphere.position.set( 7, sphere.position.y, sphere.position.z);
+  if (sphere.position.x > 10 || 
+      sphere.position.x < -10 ||
+      sphere.position.y > 6.5 ||
+      sphere.position.y < -6.5
+    ) {
+      sphere.position.set( 0, 0, sphere.position.z);
+      xBallVelocity = 0;
+      yBallVelocity = 0;
   }
-  if (sphere.position.x < -9) {
-    sphere.position.set( -7, sphere.position.y, sphere.position.z);
-  }
-  if (sphere.position.y > 5) {
-    sphere.position.set(sphere.position.x, 3.5, sphere.position.y);
-  }
-  if (sphere.position.y < -5) {
-    sphere.position.set(sphere.position.x, -3.5, sphere.position.y);
-  }
+  // if (sphere.position.x < -10) {
+  //   sphere.position.set( 0, sphere.position.y, sphere.position.z);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+  // if (sphere.position.y > 6.5) {
+  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+  // if (sphere.position.y < -6.5) {
+  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
 
-  xBallVelocity = xBallVelocity % 1;
-  yBallVelocity = yBallVelocity % 1;
-  zBallVelocity = zBallVelocity % 1;
+  // xBallVelocity = 0;
+  // yBallVelocity = 0;
 };

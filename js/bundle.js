@@ -45828,7 +45828,7 @@ const resetBall = side => {
     console.log("sphere.position.x", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x);
     console.log("sphere.position.y", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
 
-    // resetInBounds();
+    resetInBounds();
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = moveBall;
 
@@ -45855,22 +45855,33 @@ function updateZBallVelocity(newZBallVelocity) {
 }
 
 const resetInBounds = () => {
-  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > 9) {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( 7, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
+  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > 10 || 
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < -10 ||
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > 6.5 ||
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < -6.5
+    ) {
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( 0, 0, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
+      xBallVelocity = 0;
+      yBallVelocity = 0;
   }
-  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < -9) {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( -7, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
-  }
-  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > 5) {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x, 3.5, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
-  }
-  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < -5) {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x, -3.5, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
-  }
+  // if (sphere.position.x < -10) {
+  //   sphere.position.set( 0, sphere.position.y, sphere.position.z);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+  // if (sphere.position.y > 6.5) {
+  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+  // if (sphere.position.y < -6.5) {
+  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
 
-  xBallVelocity = xBallVelocity % 1;
-  yBallVelocity = yBallVelocity % 1;
-  zBallVelocity = zBallVelocity % 1;
+  // xBallVelocity = 0;
+  // yBallVelocity = 0;
 };
 /* unused harmony export resetInBounds */
 
