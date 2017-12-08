@@ -48,16 +48,15 @@ import {
 import {
   moveOutline,
 } from './outline';
-// import {
-// for game por
-// }
+import {
+  handleCollision,
+} from './collision';
 
-export let gameMode;
+export let gameMode = 'demo';
+export let muteBool = true;
+export let gameOverBool = false;
 
 export const renderContainer = () => {
-
-  let muteBool = true;
-
   userControls();
   initCamera();
 
@@ -113,7 +112,6 @@ export const renderContainer = () => {
       200 * i);
       }
   };
-  
 
   let playerLives = 3;
   let computerLives = 3;
@@ -122,22 +120,12 @@ export const renderContainer = () => {
     if (player === "computer") {
       computerLives = computerLives - 1;
       document.getElementById('comp-score').innerHTML = computerLives;
-      // document.getElementById('comp-score').classList.add("blink-me");
-      // setTimeout(
-      //   document.getElementById('comp-score').classList.remove("blink-me"),
-      //   3000
-      // );
       blinkText(document.getElementById('comp-score'));
     } else if (player === "player") {
       if (playerLives > 0) {
         playerLives = playerLives - 1;
       }
       document.getElementById('player-score').innerHTML = playerLives;
-      // document.getElementById('player-score').classList.add("blink-me");
-      // setTimeout(
-      //   document.getElementById('player-score').classList.remove("blink-me"),
-      //   3000
-      // );
       blinkText(document.getElementById('player-score'));
     }
 
@@ -156,19 +144,11 @@ export const renderContainer = () => {
     updateBallSpeed(baseBallSpeed * 1.07);
     level += 1;
     document.getElementById("game-level").innerHTML = `Level ${level}`;
-    // document.getElementById("game-level").classList.add('blink-me');
-    // setTimeout(
-    //   document.getElementById("game-level").classList.remove('blink-me'),
-    //   3000
-    // );
     blinkText(document.getElementById('game-level'));
   }
 
-  let gameOverBool = false;
-  
   function gameOver() {
     gameOverBool = true;
-    // cancelAnimationFrame(id);
     document.getElementById("game-over-message").classList.remove("hide");
     document.getElementById("play-button-text").classList.add("blink-me");
   }
@@ -201,119 +181,16 @@ export const renderContainer = () => {
     document.getElementById("game-level").innerHTML = `Level ${level}`;
   }
 
-
-  let xDirection;
-  let yDirection;
-  let xPaddleBallDiff;
-  let yPaddleBallDiff;
-
   function animate() {
-
-    // setTimeout(() => requestAnimationFrame(animate), 1000/30);
     requestAnimationFrame(animate);
     render();
 
-    // camera pivot
     demoCameraPivot();
 
     moveComputerPaddle(computerPaddleSpeed);
     checkPastNet();
 
-    var originPoint = sphere.position.clone();
-    for (var vertexIndex = 0; vertexIndex < sphere.geometry.vertices.length; vertexIndex++) {
-      var localVertex = sphere.geometry.vertices[vertexIndex].clone();
-      var globalVertex = localVertex.applyMatrix4(sphere.matrix);
-      var directionVector = globalVertex.sub(sphere.position);
-
-      var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-      var xCollisionResults = ray.intersectObjects(xCollidableList);
-      if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
-        // yBallVelocity = -yBallVelocity;
-        updateYBallVelocity(-yBallVelocity);
-        if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
-      }
-
-      var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-      var yCollisionResults = ray.intersectObjects(yCollidableList);
-      if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
-        // xBallVelocity = -xBallVelocity;
-        updateXBallVelocity(-xBallVelocity);
-        if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
-      }
-
-      var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-      var zCollisionResults = ray.intersectObjects(zCollidableList);
-      if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
-        // zBallVelocity = -zBallVelocity;
-        updateZBallVelocity(-zBallVelocity);
-        if (!muteBool && !gameOverBool) document.getElementById("beep2").play();
-        if (sphere.position.z > 0) {
-          // player side
-          // BUG look here for sticky ball issues
-          if (gameMode === "demo") {
-            // sphere.position.z = demoPaddle1.position.z - (2 * sphere.position.z) - (sphere.radius * 2);
-            xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
-            xPaddleBallDiff = (demoPaddle1.position.x - sphere.position.x) / 1.5;
-            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
-            updateXBallVelocity(newXBallVelocity);
-            
-            yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
-            yPaddleBallDiff = (demoPaddle1.position.y - sphere.position.y);
-            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed;
-            updateYBallVelocity(newYBallVelocity);
-            
-          }
-          if (gameMode === "play") {
-            // sphere.position.z -= playerPaddle1.position.z - sphere.position.z - (sphere.radius * 2)
-            xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
-            xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
-            let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
-            // if (newXBallVelocity > 3) debugger;
-            updateXBallVelocity(newXBallVelocity);
-            
-            
-            yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
-            yPaddleBallDiff = (playerPaddle1.position.y - sphere.position.y);
-            let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed;
-            // if (newYBallVelocity > 3) debugger;
-            updateYBallVelocity(newYBallVelocity);
-            
-          }
-
-          sphere.position.z = 8.7;
-
-        } else if (sphere.position.z < 0) {
-          // comp side
-          // sphere.position.z += computerPaddle1.position.z - sphere.position.z + (sphere.radius * 2);
-          xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
-          xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
-          let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
-          updateXBallVelocity(newXBallVelocity);
-
-          yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
-          yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
-          let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
-          updateYBallVelocity(newYBallVelocity);
-
-
-          // BUG look here for sticky ball issues
-          
-          sphere.position.z = -8.7;
-        }
-      }
-
-      // var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
-      // var netCollisionResults = ray.intersectObjects(netCollidableList);
-      // if (netCollisionResults.length > 0 && netCollisionResults[0].distance < directionVector.length()) {
-      //   zBallVelocity = -zBallVelocity;
-      //   // scene.remove( sphere );
-      //   sphere.position.set(0, 0, 0)
-      //   // sphere.translateX(0);
-      //   // sphere.translateY(0);
-      //   // sphere.translateZ(0);
-      //   // scene.add( sphere );
-      // }
-    }
+    handleCollision();
 
     moveBall();
     moveOutline();
