@@ -1,5 +1,5 @@
 ## 3D Pong
-[Live Link] (https://trwong.github.io/3dpong/)
+[Live Link](https://trwong.github.io/3dpong/)
 
 ## Background and Overview
 3D Pong is a modern take on the classic arcade video game Pong.
@@ -17,9 +17,13 @@ In 3D Pong, users will be able to:
 
 ### Demo Mode
 
+![3D Pong Demo Mode Gif](https://github.com/trwong/3dpong/blob/master/assets/3d_pong_demo_gif_orig_size.gif)
+
 Demo mode pits two bots against each other with a rotating camera to showcase gameplay and the app's 3d capabilities.
 
 ### Velocity Change on Paddle Hit
+
+![3D Pong Screen Shot](https://github.com/trwong/3dpong/blob/master/assets/Screen%20Shot%202017-12-08%20at%2010.34.46%20AM.png)
 
 To stay true to the original, where the ball makes contact with the paddle determines the velocity of the ball. I used the position of the ball and paddle at the time of collision as a ratio to control the balls velocity. This introduces an interesting 'high risk, high reward' game mechanic. Balls off the corner of the paddle have maximum x and y velocity but are easy to miss.
 
