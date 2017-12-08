@@ -1,55 +1,40 @@
 ## 3D Pong
-
 [Live Link] (https://trwong.github.io/3dpong/)
 
-### Background and Overview
+## Background and Overview
 3D Pong is a modern take on the classic arcade video game Pong.
 
 Users will progress through increasing levels of difficulty against a computer opponent. Users will use their mouse to control their paddle to deflect the ball towards their opponents side. Players score points when the ball pasts their opponents paddle and reaches the opposing wall. 
 
-### Functionality and MVP
+## Functionality and MVP
 In 3D Pong, users will be able to:
-(NOTE: I may have trouble reaching all of these features by Friday. Should I remove some now or can I gauge my progress a few days in?)
 
-- [ ] Move their paddle using their mouse
-- [ ] Deflect the ball towards their opponent when their paddle makes contact with the ball
-- [ ] Score / lose points when the ball reaches their opponents / their side
-- [ ] Play against a computer AI that moves to deflect the ball
-- [ ] Play on increasingly difficult levels
+* Control their paddle using their mouse
+* Deflect the ball towards their opponent when their paddle makes contact with the ball
+* Score / lose points when the ball reaches their opponents / their side
+* Play against a computer AI that moves to deflect the ball
+* Play on increasingly difficult levels
 
-### Wireframes
-![3D Pong Wireframe](./3dpong.png)
+### Demo Mode
 
-### Architecture and Technologies
-This project will be implemented with the following technologies:
-- Vanilla Javascript for overall structure and game logic
-- three.js for 3D object creation and manipulation
-- Webpack to bundle and serve up the various scripts
+Demo mode pits two bots against each other with a rotating camera to showcase gameplay and the app's 3d capabilities.
 
-In addition to the webpack entry file, there will be three scripts involved in this project:
-`game.js`: This script will handle the start, win/lose conditions, and levels of difficutly in the game
-`round.js`: This script will handle playing a single round or life
-`physics.js`: This script contain the logic and physics of the ball, walls, paddles and mouse event listeners
+### Velocity Change on Paddle Hit
+
+To stay true to the original, where the ball makes contact with the paddle determines the velocity of the ball. I used the position of the ball and paddle at the time of collision as a ratio to control the balls velocity. This introduces an interesting 'high risk, high reward' game mechanic. Balls off the corner of the paddle have maximum x and y velocity but are easy to miss.
+
+## Project Design
+3D Pong was designed with a set of core functionality and user experience as its primary goal. Using several iterations of playtesting, I learned from player interactions and utilized CSS effects to guide users through the game.
 
 
-### Implementation Timeline
-**Over The Weekend**:
-- [x] Created the game container
-- [x] Adding ball bouncing in 1D, 2D and 3D
+## Technologies
+JavaScript was used for overall structure and game logic. I intentionally did not use jQuery to practice pure, Vanilla JavaScript.
 
-**Day 1**:
-- [x] Add paddle and mouse event listener to make the paddle follow the cursor
-- [x] On 'loss' (ball gets past your paddle) ball is reset to center and point is scored
+Three.js is a lightweight 3D Javascript Library run on WebGL. Three.js was chosen to create and manipuate 3D objects within the browser.
 
-**Day 2**:
-- [x] Add computer player that attempts to deflect the ball with its paddle
+Finally, I utilized Webpack to bundle and serve up the various scripts.
 
-**Day 3**:
-- [x] Add game start button and lives (3 lives before the game ends)
-
-**Day 4**:
-- [x] Increment level and increase difficulty after beating the computer 3 times
-
-### Bonus Features
-- [ ] Websockets for multiplayer
-- [ ] Add single player 'zen' mode (player controls both paddles. No lives)
+## Possible Future Features
+In the future I would like to add:
+* Websockets for multiplayer
+* Ball curve that is controlled by player's cursor speed and direction during collision.

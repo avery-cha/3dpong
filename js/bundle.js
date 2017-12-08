@@ -45825,6 +45825,9 @@ const resetBall = side => {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
 
+    console.log("sphere.position.x", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x);
+    console.log("sphere.position.y", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+
     // resetInBounds();
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = moveBall;
@@ -45835,6 +45838,8 @@ function updateBallSpeed(newBaseBallSpeed) {
   xBallVelocity = baseBallSpeed;
   yBallVelocity = baseBallSpeed;
   zBallVelocity = -baseBallSpeed;
+  console.log("xBallVelocity", xBallVelocity);
+  console.log("yBallVelocity", yBallVelocity);
 }
 
 function updateXBallVelocity(newXBallVelocity) {

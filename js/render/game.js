@@ -18,6 +18,7 @@ import {
 } from './../initialize/paddles';
 import {
   render,
+  animate
 } from './render';
 
 export let gameMode = 'demo';
