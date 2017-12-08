@@ -5,7 +5,7 @@ import {
 } from './../initialize/init';
 import {
   gameMode,
-} from './render';
+} from './game';
 
 export let camera_pivot;
 export let Y_AXIS;

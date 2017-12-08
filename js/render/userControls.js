@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {
   gameMode,
-} from './render';
+} from './game';
 import {
   camera
 } from './../initialize/init';

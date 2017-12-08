@@ -31,7 +31,7 @@ import {
   gameMode,
   muteBool,
   gameOverBool,
-} from './render';
+} from './game';
 
 export const handleCollision = () => {
   let xDirection;

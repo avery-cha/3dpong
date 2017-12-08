@@ -28,8 +28,6 @@ export const resetBall = side => {
     sphere.translateY(yBallVelocity);
     sphere.translateZ(zBallVelocity);
 
-    console.log("xBallVelocity", xBallVelocity);
-    console.log("yBallVelocity", yBallVelocity);
     // resetInBounds();
 };
 
