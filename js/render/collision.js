@@ -32,7 +32,6 @@ export const handleCollisions = () => {
   let yDirection;
   let xPaddleBallDiff;
   let yPaddleBallDiff;
-
   var originPoint = sphere.position.clone();
 
   for (var vertexIndex = 0; vertexIndex < sphere.geometry.vertices.length; vertexIndex++) {
@@ -46,7 +45,6 @@ export const handleCollisions = () => {
       updateYBallVelocity(-yBallVelocity);
       if (!muteBool && !gameOverBool) document.getElementById("beep1").play();
     }
-
     var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
     var yCollisionResults = ray.intersectObjects(yCollidableList);
     if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
@@ -77,7 +75,18 @@ export const handleCollisions = () => {
           xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
           xPaddleBallDiff = (playerPaddle1.position.x - sphere.position.x) / 1.5;
           let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
+          if (newXBallVelocity > 0.3) debugger;
           updateXBallVelocity(newXBallVelocity);
+          console.log("----------");
+          console.log("xDirection", xDirection);
+          console.log("xPaddleBallDiff", xPaddleBallDiff);
+          console.log("baseBallSpeed", baseBallSpeed);
+          console.log("newXBallVelocity", newXBallVelocity);
+          console.log("player x velocity", xBallVelocity);
+          console.log("player paddle position", playerPaddle1.position.x);
+          console.log("sphere", sphere.position.x);
+          console.log("zCollidableList", zCollidableList);
+          console.log("----------");
 
 
           yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
@@ -91,13 +100,27 @@ export const handleCollisions = () => {
         // comp side
         xDirection = xBallVelocity === 0 ? 1 : xBallVelocity / Math.abs(xBallVelocity);
         xPaddleBallDiff = computerPaddle1.position.x - sphere.position.x;
-        let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed * 1.1;
+        let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * baseBallSpeed;
         updateXBallVelocity(newXBallVelocity);
+        console.log("----------");
+        console.log("xDirection", xDirection);
+        console.log("xPaddleBallDiff", xPaddleBallDiff);
+        console.log("baseBallSpeed", baseBallSpeed);
+        console.log("newXBallVelocity", newXBallVelocity);
+        console.log("comp x velocity", xBallVelocity);
+        console.log("comp paddle position", computerPaddle1.position.x);
+        console.log("sphere", sphere.position.x);
+        console.log("zCollidableList", zCollidableList);
+
+        console.log("----------");
+        if (newXBallVelocity > 0.3) debugger;
+
 
         yDirection = yBallVelocity === 0 ? 1 : yBallVelocity / Math.abs(yBallVelocity);
         yPaddleBallDiff = computerPaddle1.position.y - sphere.position.y;
-        let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed * 1.1;
+        let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * baseBallSpeed;
         updateYBallVelocity(newYBallVelocity);
+        console.log("9", xBallVelocity);
 
         sphere.position.z = -8.7;
       }

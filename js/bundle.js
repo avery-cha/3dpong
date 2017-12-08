@@ -45211,7 +45211,6 @@ const init = () => {
   Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["e" /* initPaddle */])();
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
   // initLight();
-  // initNets();
 
   // STATS
   var stats = new __WEBPACK_IMPORTED_MODULE_6_stats_js___default.a();
@@ -45286,77 +45285,6 @@ const zCollidableList = [];
 
 
 function initWall() {
-  // // ** Walls **
-  // // var planeGeometry = new THREE.PlaneGeometry(20.25, 20.25, 32, 32);
-  // // var planeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide });
-  // var planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true });
-
-  // var horizPlaneGeometry = new THREE.PlaneGeometry(16, 20, 24, 30);
-  // var vertPlaneGeometry = new THREE.PlaneGeometry(20, 9, 30, 14);
-
-  // var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  // rightPlane.translateX(8);
-  // rightPlane.translateZ(0);
-  // rightPlane.rotation.y = 3.14159 / 2;
-  // scene.add(rightPlane);
-  // yCollidableList.push(rightPlane);
-  // var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  // rightPlane.translateX(8);
-  // rightPlane.translateZ(0);
-  // rightPlane.rotation.y = 3.14159 / 2;
-  // scene.add(rightPlane);
-
-  // var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  // leftPlane.translateX(-8);
-  // leftPlane.translateZ(0);
-  // leftPlane.rotation.y = 3.14159 / 2;
-  // scene.add(leftPlane);
-  // yCollidableList.push(leftPlane);
-  // var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  // leftPlane.translateX(-8);
-  // leftPlane.translateZ(0);
-  // leftPlane.rotation.y = 3.14159 / 2;
-  // scene.add(leftPlane);
-
-  // var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  // topPlane.translateY(4.5);
-  // topPlane.rotation.x = 3.14159 / 2;
-  // scene.add(topPlane);
-  // xCollidableList.push(topPlane);
-  // var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  // topPlane.translateY(4.5);
-  // topPlane.rotation.x = 3.14159 / 2;
-  // scene.add(topPlane);
-
-  // var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  // bottomPlane.translateY(-4.5);
-  // bottomPlane.rotation.x = 3.14159 / 2;
-  // scene.add(bottomPlane);
-  // xCollidableList.push(bottomPlane);
-  // var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  // bottomPlane.translateY(4.5);
-  // bottomPlane.rotation.x = 3.14159 / 2;
-  // scene.add(bottomPlane);
-  
-  //   // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  //   // backPlane.translateZ( -10 );
-  //   // scene.add(backPlane);
-  //   // zCollidableList.push(backPlane);
-  //   // var backPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  //   // backPlane.translateZ( -10 );
-  //   // scene.add(backPlane);
-
-  //   // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  //   // frontPlane.translateZ( 10 );
-  //   // scene.add(frontPlane);
-  //   // zCollidableList.push(frontPlane);
-  //   // var frontPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-  //   // frontPlane.translateZ( 10 );
-  //   // scene.add(frontPlane);
-
-
-
-
   var planeMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xffffff, wireframe: true, transparent: true });
 
   var horizPlaneGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](18, 21, 1, 17, 20);
@@ -45405,7 +45333,6 @@ function initWall() {
   bottomPlane.translateY(5);
   bottomPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
-
 }
 
 /***/ }),
@@ -45814,10 +45741,10 @@ let zBallVelocity = 0.275;
 
 const resetBall = side => {
   if (side === "computer") {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9.5);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
   } else if (side === "player") {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9.5);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
   }
   xBallVelocity = 0;
@@ -45832,6 +45759,9 @@ const resetBall = side => {
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateX(xBallVelocity);
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
     __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
+
+
+    if (xBallVelocity > 0.3) debugger;
 
     // resetInBounds();
 };
@@ -45848,6 +45778,7 @@ function updateBallSpeed(newBaseBallSpeed) {
 
 function updateXBallVelocity(newXBallVelocity) {
   xBallVelocity = newXBallVelocity;
+
 }
 
 function updateYBallVelocity(newYBallVelocity) {
@@ -46165,7 +46096,6 @@ const handleCollisions = () => {
   let yDirection;
   let xPaddleBallDiff;
   let yPaddleBallDiff;
-
   var originPoint = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.clone();
 
   for (var vertexIndex = 0; vertexIndex < __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].geometry.vertices.length; vertexIndex++) {
@@ -46179,7 +46109,6 @@ const handleCollisions = () => {
       Object(__WEBPACK_IMPORTED_MODULE_4__ball__["f" /* updateYBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
       if (!__WEBPACK_IMPORTED_MODULE_5__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_5__game__["d" /* gameOverBool */]) document.getElementById("beep1").play();
     }
-
     var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
     var yCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_2__initialize_walls__["c" /* yCollidableList */]);
     if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
@@ -46210,7 +46139,18 @@ const handleCollisions = () => {
           xDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
           xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["f" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
           let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
+          if (newXBallVelocity > 0.3) debugger;
           Object(__WEBPACK_IMPORTED_MODULE_4__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
+          console.log("----------");
+          console.log("xDirection", xDirection);
+          console.log("xPaddleBallDiff", xPaddleBallDiff);
+          console.log("baseBallSpeed", __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */]);
+          console.log("newXBallVelocity", newXBallVelocity);
+          console.log("player x velocity", __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
+          console.log("player paddle position", __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["f" /* playerPaddle1 */].position.x);
+          console.log("sphere", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x);
+          console.log("zCollidableList", __WEBPACK_IMPORTED_MODULE_2__initialize_walls__["d" /* zCollidableList */]);
+          console.log("----------");
 
 
           yDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
@@ -46224,13 +46164,27 @@ const handleCollisions = () => {
         // comp side
         xDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
         xPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["a" /* computerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x;
-        let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */] * 1.1;
+        let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
         Object(__WEBPACK_IMPORTED_MODULE_4__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
+        console.log("----------");
+        console.log("xDirection", xDirection);
+        console.log("xPaddleBallDiff", xPaddleBallDiff);
+        console.log("baseBallSpeed", __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */]);
+        console.log("newXBallVelocity", newXBallVelocity);
+        console.log("comp x velocity", __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
+        console.log("comp paddle position", __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["a" /* computerPaddle1 */].position.x);
+        console.log("sphere", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x);
+        console.log("zCollidableList", __WEBPACK_IMPORTED_MODULE_2__initialize_walls__["d" /* zCollidableList */]);
+
+        console.log("----------");
+        if (newXBallVelocity > 0.3) debugger;
+
 
         yDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
         yPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["a" /* computerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y;
-        let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */] * 1.1;
+        let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
         Object(__WEBPACK_IMPORTED_MODULE_4__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
+        console.log("9", __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
 
         __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z = -8.7;
       }

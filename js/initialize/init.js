@@ -43,7 +43,6 @@ export const init = () => {
   initPaddle();
   initOutline();
   // initLight();
-  // initNets();
 
   // STATS
   var stats = new Stats();

@@ -18,6 +18,7 @@ import {
 } from './camera';
 import {
   moveBall,
+  xBallVelocity,
 } from './ball';
 import {
   moveOutline,

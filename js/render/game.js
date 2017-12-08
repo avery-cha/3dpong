@@ -15,6 +15,8 @@ import {
   updateBallSpeed,
   updateXBallVelocity,
   updateYBallVelocity,
+  xBallVelocity,
+  yBallVelocity,
 } from './ball';
 import {
   render,

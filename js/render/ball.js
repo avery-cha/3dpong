@@ -18,10 +18,10 @@ export let zBallVelocity = 0.275;
 
 export const resetBall = side => {
   if (side === "computer") {
-    sphere.position.set(0, 0, -9.5);
+    sphere.position.set(0, 0, -9);
     zBallVelocity = Math.abs(zBallVelocity);
   } else if (side === "player") {
-    sphere.position.set(0, 0, 9.5);
+    sphere.position.set(0, 0, 9);
     zBallVelocity = -Math.abs(zBallVelocity);
   }
   xBallVelocity = 0;
@@ -34,6 +34,9 @@ export const resetBall = side => {
     sphere.translateX(xBallVelocity);
     sphere.translateY(yBallVelocity);
     sphere.translateZ(zBallVelocity);
+
+
+    if (xBallVelocity > 0.3) debugger;
 
     // resetInBounds();
 };
@@ -48,6 +51,7 @@ export function updateBallSpeed(newBaseBallSpeed) {
 
 export function updateXBallVelocity(newXBallVelocity) {
   xBallVelocity = newXBallVelocity;
+
 }
 
 export function updateYBallVelocity(newYBallVelocity) {
