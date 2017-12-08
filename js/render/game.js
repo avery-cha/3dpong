@@ -1,35 +1,22 @@
 import * as THREE from 'three';
 import {
-  init,
   scene,
-  camera,
-  renderer,
 } from './../initialize/init';
 import {
   sphere,
 } from './../initialize/sphere';
 import {
-  resetBall,
-  moveBall,
   updateBallSpeed,
   updateXBallVelocity,
   updateYBallVelocity,
-  updateZBallVelocity,
   baseBallSpeed,
-  xBallVelocity,
-  yBallVelocity,
-  zBallVelocity,
 } from './ball';
 import {
-  playerPaddle1,
-  playerPaddle2,
-  computerPaddle1,
-  computerPaddle2,
   demoPaddle1,
   demoPaddle2,
 } from './../initialize/paddles';
 import {
-  render
+  render,
 } from './render';
 
 export let gameMode = 'demo';
@@ -41,9 +28,6 @@ let level = 1;
 export let playerLives = 3;
 export let computerLives = 3;
 
-
-
-
 export function pauseGameOn() {
   pauseGame = true;
 }
@@ -52,7 +36,6 @@ export function pauseGameOff() {
   pauseGame = false;
   requestAnimationFrame(render);
 }
-
 
 function nextLevel() {
   computerLives = 3;

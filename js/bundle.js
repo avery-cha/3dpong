@@ -45505,24 +45505,19 @@ function initPaddle() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export animate */
 /* harmony export (immutable) */ __webpack_exports__["a"] = render;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__initialize_walls__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__userControls__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__computerPaddle__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__camera__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ball__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__outline__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__collision__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__game__ = __webpack_require__(23);
-
-
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__userControls__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__computerPaddle__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__camera__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ball__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__outline__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collision__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__game__ = __webpack_require__(23);
 
 
 
@@ -45535,66 +45530,61 @@ function initPaddle() {
 
 
 const renderContainer = () => {
-  Object(__WEBPACK_IMPORTED_MODULE_5__userControls__["a" /* userControls */])();
-  Object(__WEBPACK_IMPORTED_MODULE_7__camera__["b" /* initCamera */])();
+  Object(__WEBPACK_IMPORTED_MODULE_3__userControls__["a" /* userControls */])();
+  Object(__WEBPACK_IMPORTED_MODULE_5__camera__["b" /* initCamera */])();
 
   document.getElementById("play-button").onclick = () => {
-    Object(__WEBPACK_IMPORTED_MODULE_11__game__["k" /* startGame */])();
-    Object(__WEBPACK_IMPORTED_MODULE_7__camera__["c" /* resetCamera */])();
+    Object(__WEBPACK_IMPORTED_MODULE_9__game__["k" /* startGame */])();
+    Object(__WEBPACK_IMPORTED_MODULE_5__camera__["c" /* resetCamera */])();
     document.getElementById("play-button-text").classList.remove("blink-me");
   };
 
   document.getElementById("mute-button").onclick = () => {
-    Object(__WEBPACK_IMPORTED_MODULE_11__game__["l" /* toggleMuteBool */])();
-    console.log("muting");
+    Object(__WEBPACK_IMPORTED_MODULE_9__game__["l" /* toggleMuteBool */])();
   };
-
-  function checkPastNet() {
-    if (__WEBPACK_IMPORTED_MODULE_11__game__["j" /* playerLives */] > 0 && __WEBPACK_IMPORTED_MODULE_11__game__["a" /* computerLives */] > 0 ) {
-      if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
-        if (!__WEBPACK_IMPORTED_MODULE_11__game__["f" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_11__game__["e" /* gameOverBool */]) document.getElementById("beep5").play();
-        if (__WEBPACK_IMPORTED_MODULE_11__game__["d" /* gameMode */] === "play" && __WEBPACK_IMPORTED_MODULE_11__game__["g" /* pauseGame */] === false && __WEBPACK_IMPORTED_MODULE_11__game__["e" /* gameOverBool */] === false) {
-          Object(__WEBPACK_IMPORTED_MODULE_11__game__["c" /* decrementLife */])("computer");
-        }
-        Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("computer");
-        Object(__WEBPACK_IMPORTED_MODULE_11__game__["i" /* pauseGameOn */])();
-        setTimeout(__WEBPACK_IMPORTED_MODULE_11__game__["h" /* pauseGameOff */], 1000);
-      } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
-        if (!__WEBPACK_IMPORTED_MODULE_11__game__["f" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_11__game__["e" /* gameOverBool */]) document.getElementById("shut-down2").play();
-
-        if (__WEBPACK_IMPORTED_MODULE_11__game__["d" /* gameMode */] === "play" && __WEBPACK_IMPORTED_MODULE_11__game__["g" /* pauseGame */] === false && __WEBPACK_IMPORTED_MODULE_11__game__["e" /* gameOverBool */] === false) {
-          Object(__WEBPACK_IMPORTED_MODULE_11__game__["c" /* decrementLife */])("player");
-        }
-        Object(__WEBPACK_IMPORTED_MODULE_8__ball__["c" /* resetBall */])("player");
-        Object(__WEBPACK_IMPORTED_MODULE_11__game__["i" /* pauseGameOn */])();
-        setTimeout(__WEBPACK_IMPORTED_MODULE_11__game__["h" /* pauseGameOff */], 1000);
-      }
-    }
-  }
-  
-  function animate() {
-    requestAnimationFrame(animate);
-    render();
-
-    Object(__WEBPACK_IMPORTED_MODULE_7__camera__["a" /* demoCameraPivot */])();
-
-    Object(__WEBPACK_IMPORTED_MODULE_6__computerPaddle__["a" /* moveComputerPaddle */])(__WEBPACK_IMPORTED_MODULE_11__game__["b" /* computerPaddleSpeed */]);
-    checkPastNet();
-
-    Object(__WEBPACK_IMPORTED_MODULE_10__collision__["a" /* handleCollision */])();
-
-    Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
-    Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
-  }
 
   animate();
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = renderContainer;
 
 
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+  Object(__WEBPACK_IMPORTED_MODULE_5__camera__["a" /* demoCameraPivot */])();
+  Object(__WEBPACK_IMPORTED_MODULE_4__computerPaddle__["a" /* moveComputerPaddle */])(__WEBPACK_IMPORTED_MODULE_9__game__["b" /* computerPaddleSpeed */]);
+  checkPastNet();
+  Object(__WEBPACK_IMPORTED_MODULE_8__collision__["a" /* handleCollision */])();
+  Object(__WEBPACK_IMPORTED_MODULE_6__ball__["b" /* moveBall */])();
+  Object(__WEBPACK_IMPORTED_MODULE_7__outline__["a" /* moveOutline */])();
+}
+
 function render() {
-  if (__WEBPACK_IMPORTED_MODULE_11__game__["e" /* gameOverBool */] || __WEBPACK_IMPORTED_MODULE_11__game__["g" /* pauseGame */]) return;
+  if (__WEBPACK_IMPORTED_MODULE_9__game__["e" /* gameOverBool */] || __WEBPACK_IMPORTED_MODULE_9__game__["g" /* pauseGame */]) return;
   __WEBPACK_IMPORTED_MODULE_1__initialize_init__["c" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */], __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */]);
+}
+
+function checkPastNet() {
+  if (__WEBPACK_IMPORTED_MODULE_9__game__["j" /* playerLives */] > 0 && __WEBPACK_IMPORTED_MODULE_9__game__["a" /* computerLives */] > 0) {
+    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
+      if (!__WEBPACK_IMPORTED_MODULE_9__game__["f" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_9__game__["e" /* gameOverBool */]) document.getElementById("beep5").play();
+      if (__WEBPACK_IMPORTED_MODULE_9__game__["d" /* gameMode */] === "play" && __WEBPACK_IMPORTED_MODULE_9__game__["g" /* pauseGame */] === false && __WEBPACK_IMPORTED_MODULE_9__game__["e" /* gameOverBool */] === false) {
+        Object(__WEBPACK_IMPORTED_MODULE_9__game__["c" /* decrementLife */])("computer");
+      }
+      Object(__WEBPACK_IMPORTED_MODULE_6__ball__["c" /* resetBall */])("computer");
+      Object(__WEBPACK_IMPORTED_MODULE_9__game__["i" /* pauseGameOn */])();
+      setTimeout(__WEBPACK_IMPORTED_MODULE_9__game__["h" /* pauseGameOff */], 1000);
+    } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
+      if (!__WEBPACK_IMPORTED_MODULE_9__game__["f" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_9__game__["e" /* gameOverBool */]) document.getElementById("shut-down2").play();
+
+      if (__WEBPACK_IMPORTED_MODULE_9__game__["d" /* gameMode */] === "play" && __WEBPACK_IMPORTED_MODULE_9__game__["g" /* pauseGame */] === false && __WEBPACK_IMPORTED_MODULE_9__game__["e" /* gameOverBool */] === false) {
+        Object(__WEBPACK_IMPORTED_MODULE_9__game__["c" /* decrementLife */])("player");
+      }
+      Object(__WEBPACK_IMPORTED_MODULE_6__ball__["c" /* resetBall */])("player");
+      Object(__WEBPACK_IMPORTED_MODULE_9__game__["i" /* pauseGameOn */])();
+      setTimeout(__WEBPACK_IMPORTED_MODULE_9__game__["h" /* pauseGameOff */], 1000);
+    }
+  }
 }
 
 /***/ }),
@@ -46047,9 +46037,6 @@ let level = 1;
 let playerLives = 3;
 let computerLives = 3;
 
-
-
-
 function pauseGameOn() {
   pauseGame = true;
 }
@@ -46058,7 +46045,6 @@ function pauseGameOff() {
   pauseGame = false;
   requestAnimationFrame(__WEBPACK_IMPORTED_MODULE_5__render__["a" /* render */]);
 }
-
 
 function nextLevel() {
   computerLives = 3;
