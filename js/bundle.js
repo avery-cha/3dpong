@@ -45510,17 +45510,13 @@ function initPaddle() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__initialize_walls__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__userControls__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__computerPaddle__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__camera__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ball__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__outline__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__game__ = __webpack_require__(23);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__userControls__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__computerPaddle__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__camera__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ball__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__outline__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__game__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collision__ = __webpack_require__(24);
 
 
 
@@ -45532,17 +45528,11 @@ function initPaddle() {
 
 
 const renderContainer = () => {
-  Object(__WEBPACK_IMPORTED_MODULE_5__userControls__["a" /* userControls */])();
-  Object(__WEBPACK_IMPORTED_MODULE_7__camera__["b" /* initCamera */])();
+  Object(__WEBPACK_IMPORTED_MODULE_2__userControls__["a" /* userControls */])();
+  Object(__WEBPACK_IMPORTED_MODULE_4__camera__["b" /* initCamera */])();
 
-  document.getElementById("play-button").onclick = () => {
-    Object(__WEBPACK_IMPORTED_MODULE_10__game__["g" /* startGame */])();
-    Object(__WEBPACK_IMPORTED_MODULE_7__camera__["c" /* resetCamera */])();
-  };
-
-  document.getElementById("mute-button").onclick = () => {
-    Object(__WEBPACK_IMPORTED_MODULE_10__game__["h" /* toggleMuteBool */])();
-  };
+  addPlayButtonEventListener();
+  addMuteButtonEventListener();
 
   animate();
 };
@@ -45550,97 +45540,33 @@ const renderContainer = () => {
 
 
 function animate() {
-  let xDirection;
-  let yDirection;
-  let xPaddleBallDiff;
-  let yPaddleBallDiff;
-
   requestAnimationFrame(animate);
   render();
-
-  Object(__WEBPACK_IMPORTED_MODULE_7__camera__["a" /* demoCameraPivot */])();
-
-  Object(__WEBPACK_IMPORTED_MODULE_10__game__["a" /* checkPastNet */])();
-  Object(__WEBPACK_IMPORTED_MODULE_6__computerPaddle__["a" /* moveComputerPaddle */])(__WEBPACK_IMPORTED_MODULE_10__game__["b" /* computerPaddleSpeed */]);
-
-  var originPoint = __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.clone();
-  for (var vertexIndex = 0; vertexIndex < __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].geometry.vertices.length; vertexIndex++) {
-    var localVertex = __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].geometry.vertices[vertexIndex].clone();
-    var globalVertex = localVertex.applyMatrix4(__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].matrix);
-    var directionVector = globalVertex.sub(__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position);
-
-    var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
-    var xCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_3__initialize_walls__["b" /* xCollidableList */]);
-    if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
-      if (!__WEBPACK_IMPORTED_MODULE_10__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_10__game__["d" /* gameOverBool */]) document.getElementById("beep1").play();
-    }
-
-    var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
-    var yCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_3__initialize_walls__["c" /* yCollidableList */]);
-    if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
-      if (!__WEBPACK_IMPORTED_MODULE_10__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_10__game__["d" /* gameOverBool */]) document.getElementById("beep1").play();
-    }
-
-    var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
-    var zCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_3__initialize_walls__["d" /* zCollidableList */]);
-    if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
-      Object(__WEBPACK_IMPORTED_MODULE_8__ball__["g" /* updateZBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_8__ball__["j" /* zBallVelocity */]);
-      if (!__WEBPACK_IMPORTED_MODULE_10__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_10__game__["d" /* gameOverBool */]) document.getElementById("beep2").play();
-      if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z > 0) {
-        // player side
-        if (__WEBPACK_IMPORTED_MODULE_10__game__["c" /* gameMode */] === "demo") {
-          xDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
-          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
-          let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
-          Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
-
-          yDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
-          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y);
-          let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
-          Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
-
-        }
-        if (__WEBPACK_IMPORTED_MODULE_10__game__["c" /* gameMode */] === "play") {
-          xDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
-          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
-          let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
-          Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
-
-
-          yDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
-          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y);
-          let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */];
-          Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
-        }
-        __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z = 8.7;
-
-      } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z < 0) {
-        // comp side
-        xDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["h" /* xBallVelocity */]);
-        xPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["a" /* computerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.x;
-        let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1.1;
-        Object(__WEBPACK_IMPORTED_MODULE_8__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
-
-        yDirection = __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_8__ball__["i" /* yBallVelocity */]);
-        yPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["a" /* computerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.y;
-        let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_8__ball__["a" /* baseBallSpeed */] * 1.1;
-        Object(__WEBPACK_IMPORTED_MODULE_8__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
-
-        __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z = -8.7;
-      }
-    }
-  }
-
-  Object(__WEBPACK_IMPORTED_MODULE_8__ball__["b" /* moveBall */])();
-  Object(__WEBPACK_IMPORTED_MODULE_9__outline__["a" /* moveOutline */])();
+  Object(__WEBPACK_IMPORTED_MODULE_4__camera__["a" /* demoCameraPivot */])();
+  Object(__WEBPACK_IMPORTED_MODULE_7__game__["a" /* checkPastNet */])();
+  Object(__WEBPACK_IMPORTED_MODULE_3__computerPaddle__["a" /* moveComputerPaddle */])(__WEBPACK_IMPORTED_MODULE_7__game__["b" /* computerPaddleSpeed */]);
+  Object(__WEBPACK_IMPORTED_MODULE_8__collision__["a" /* handleCollisions */])();  
+  Object(__WEBPACK_IMPORTED_MODULE_5__ball__["b" /* moveBall */])();
+  Object(__WEBPACK_IMPORTED_MODULE_6__outline__["a" /* moveOutline */])();
 }
 
 function render() {
-  if (__WEBPACK_IMPORTED_MODULE_10__game__["d" /* gameOverBool */] || __WEBPACK_IMPORTED_MODULE_10__game__["f" /* pauseGame */]) return;
+  if (__WEBPACK_IMPORTED_MODULE_7__game__["d" /* gameOverBool */] || __WEBPACK_IMPORTED_MODULE_7__game__["f" /* pauseGame */]) return;
   __WEBPACK_IMPORTED_MODULE_1__initialize_init__["c" /* renderer */].render(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */], __WEBPACK_IMPORTED_MODULE_1__initialize_init__["a" /* camera */]);
 }
+
+const addPlayButtonEventListener = () => {
+  document.getElementById("play-button").onclick = () => {
+    Object(__WEBPACK_IMPORTED_MODULE_7__game__["g" /* startGame */])();
+    Object(__WEBPACK_IMPORTED_MODULE_4__camera__["c" /* resetCamera */])();
+  };
+};
+
+const addMuteButtonEventListener = () => {
+  document.getElementById("mute-button").onclick = () => {
+    Object(__WEBPACK_IMPORTED_MODULE_7__game__["h" /* toggleMuteBool */])();
+  };
+};
 
 /***/ }),
 /* 14 */
@@ -46210,6 +46136,105 @@ const toggleMuteBool = () => {
   muteBool = muteBool ? false : true;
 };
 /* harmony export (immutable) */ __webpack_exports__["h"] = toggleMuteBool;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_walls__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ball__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__game__ = __webpack_require__(23);
+
+
+
+
+
+
+
+const handleCollisions = () => {
+  let xDirection;
+  let yDirection;
+  let xPaddleBallDiff;
+  let yPaddleBallDiff;
+
+  var originPoint = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.clone();
+
+  for (var vertexIndex = 0; vertexIndex < __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].geometry.vertices.length; vertexIndex++) {
+    var localVertex = __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].geometry.vertices[vertexIndex].clone();
+    var globalVertex = localVertex.applyMatrix4(__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].matrix);
+    var directionVector = globalVertex.sub(__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position);
+
+    var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
+    var xCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_2__initialize_walls__["b" /* xCollidableList */]);
+    if (xCollisionResults.length > 0 && xCollisionResults[0].distance < directionVector.length()) {
+      Object(__WEBPACK_IMPORTED_MODULE_4__ball__["f" /* updateYBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
+      if (!__WEBPACK_IMPORTED_MODULE_5__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_5__game__["d" /* gameOverBool */]) document.getElementById("beep1").play();
+    }
+
+    var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
+    var yCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_2__initialize_walls__["c" /* yCollidableList */]);
+    if (yCollisionResults.length > 0 && yCollisionResults[0].distance < directionVector.length()) {
+      Object(__WEBPACK_IMPORTED_MODULE_4__ball__["e" /* updateXBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
+      if (!__WEBPACK_IMPORTED_MODULE_5__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_5__game__["d" /* gameOverBool */]) document.getElementById("beep1").play();
+    }
+
+    var ray = new __WEBPACK_IMPORTED_MODULE_0_three__["Raycaster"](originPoint, directionVector.clone().normalize());
+    var zCollisionResults = ray.intersectObjects(__WEBPACK_IMPORTED_MODULE_2__initialize_walls__["d" /* zCollidableList */]);
+    if (zCollisionResults.length > 0 && zCollisionResults[0].distance < directionVector.length()) {
+      Object(__WEBPACK_IMPORTED_MODULE_4__ball__["g" /* updateZBallVelocity */])(-__WEBPACK_IMPORTED_MODULE_4__ball__["j" /* zBallVelocity */]);
+      if (!__WEBPACK_IMPORTED_MODULE_5__game__["e" /* muteBool */] && !__WEBPACK_IMPORTED_MODULE_5__game__["d" /* gameOverBool */]) document.getElementById("beep2").play();
+      if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z > 0) {
+        // player side
+        if (__WEBPACK_IMPORTED_MODULE_5__game__["c" /* gameMode */] === "demo") {
+          xDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
+          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["c" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
+          let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
+          Object(__WEBPACK_IMPORTED_MODULE_4__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
+
+          yDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
+          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["c" /* demoPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+          let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
+          Object(__WEBPACK_IMPORTED_MODULE_4__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
+
+        }
+        if (__WEBPACK_IMPORTED_MODULE_5__game__["c" /* gameMode */] === "play") {
+          xDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
+          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["f" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
+          let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
+          Object(__WEBPACK_IMPORTED_MODULE_4__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
+
+
+          yDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
+          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["f" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+          let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */];
+          Object(__WEBPACK_IMPORTED_MODULE_4__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
+        }
+        __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z = 8.7;
+
+      } else if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z < 0) {
+        // comp side
+        xDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["h" /* xBallVelocity */]);
+        xPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["a" /* computerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x;
+        let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */] * 1.1;
+        Object(__WEBPACK_IMPORTED_MODULE_4__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
+
+        yDirection = __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_4__ball__["i" /* yBallVelocity */]);
+        yPaddleBallDiff = __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["a" /* computerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y;
+        let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_4__ball__["a" /* baseBallSpeed */] * 1.1;
+        Object(__WEBPACK_IMPORTED_MODULE_4__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
+
+        __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z = -8.7;
+      }
+    }
+  }
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = handleCollisions;
 
 
 /***/ })
