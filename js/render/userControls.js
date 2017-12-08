@@ -10,6 +10,8 @@ import {
   playerPaddle2,
 } from './../initialize/paddles';
 
+export let mouseSpeed = [0, 0];
+
 export const userControls = () => {
   // Code created with the help of Stack Overflow question
   // https://stackoverflow.com/questions/13055214/mouse-canvas-x-y-to-three-js-world-x-y-z
@@ -24,7 +26,6 @@ export const userControls = () => {
   document.addEventListener('mousemove', onDocumentMouseMove, false);
 
   let previousMousePos = [0, 0];
-  let mouseSpeed = [0, 0];
   
   function onDocumentMouseMove(event) {
     if (gameMode === "play") {
