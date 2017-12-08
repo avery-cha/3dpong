@@ -145,6 +145,6 @@ a {
   color: black;
 }
 
-.fa:hover {
-  transform: 110%;
+.fa:hover, .button:hover {
+  transform: scale(1.1);
 }
