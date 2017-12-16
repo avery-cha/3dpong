@@ -28,8 +28,6 @@ export const resetBall = side => {
     sphere.translateY(yBallVelocity);
     sphere.translateZ(zBallVelocity);
 
-    console.log("sphere.position.x", sphere.position.x);
-    console.log("sphere.position.y", sphere.position.y);
 
     resetInBounds();
 };
@@ -39,8 +37,6 @@ export function updateBallSpeed(newBaseBallSpeed) {
   xBallVelocity = baseBallSpeed;
   yBallVelocity = baseBallSpeed;
   zBallVelocity = -baseBallSpeed;
-  console.log("xBallVelocity", xBallVelocity);
-  console.log("yBallVelocity", yBallVelocity);
 }
 
 export function updateXBallVelocity(newXBallVelocity) {

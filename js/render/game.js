@@ -22,7 +22,7 @@ import {
 } from './render';
 
 export let gameMode = 'demo';
-export let muteBool = true;
+export let muteBool = false;
 export let gameOverBool = false;
 export let pauseGame = false;
 export let computerPaddleSpeed;
@@ -41,7 +41,7 @@ export function pauseGameOff() {
 
 function nextLevel() {
   computerLives = 3;
-  computerPaddleSpeed *= 1.1;
+  computerPaddleSpeed *= 1.13;
   updateBallSpeed(baseBallSpeed * 1.07);
   level += 1;
   document.getElementById("game-level").innerHTML = `Level ${level}`;
@@ -69,7 +69,7 @@ function resetGame() {
   gameOverBool = false;
   playerLives = 3;
   computerLives = 3;
-  computerPaddleSpeed = 0.15;
+  computerPaddleSpeed = 0.145;
   updateBallSpeed(0.2);
   updateXBallVelocity(0.02);
   updateYBallVelocity(0.02);

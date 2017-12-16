@@ -45208,7 +45208,7 @@ const init = () => {
 
   Object(__WEBPACK_IMPORTED_MODULE_1__sphere__["a" /* default */])();
   Object(__WEBPACK_IMPORTED_MODULE_2__walls__["a" /* initWall */])();
-  Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["e" /* initPaddle */])();
+  Object(__WEBPACK_IMPORTED_MODULE_3__paddles__["d" /* initPaddle */])();
   Object(__WEBPACK_IMPORTED_MODULE_4__outline__["b" /* initOutline */])();
   // initLight();
   // initNets();
@@ -45368,11 +45368,11 @@ function initWall() {
   rightPlane.rotation.y = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightPlane);
   yCollidableList.push(rightPlane);
-  var rightPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
-  rightPlane.translateX(8.5);
-  rightPlane.translateZ(0);
-  rightPlane.rotation.y = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightPlane);
+  // var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // rightPlane.translateX(8.5);
+  // rightPlane.translateZ(0);
+  // rightPlane.rotation.y = 3.14159 / 2;
+  // scene.add(rightPlane);
 
   var leftPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
   leftPlane.translateX(-8.5);
@@ -45380,32 +45380,31 @@ function initWall() {
   leftPlane.rotation.y = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftPlane);
   yCollidableList.push(leftPlane);
-  var leftPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertPlaneGeometry, planeMaterial);
-  leftPlane.translateX(-8.5);
-  leftPlane.translateZ(0);
-  leftPlane.rotation.y = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftPlane);
+  // var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // leftPlane.translateX(-8.5);
+  // leftPlane.translateZ(0);
+  // leftPlane.rotation.y = 3.14159 / 2;
+  // scene.add(leftPlane);
 
   var topPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
   topPlane.translateY(5);
   topPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topPlane);
   xCollidableList.push(topPlane);
-  var topPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
-  topPlane.translateY(5);
-  topPlane.rotation.x = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topPlane);
+  // var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // topPlane.translateY(5);
+  // topPlane.rotation.x = 3.14159 / 2;
+  // scene.add(topPlane);
 
   var bottomPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
   bottomPlane.translateY(-5);
   bottomPlane.rotation.x = 3.14159 / 2;
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
   xCollidableList.push(bottomPlane);
-  var bottomPlane = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizPlaneGeometry, planeMaterial);
-  bottomPlane.translateY(5);
-  bottomPlane.rotation.x = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomPlane);
-
+  // var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // bottomPlane.translateY(5);
+  // bottomPlane.rotation.x = 3.14159 / 2;
+  // scene.add(bottomPlane);
 }
 
 /***/ }),
@@ -45413,13 +45412,13 @@ function initWall() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return playerPaddle1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return playerPaddle2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return playerPaddle1; });
+/* unused harmony export playerPaddle2 */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return computerPaddle1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return computerPaddle2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return demoPaddle1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return demoPaddle2; });
-/* harmony export (immutable) */ __webpack_exports__["e"] = initPaddle;
+/* unused harmony export computerPaddle2 */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return demoPaddle1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return demoPaddle2; });
+/* harmony export (immutable) */ __webpack_exports__["d"] = initPaddle;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
@@ -45476,27 +45475,27 @@ function initPaddle() {
   playerPaddle1.translateZ(10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle1);
   __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(playerPaddle1);
-  playerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
-  playerPaddle2.translateX(1000);
-  playerPaddle2.translateZ(10);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle2);
+  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle2.translateX(1000);
+  // playerPaddle2.translateZ(10);
+  // scene.add(playerPaddle2);
 
   var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
   computerPaddle1.translateZ(-10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle1);
   __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(computerPaddle1);
-  computerPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
-  computerPaddle2.translateZ(-10);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle2);
+  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle2.translateZ(-10);
+  // scene.add(computerPaddle2);
 
   demoPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
   demoPaddle1.translateZ(10);
   __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle1);
   __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(demoPaddle1);
-  demoPaddle2 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
-  demoPaddle2.translateZ(10);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle2);
+  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle2.translateZ(10);
+  // scene.add(demoPaddle2);
 
 }
 
@@ -45613,10 +45612,10 @@ const userControls = () => {
       var distance = (10 - __WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */].position.z) / dir.z;
       var pos = __WEBPACK_IMPORTED_MODULE_2__initialize_init__["a" /* camera */].position.clone().add(dir.multiplyScalar(distance));
 
-      __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["f" /* playerPaddle1 */].position.set(
+      __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["e" /* playerPaddle1 */].position.set(
         pos.x, -pos.y, pos.z);
-      __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__["g" /* playerPaddle2 */].position.set(
-        pos.x, -pos.y, pos.z);
+      // playerPaddle2.position.set(
+      //   pos.x, -pos.y, pos.z);
 
       // calculate mouse speed
       mouseSpeed = [
@@ -45687,37 +45686,37 @@ let demoPaddleSpeed = .25;
 const moveComputerPaddle = (paddleSpeed = demoPaddleSpeed) => {
   if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.x < 6.5) {
     __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].translateX(paddleSpeed);
-    __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* computerPaddle2 */].translateX(paddleSpeed);
+    // computerPaddle2.translateX(paddleSpeed);
   }
   if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.y && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.y < 3.5) {
     __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].translateY(paddleSpeed);
-    __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* computerPaddle2 */].translateY(paddleSpeed);
+    // computerPaddle2.translateY(paddleSpeed);
   }
   if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.x > -6.5) {
     __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].translateX(-paddleSpeed);
-    __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* computerPaddle2 */].translateX(-paddleSpeed);
+    // computerPaddle2.translateX(-paddleSpeed);
   }
   if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.y && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].position.y > -3.5) {
     __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["a" /* computerPaddle1 */].translateY(-paddleSpeed);
-    __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* computerPaddle2 */].translateY(-paddleSpeed);
+    // computerPaddle2.translateY(-paddleSpeed);
   }
 
-  if (__WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */] && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["d" /* demoPaddle2 */]) {
-    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.x < 6.5) {
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].translateX(paddleSpeed);
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["d" /* demoPaddle2 */].translateX(paddleSpeed);
+  if (__WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */]) {
+    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.x < 6.5) {
+      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].translateX(paddleSpeed);
+      // demoPaddle2.translateX(paddleSpeed);
     }
-    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.y && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.y < 3.5) {
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].translateY(paddleSpeed);
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["d" /* demoPaddle2 */].translateY(paddleSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.y && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.y < 3.5) {
+      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].translateY(paddleSpeed);
+      // demoPaddle2.translateY(paddleSpeed);
     }
-    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.x > -6.5) {
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].translateX(-paddleSpeed);
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["d" /* demoPaddle2 */].translateX(-paddleSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.x && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.x > -6.5) {
+      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].translateX(-paddleSpeed);
+      // demoPaddle2.translateX(-paddleSpeed);
     }
-    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.y && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].position.y > -3.5) {
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["c" /* demoPaddle1 */].translateY(-paddleSpeed);
-      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["d" /* demoPaddle2 */].translateY(-paddleSpeed);
+    if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.y && __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].position.y > -3.5) {
+      __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__["b" /* demoPaddle1 */].translateY(-paddleSpeed);
+      // demoPaddle2.translateY(-paddleSpeed);
     }
   }
 };
@@ -46027,7 +46026,7 @@ a+"px",m=b,r=0);return b},update:function(){l=this.end()}}};"object"===typeof mo
 
 
 let gameMode = 'demo';
-let muteBool = true;
+let muteBool = false;
 let gameOverBool = false;
 let pauseGame = false;
 let computerPaddleSpeed;
@@ -46046,7 +46045,7 @@ function pauseGameOff() {
 
 function nextLevel() {
   computerLives = 3;
-  computerPaddleSpeed *= 1.1;
+  computerPaddleSpeed *= 1.13;
   Object(__WEBPACK_IMPORTED_MODULE_3__ball__["d" /* updateBallSpeed */])(__WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */] * 1.07);
   level += 1;
   document.getElementById("game-level").innerHTML = `Level ${level}`;
@@ -46065,8 +46064,8 @@ function startGame() {
 
   resetGame();
   gameMode = "play";
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */]);
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["d" /* demoPaddle2 */]);
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["b" /* demoPaddle1 */]);
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle2 */]);
   requestAnimationFrame(__WEBPACK_IMPORTED_MODULE_5__render__["a" /* render */]);
 }
 
@@ -46074,7 +46073,7 @@ function resetGame() {
   gameOverBool = false;
   playerLives = 3;
   computerLives = 3;
-  computerPaddleSpeed = 0.15;
+  computerPaddleSpeed = 0.145;
   Object(__WEBPACK_IMPORTED_MODULE_3__ball__["d" /* updateBallSpeed */])(0.2);
   Object(__WEBPACK_IMPORTED_MODULE_3__ball__["e" /* updateXBallVelocity */])(0.02);
   Object(__WEBPACK_IMPORTED_MODULE_3__ball__["f" /* updateYBallVelocity */])(0.02);
@@ -46209,18 +46208,18 @@ const handleCollision = () => {
         // player side
         if (__WEBPACK_IMPORTED_MODULE_5__game__["c" /* gameMode */] === "demo") {
           xDirection = __WEBPACK_IMPORTED_MODULE_3__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_3__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_3__ball__["h" /* xBallVelocity */]);
-          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
+          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["b" /* demoPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
           let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */];
           Object(__WEBPACK_IMPORTED_MODULE_3__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
 
           yDirection = __WEBPACK_IMPORTED_MODULE_3__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_3__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_3__ball__["i" /* yBallVelocity */]);
-          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["b" /* demoPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
           let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */];
           Object(__WEBPACK_IMPORTED_MODULE_3__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
         }
         if (__WEBPACK_IMPORTED_MODULE_5__game__["c" /* gameMode */] === "play") {
           xDirection = __WEBPACK_IMPORTED_MODULE_3__ball__["h" /* xBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_3__ball__["h" /* xBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_3__ball__["h" /* xBallVelocity */]);
-          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
+          xPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["e" /* playerPaddle1 */].position.x - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x) / 1.5;
           let newXBallVelocity = xDirection * Math.abs(xPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */];
           Object(__WEBPACK_IMPORTED_MODULE_3__ball__["e" /* updateXBallVelocity */])(newXBallVelocity);
 
@@ -46232,7 +46231,7 @@ const handleCollision = () => {
 
 
           yDirection = __WEBPACK_IMPORTED_MODULE_3__ball__["i" /* yBallVelocity */] === 0 ? 1 : __WEBPACK_IMPORTED_MODULE_3__ball__["i" /* yBallVelocity */] / Math.abs(__WEBPACK_IMPORTED_MODULE_3__ball__["i" /* yBallVelocity */]);
-          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["f" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
+          yPaddleBallDiff = (__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["e" /* playerPaddle1 */].position.y - __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
           let newYBallVelocity = yDirection * Math.abs(yPaddleBallDiff) * __WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */];
           Object(__WEBPACK_IMPORTED_MODULE_3__ball__["f" /* updateYBallVelocity */])(newYBallVelocity);
         }

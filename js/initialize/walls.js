@@ -90,11 +90,11 @@ export function initWall() {
   rightPlane.rotation.y = 3.14159 / 2;
   scene.add(rightPlane);
   yCollidableList.push(rightPlane);
-  var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  rightPlane.translateX(8.5);
-  rightPlane.translateZ(0);
-  rightPlane.rotation.y = 3.14159 / 2;
-  scene.add(rightPlane);
+  // var rightPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // rightPlane.translateX(8.5);
+  // rightPlane.translateZ(0);
+  // rightPlane.rotation.y = 3.14159 / 2;
+  // scene.add(rightPlane);
 
   var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
   leftPlane.translateX(-8.5);
@@ -102,30 +102,29 @@ export function initWall() {
   leftPlane.rotation.y = 3.14159 / 2;
   scene.add(leftPlane);
   yCollidableList.push(leftPlane);
-  var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
-  leftPlane.translateX(-8.5);
-  leftPlane.translateZ(0);
-  leftPlane.rotation.y = 3.14159 / 2;
-  scene.add(leftPlane);
+  // var leftPlane = new THREE.Mesh(vertPlaneGeometry, planeMaterial);
+  // leftPlane.translateX(-8.5);
+  // leftPlane.translateZ(0);
+  // leftPlane.rotation.y = 3.14159 / 2;
+  // scene.add(leftPlane);
 
   var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
   topPlane.translateY(5);
   topPlane.rotation.x = 3.14159 / 2;
   scene.add(topPlane);
   xCollidableList.push(topPlane);
-  var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  topPlane.translateY(5);
-  topPlane.rotation.x = 3.14159 / 2;
-  scene.add(topPlane);
+  // var topPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // topPlane.translateY(5);
+  // topPlane.rotation.x = 3.14159 / 2;
+  // scene.add(topPlane);
 
   var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
   bottomPlane.translateY(-5);
   bottomPlane.rotation.x = 3.14159 / 2;
   scene.add(bottomPlane);
   xCollidableList.push(bottomPlane);
-  var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
-  bottomPlane.translateY(5);
-  bottomPlane.rotation.x = 3.14159 / 2;
-  scene.add(bottomPlane);
-
+  // var bottomPlane = new THREE.Mesh(horizPlaneGeometry, planeMaterial);
+  // bottomPlane.translateY(5);
+  // bottomPlane.rotation.x = 3.14159 / 2;
+  // scene.add(bottomPlane);
 }

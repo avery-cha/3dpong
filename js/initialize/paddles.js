@@ -54,26 +54,26 @@ export function initPaddle() {
   playerPaddle1.translateZ(10);
   scene.add(playerPaddle1);
   zCollidableList.push(playerPaddle1);
-  playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  playerPaddle2.translateX(1000);
-  playerPaddle2.translateZ(10);
-  scene.add(playerPaddle2);
+  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle2.translateX(1000);
+  // playerPaddle2.translateZ(10);
+  // scene.add(playerPaddle2);
 
   var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
   computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
   computerPaddle1.translateZ(-10);
   scene.add(computerPaddle1);
   zCollidableList.push(computerPaddle1);
-  computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-  computerPaddle2.translateZ(-10);
-  scene.add(computerPaddle2);
+  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle2.translateZ(-10);
+  // scene.add(computerPaddle2);
 
   demoPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
   demoPaddle1.translateZ(10);
   scene.add(demoPaddle1);
   zCollidableList.push(demoPaddle1);
-  demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  demoPaddle2.translateZ(10);
-  scene.add(demoPaddle2);
+  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle2.translateZ(10);
+  // scene.add(demoPaddle2);
 
 }

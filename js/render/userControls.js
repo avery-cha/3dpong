@@ -43,8 +43,8 @@ export const userControls = () => {
 
       playerPaddle1.position.set(
         pos.x, -pos.y, pos.z);
-      playerPaddle2.position.set(
-        pos.x, -pos.y, pos.z);
+      // playerPaddle2.position.set(
+      //   pos.x, -pos.y, pos.z);
 
       // calculate mouse speed
       mouseSpeed = [
@@ -55,7 +55,6 @@ export const userControls = () => {
         event.clientX,
         event.clientY
       ];
-      // console.log("mouseSpeed", mouseSpeed);
     }
   }
 
