@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -45133,49 +45133,18 @@
 
 
 /***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_render__ = __webpack_require__(13);
-
-
-
-
-    
-
-document.addEventListener("DOMContentLoaded", function() {
-  Object(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["b" /* init */])();
-  Object(__WEBPACK_IMPORTED_MODULE_2__render_render__["b" /* renderContainer */])();
-});
-
-
-    
-
-
-/***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__walls__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__paddles__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__outline__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lights__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stats_js__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sphere__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__walls__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__paddles__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__outline__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lights__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stats_js__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_stats_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_stats_js__);
 
 
@@ -45238,7 +45207,7 @@ const init = () => {
 
 
 /***/ }),
-/* 9 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45246,7 +45215,7 @@ const init = () => {
 /* harmony export (immutable) */ __webpack_exports__["a"] = initSphere;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(1);
 
 
 
@@ -45263,15 +45232,255 @@ function initSphere() {
 }
 
 /***/ }),
-/* 10 */,
-/* 11 */
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return playerPaddle1; });
+/* unused harmony export playerPaddle2 */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return computerPaddle1; });
+/* unused harmony export computerPaddle2 */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return demoPaddle1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return demoPaddle2; });
+/* harmony export (immutable) */ __webpack_exports__["d"] = initPaddle;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__walls__ = __webpack_require__(5);
+
+
+
+
+let playerPaddle1 = undefined;
+let playerPaddle2 = undefined;
+let computerPaddle1 = undefined;
+let computerPaddle2 = undefined;
+let demoPaddle1 = undefined;
+let demoPaddle2 = undefined;
+
+function initPaddle() {
+  // ** Paddles **
+  // var paddleGeometry = new THREE.PlaneGeometry(3, 2, 32, 32);
+  // var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true });
+
+  // playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle1.translateX(1000);
+  // playerPaddle1.translateZ(9.5);
+  // scene.add(playerPaddle1);
+  // zCollidableList.push(playerPaddle1);
+  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle2.translateX(1000);
+  // playerPaddle2.translateZ(9.5);
+  // scene.add(playerPaddle2);
+  
+  // var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
+  // computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle1.translateZ(-9.5);
+  // scene.add(computerPaddle1);
+  // zCollidableList.push(computerPaddle1);
+  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle2.translateZ(-9.5);
+  // scene.add(computerPaddle2);
+  
+  // demoPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle1.translateZ(9.5);
+  // scene.add(demoPaddle1);
+  // zCollidableList.push(demoPaddle1);
+  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle2.translateZ(9.5);
+  // scene.add(demoPaddle2);
+
+  // Creating paddles with cubes instead
+  var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](3, 2, 1, 9, 6);
+  var playerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x0000ee, wireframe: true, transparent: true });
+
+  playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
+  playerPaddle1.translateX(1000);
+  playerPaddle1.translateZ(10);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle1);
+  __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(playerPaddle1);
+  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // playerPaddle2.translateX(1000);
+  // playerPaddle2.translateZ(10);
+  // scene.add(playerPaddle2);
+
+  var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
+  computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
+  computerPaddle1.translateZ(-10);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle1);
+  __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(computerPaddle1);
+  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
+  // computerPaddle2.translateZ(-10);
+  // scene.add(computerPaddle2);
+
+  demoPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
+  demoPaddle1.translateZ(10);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle1);
+  __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(demoPaddle1);
+  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
+  // demoPaddle2.translateZ(10);
+  // scene.add(demoPaddle2);
+
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return gameMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return muteBool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return gameOverBool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return pauseGame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return computerPaddleSpeed; });
+/* unused harmony export playerLives */
+/* unused harmony export computerLives */
+/* unused harmony export pauseGameOn */
+/* unused harmony export pauseGameOff */
+/* harmony export (immutable) */ __webpack_exports__["g"] = startGame;
+/* unused harmony export decrementLife */
+/* harmony export (immutable) */ __webpack_exports__["a"] = checkPastNet;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ball__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__render__ = __webpack_require__(8);
+
+
+
+
+
+
+
+let gameMode = 'demo';
+let muteBool = false;
+let gameOverBool = false;
+let pauseGame = false;
+let computerPaddleSpeed;
+let level = 1;
+let playerLives = 3;
+let computerLives = 3;
+
+function pauseGameOn() {
+  pauseGame = true;
+}
+
+function pauseGameOff() {
+  pauseGame = false;
+  requestAnimationFrame(__WEBPACK_IMPORTED_MODULE_5__render__["a" /* render */]);
+}
+
+function nextLevel() {
+  computerLives = 3;
+  computerPaddleSpeed *= 1.13;
+  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["d" /* updateBallSpeed */])(__WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */] * 1.07);
+  level += 1;
+  document.getElementById("game-level").innerHTML = `Level ${level}`;
+  blinkText(document.getElementById('game-level'));
+}
+
+function gameOver() {
+  gameOverBool = true;
+  document.getElementById("game-over-message").classList.remove("hide");
+  document.getElementById("play-button-text").classList.add("blink-me");
+}
+
+function startGame() {
+  document.getElementById("game-over-message").classList.add("hide");
+  document.getElementById("game-level").innerHTML = `Level ${level}`;
+
+  resetGame();
+  gameMode = "play";
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["b" /* demoPaddle1 */]);
+  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle2 */]);
+  requestAnimationFrame(__WEBPACK_IMPORTED_MODULE_5__render__["a" /* render */]);
+}
+
+function resetGame() {
+  gameOverBool = false;
+  playerLives = 3;
+  computerLives = 3;
+  computerPaddleSpeed = 0.145;
+  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["d" /* updateBallSpeed */])(0.2);
+  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["e" /* updateXBallVelocity */])(0.02);
+  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["f" /* updateYBallVelocity */])(0.02);
+  level = 1;
+  __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
+  document.getElementById('comp-score').innerHTML = computerLives;
+  document.getElementById('player-score').innerHTML = playerLives;
+  document.getElementById("game-level").innerHTML = `Level ${level}`;
+}
+
+
+function decrementLife(player) {
+  if (player === "computer") {
+    computerLives = computerLives - 1;
+    document.getElementById('comp-score').innerHTML = computerLives;
+    blinkText(document.getElementById('comp-score'));
+  } else if (player === "player") {
+    if (playerLives > 0) {
+      playerLives = playerLives - 1;
+    }
+    document.getElementById('player-score').innerHTML = playerLives;
+    blinkText(document.getElementById('player-score'));
+  }
+
+  if (playerLives <= 0) {
+    gameOver();
+  } else if (computerLives <= 0) {
+    nextLevel();
+  }
+}
+
+function checkPastNet() {
+  if (playerLives > 0 && computerLives > 0) {
+    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
+      if (!muteBool && !gameOverBool) document.getElementById("beep5").play();
+      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
+        decrementLife("computer");
+      }
+      Object(__WEBPACK_IMPORTED_MODULE_3__ball__["c" /* resetBall */])("computer");
+      pauseGameOn();
+      setTimeout(pauseGameOff, 1000);
+    } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
+      if (!muteBool && !gameOverBool) document.getElementById("shut-down2").play();
+
+      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
+        decrementLife("player");
+      }
+      Object(__WEBPACK_IMPORTED_MODULE_3__ball__["c" /* resetBall */])("player");
+      pauseGameOn();
+      setTimeout(pauseGameOff, 1000);
+    }
+  }
+}
+
+const blinkText = domElement => {
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      domElement.style.visibility = domElement.style.visibility === 'hidden' ? "" : 'hidden';
+    },
+      200 * i);
+  }
+};
+
+const toggleMuteBool = () => {
+  muteBool = muteBool ? false : true;
+};
+/* harmony export (immutable) */ __webpack_exports__["h"] = toggleMuteBool;
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = initWall;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(1);
 
 
 
@@ -45408,99 +45617,159 @@ function initWall() {
 }
 
 /***/ }),
-/* 12 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return playerPaddle1; });
-/* unused harmony export playerPaddle2 */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return computerPaddle1; });
-/* unused harmony export computerPaddle2 */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return demoPaddle1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return demoPaddle2; });
-/* harmony export (immutable) */ __webpack_exports__["d"] = initPaddle;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return baseBallSpeed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return xBallVelocity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return yBallVelocity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return zBallVelocity; });
+/* harmony export (immutable) */ __webpack_exports__["d"] = updateBallSpeed;
+/* harmony export (immutable) */ __webpack_exports__["e"] = updateXBallVelocity;
+/* harmony export (immutable) */ __webpack_exports__["f"] = updateYBallVelocity;
+/* harmony export (immutable) */ __webpack_exports__["g"] = updateZBallVelocity;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__walls__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(2);
 
 
 
+let baseBallSpeed = 0.275;
+let xBallVelocity = 0.275;
+let yBallVelocity = 0.275;
+let zBallVelocity = 0.275;
 
-let playerPaddle1 = undefined;
-let playerPaddle2 = undefined;
-let computerPaddle1 = undefined;
-let computerPaddle2 = undefined;
-let demoPaddle1 = undefined;
-let demoPaddle2 = undefined;
 
-function initPaddle() {
-  // ** Paddles **
-  // var paddleGeometry = new THREE.PlaneGeometry(3, 2, 32, 32);
-  // var playerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ee, wireframe: true, transparent: true });
+const resetBall = side => {
+  if (side === "computer") {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9.5);
+    zBallVelocity = Math.abs(zBallVelocity);
+  } else if (side === "player") {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9.5);
+    zBallVelocity = -Math.abs(zBallVelocity);
+  }
+  xBallVelocity = 0;
+  yBallVelocity = 0;
 
-  // playerPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  // playerPaddle1.translateX(1000);
-  // playerPaddle1.translateZ(9.5);
-  // scene.add(playerPaddle1);
-  // zCollidableList.push(playerPaddle1);
-  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  // playerPaddle2.translateX(1000);
-  // playerPaddle2.translateZ(9.5);
-  // scene.add(playerPaddle2);
+  // resetInBounds();
+};
+/* harmony export (immutable) */ __webpack_exports__["c"] = resetBall;
+
   
-  // var computerPaddleMaterial = new THREE.MeshBasicMaterial({ color: 0xee0000, wireframe: true, transparent: true });
-  // computerPaddle1 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-  // computerPaddle1.translateZ(-9.5);
-  // scene.add(computerPaddle1);
-  // zCollidableList.push(computerPaddle1);
-  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-  // computerPaddle2.translateZ(-9.5);
-  // scene.add(computerPaddle2);
-  
-  // demoPaddle1 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  // demoPaddle1.translateZ(9.5);
-  // scene.add(demoPaddle1);
-  // zCollidableList.push(demoPaddle1);
-  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  // demoPaddle2.translateZ(9.5);
-  // scene.add(demoPaddle2);
+  const moveBall = () => {
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateX(xBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
+    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
 
-  // Creating paddles with cubes instead
-  var paddleGeometry = new __WEBPACK_IMPORTED_MODULE_0_three__["BoxGeometry"](3, 2, 1, 9, 6);
-  var playerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x0000ee, wireframe: true, transparent: true });
 
-  playerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
-  playerPaddle1.translateX(1000);
-  playerPaddle1.translateZ(10);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(playerPaddle1);
-  __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(playerPaddle1);
-  // playerPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  // playerPaddle2.translateX(1000);
-  // playerPaddle2.translateZ(10);
-  // scene.add(playerPaddle2);
+    resetInBounds();
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = moveBall;
 
-  var computerPaddleMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0xee0000, wireframe: true, transparent: true });
-  computerPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, computerPaddleMaterial);
-  computerPaddle1.translateZ(-10);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(computerPaddle1);
-  __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(computerPaddle1);
-  // computerPaddle2 = new THREE.Mesh(paddleGeometry, computerPaddleMaterial);
-  // computerPaddle2.translateZ(-10);
-  // scene.add(computerPaddle2);
 
-  demoPaddle1 = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](paddleGeometry, playerPaddleMaterial);
-  demoPaddle1.translateZ(10);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(demoPaddle1);
-  __WEBPACK_IMPORTED_MODULE_2__walls__["d" /* zCollidableList */].push(demoPaddle1);
-  // demoPaddle2 = new THREE.Mesh(paddleGeometry, playerPaddleMaterial);
-  // demoPaddle2.translateZ(10);
-  // scene.add(demoPaddle2);
-
+function updateBallSpeed(newBaseBallSpeed) {
+  baseBallSpeed = newBaseBallSpeed;
+  xBallVelocity = baseBallSpeed;
+  yBallVelocity = baseBallSpeed;
+  zBallVelocity = -baseBallSpeed;
 }
 
+function updateXBallVelocity(newXBallVelocity) {
+  xBallVelocity = newXBallVelocity;
+}
+
+function updateYBallVelocity(newYBallVelocity) {
+  yBallVelocity = newYBallVelocity;
+}
+
+function updateZBallVelocity(newZBallVelocity) {
+  zBallVelocity = newZBallVelocity;
+}
+
+const resetInBounds = () => {
+  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > 10 || 
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < -10 ||
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > 6.5 ||
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < -6.5
+    ) {
+      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( 0, 0, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
+      xBallVelocity = 0;
+      yBallVelocity = 0;
+  }
+  // if (sphere.position.x < -10) {
+  //   sphere.position.set( 0, sphere.position.y, sphere.position.z);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+  // if (sphere.position.y > 6.5) {
+  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+  // if (sphere.position.y < -6.5) {
+  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
+  //   xBallVelocity = 0;
+  //   yBallVelocity = 0;
+  // }
+
+  // xBallVelocity = 0;
+  // yBallVelocity = 0;
+};
+/* unused harmony export resetInBounds */
+
+
 /***/ }),
-/* 13 */
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return topOutline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return bottomOutline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return rightOutline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return leftOutline; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(1);
+
+
+
+let topOutline;
+let bottomOutline;
+let rightOutline;
+let leftOutline;
+
+const initOutline = () => {
+  var outlineMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ee00, side: __WEBPACK_IMPORTED_MODULE_0_three__["DoubleSide"] });
+
+  var horizOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 0.6);
+  var vertOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](0.6, 9);
+
+  topOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
+  topOutline.translateY(4.5);
+  topOutline.rotation.x = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topOutline);
+
+  bottomOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
+  bottomOutline.translateY(-4.5);
+  bottomOutline.rotation.x = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomOutline);
+
+  leftOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertOutline, outlineMaterial);
+  leftOutline.translateX(-8);
+  leftOutline.rotation.y = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftOutline);
+
+  rightOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertOutline, outlineMaterial);
+  rightOutline.translateX(8);
+  rightOutline.rotation.y = 3.14159 / 2;
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightOutline);
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = initOutline;
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45508,15 +45777,15 @@ function initPaddle() {
 /* harmony export (immutable) */ __webpack_exports__["a"] = render;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__userControls__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__computerPaddle__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__camera__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ball__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__outline__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collision__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__game__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__userControls__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__computerPaddle__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__camera__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ball__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__outline__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collision__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__game__ = __webpack_require__(4);
 
 
 
@@ -45566,16 +45835,16 @@ function render() {
 
 
 /***/ }),
-/* 14 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mouseSpeed; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__initialize_paddles__ = __webpack_require__(3);
 
 
 
@@ -45626,7 +45895,6 @@ const userControls = () => {
         event.clientX,
         event.clientY
       ];
-      // console.log("mouseSpeed", mouseSpeed);
     }
   }
 
@@ -45668,15 +45936,75 @@ const userControls = () => {
 
 
 /***/ }),
-/* 15 */
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_render__ = __webpack_require__(8);
+
+
+
+
+    
+
+document.addEventListener("DOMContentLoaded", function() {
+  Object(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["b" /* init */])();
+  Object(__WEBPACK_IMPORTED_MODULE_2__render_render__["b" /* renderContainer */])();
+});
+
+
+    
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(1);
+
+
+
+const initLight = () => {
+  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 3, 30);
+  light1.position.set(0, 5, 14);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light1);
+
+  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 3, 30);
+  light2.position.set(0, 5, -14);
+  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light2);
+};
+/* unused harmony export initLight */
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+// stats.js - http://github.com/mrdoob/stats.js
+var Stats=function(){var l=Date.now(),m=l,g=0,n=Infinity,o=0,h=0,p=Infinity,q=0,r=0,s=0,f=document.createElement("div");f.id="stats";f.addEventListener("mousedown",function(b){b.preventDefault();t(++s%2)},!1);f.style.cssText="width:80px;opacity:0.9;cursor:pointer";var a=document.createElement("div");a.id="fps";a.style.cssText="padding:0 0 3px 3px;text-align:left;background-color:#002";f.appendChild(a);var i=document.createElement("div");i.id="fpsText";i.style.cssText="color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px";
+i.innerHTML="FPS";a.appendChild(i);var c=document.createElement("div");c.id="fpsGraph";c.style.cssText="position:relative;width:74px;height:30px;background-color:#0ff";for(a.appendChild(c);74>c.children.length;){var j=document.createElement("span");j.style.cssText="width:1px;height:30px;float:left;background-color:#113";c.appendChild(j)}var d=document.createElement("div");d.id="ms";d.style.cssText="padding:0 0 3px 3px;text-align:left;background-color:#020;display:none";f.appendChild(d);var k=document.createElement("div");
+k.id="msText";k.style.cssText="color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px";k.innerHTML="MS";d.appendChild(k);var e=document.createElement("div");e.id="msGraph";e.style.cssText="position:relative;width:74px;height:30px;background-color:#0f0";for(d.appendChild(e);74>e.children.length;)j=document.createElement("span"),j.style.cssText="width:1px;height:30px;float:left;background-color:#131",e.appendChild(j);var t=function(b){s=b;switch(s){case 0:a.style.display=
+"block";d.style.display="none";break;case 1:a.style.display="none",d.style.display="block"}};return{REVISION:12,domElement:f,setMode:t,begin:function(){l=Date.now()},end:function(){var b=Date.now();g=b-l;n=Math.min(n,g);o=Math.max(o,g);k.textContent=g+" MS ("+n+"-"+o+")";var a=Math.min(30,30-30*(g/200));e.appendChild(e.firstChild).style.height=a+"px";r++;b>m+1E3&&(h=Math.round(1E3*r/(b-m)),p=Math.min(p,h),q=Math.max(q,h),i.textContent=h+" FPS ("+p+"-"+q+")",a=Math.min(30,30-30*(h/100)),c.appendChild(c.firstChild).style.height=
+a+"px",m=b,r=0);return b},update:function(){l=this.end()}}};"object"===typeof module&&(module.exports=Stats);
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export demoPaddleSpeed */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_paddles__ = __webpack_require__(3);
 
 
 
@@ -45724,7 +46052,7 @@ const moveComputerPaddle = (paddleSpeed = demoPaddleSpeed) => {
 
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45732,8 +46060,8 @@ const moveComputerPaddle = (paddleSpeed = demoPaddleSpeed) => {
 /* unused harmony export Y_AXIS */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game__ = __webpack_require__(4);
 
 
 
@@ -45779,171 +46107,14 @@ const demoCameraPivot = () => {
 
 
 /***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return baseBallSpeed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return xBallVelocity; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return yBallVelocity; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return zBallVelocity; });
-/* harmony export (immutable) */ __webpack_exports__["d"] = updateBallSpeed;
-/* harmony export (immutable) */ __webpack_exports__["e"] = updateXBallVelocity;
-/* harmony export (immutable) */ __webpack_exports__["f"] = updateYBallVelocity;
-/* harmony export (immutable) */ __webpack_exports__["g"] = updateZBallVelocity;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(9);
-
-
-
-let baseBallSpeed = 0.275;
-let xBallVelocity = 0.275;
-let yBallVelocity = 0.275;
-let zBallVelocity = 0.275;
-
-
-const resetBall = side => {
-  if (side === "computer") {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, -9.5);
-    zBallVelocity = Math.abs(zBallVelocity);
-  } else if (side === "player") {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9.5);
-    zBallVelocity = -Math.abs(zBallVelocity);
-  }
-  xBallVelocity = 0;
-  yBallVelocity = 0;
-
-  // resetInBounds();
-};
-/* harmony export (immutable) */ __webpack_exports__["c"] = resetBall;
-
-  
-  const moveBall = () => {
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateX(xBallVelocity);
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateY(yBallVelocity);
-    __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].translateZ(zBallVelocity);
-
-    console.log("sphere.position.x", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x);
-    console.log("sphere.position.y", __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y);
-
-    resetInBounds();
-};
-/* harmony export (immutable) */ __webpack_exports__["b"] = moveBall;
-
-
-function updateBallSpeed(newBaseBallSpeed) {
-  baseBallSpeed = newBaseBallSpeed;
-  xBallVelocity = baseBallSpeed;
-  yBallVelocity = baseBallSpeed;
-  zBallVelocity = -baseBallSpeed;
-  console.log("xBallVelocity", xBallVelocity);
-  console.log("yBallVelocity", yBallVelocity);
-}
-
-function updateXBallVelocity(newXBallVelocity) {
-  xBallVelocity = newXBallVelocity;
-}
-
-function updateYBallVelocity(newYBallVelocity) {
-  yBallVelocity = newYBallVelocity;
-}
-
-function updateZBallVelocity(newZBallVelocity) {
-  zBallVelocity = newZBallVelocity;
-}
-
-const resetInBounds = () => {
-  if (__WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x > 10 || 
-      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.x < -10 ||
-      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y > 6.5 ||
-      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.y < -6.5
-    ) {
-      __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.set( 0, 0, __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__["b" /* sphere */].position.z);
-      xBallVelocity = 0;
-      yBallVelocity = 0;
-  }
-  // if (sphere.position.x < -10) {
-  //   sphere.position.set( 0, sphere.position.y, sphere.position.z);
-  //   xBallVelocity = 0;
-  //   yBallVelocity = 0;
-  // }
-  // if (sphere.position.y > 6.5) {
-  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
-  //   xBallVelocity = 0;
-  //   yBallVelocity = 0;
-  // }
-  // if (sphere.position.y < -6.5) {
-  //   sphere.position.set(sphere.position.x, 0, sphere.position.y);
-  //   xBallVelocity = 0;
-  //   yBallVelocity = 0;
-  // }
-
-  // xBallVelocity = 0;
-  // yBallVelocity = 0;
-};
-/* unused harmony export resetInBounds */
-
-
-/***/ }),
-/* 18 */,
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return topOutline; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return bottomOutline; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return rightOutline; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return leftOutline; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
-
-
-
-let topOutline;
-let bottomOutline;
-let rightOutline;
-let leftOutline;
-
-const initOutline = () => {
-  var outlineMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ee00, side: __WEBPACK_IMPORTED_MODULE_0_three__["DoubleSide"] });
-
-  var horizOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 0.6);
-  var vertOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](0.6, 9);
-
-  topOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
-  topOutline.translateY(4.5);
-  topOutline.rotation.x = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(topOutline);
-
-  bottomOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
-  bottomOutline.translateY(-4.5);
-  bottomOutline.rotation.x = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(bottomOutline);
-
-  leftOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertOutline, outlineMaterial);
-  leftOutline.translateX(-8);
-  leftOutline.rotation.y = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(leftOutline);
-
-  rightOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](vertOutline, outlineMaterial);
-  rightOutline.translateX(8);
-  rightOutline.rotation.y = 3.14159 / 2;
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(rightOutline);
-};
-/* harmony export (immutable) */ __webpack_exports__["b"] = initOutline;
-
-
-/***/ }),
-/* 20 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_outline__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_outline__ = __webpack_require__(7);
 
 
 
@@ -45960,191 +46131,7 @@ const moveOutline = () => {
 
 
 /***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__init__ = __webpack_require__(8);
-
-
-
-const initLight = () => {
-  var light1 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 3, 30);
-  light1.position.set(0, 5, 14);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light1);
-
-  var light2 = new __WEBPACK_IMPORTED_MODULE_0_three__["PointLight"](0xffffff, 3, 30);
-  light2.position.set(0, 5, -14);
-  __WEBPACK_IMPORTED_MODULE_1__init__["d" /* scene */].add(light2);
-};
-/* unused harmony export initLight */
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-// stats.js - http://github.com/mrdoob/stats.js
-var Stats=function(){var l=Date.now(),m=l,g=0,n=Infinity,o=0,h=0,p=Infinity,q=0,r=0,s=0,f=document.createElement("div");f.id="stats";f.addEventListener("mousedown",function(b){b.preventDefault();t(++s%2)},!1);f.style.cssText="width:80px;opacity:0.9;cursor:pointer";var a=document.createElement("div");a.id="fps";a.style.cssText="padding:0 0 3px 3px;text-align:left;background-color:#002";f.appendChild(a);var i=document.createElement("div");i.id="fpsText";i.style.cssText="color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px";
-i.innerHTML="FPS";a.appendChild(i);var c=document.createElement("div");c.id="fpsGraph";c.style.cssText="position:relative;width:74px;height:30px;background-color:#0ff";for(a.appendChild(c);74>c.children.length;){var j=document.createElement("span");j.style.cssText="width:1px;height:30px;float:left;background-color:#113";c.appendChild(j)}var d=document.createElement("div");d.id="ms";d.style.cssText="padding:0 0 3px 3px;text-align:left;background-color:#020;display:none";f.appendChild(d);var k=document.createElement("div");
-k.id="msText";k.style.cssText="color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px";k.innerHTML="MS";d.appendChild(k);var e=document.createElement("div");e.id="msGraph";e.style.cssText="position:relative;width:74px;height:30px;background-color:#0f0";for(d.appendChild(e);74>e.children.length;)j=document.createElement("span"),j.style.cssText="width:1px;height:30px;float:left;background-color:#131",e.appendChild(j);var t=function(b){s=b;switch(s){case 0:a.style.display=
-"block";d.style.display="none";break;case 1:a.style.display="none",d.style.display="block"}};return{REVISION:12,domElement:f,setMode:t,begin:function(){l=Date.now()},end:function(){var b=Date.now();g=b-l;n=Math.min(n,g);o=Math.max(o,g);k.textContent=g+" MS ("+n+"-"+o+")";var a=Math.min(30,30-30*(g/200));e.appendChild(e.firstChild).style.height=a+"px";r++;b>m+1E3&&(h=Math.round(1E3*r/(b-m)),p=Math.min(p,h),q=Math.max(q,h),i.textContent=h+" FPS ("+p+"-"+q+")",a=Math.min(30,30-30*(h/100)),c.appendChild(c.firstChild).style.height=
-a+"px",m=b,r=0);return b},update:function(){l=this.end()}}};"object"===typeof module&&(module.exports=Stats);
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return gameMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return muteBool; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return gameOverBool; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return pauseGame; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return computerPaddleSpeed; });
-/* unused harmony export playerLives */
-/* unused harmony export computerLives */
-/* unused harmony export pauseGameOn */
-/* unused harmony export pauseGameOff */
-/* harmony export (immutable) */ __webpack_exports__["g"] = startGame;
-/* unused harmony export decrementLife */
-/* harmony export (immutable) */ __webpack_exports__["a"] = checkPastNet;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ball__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__render__ = __webpack_require__(13);
-
-
-
-
-
-
-
-let gameMode = 'demo';
-let muteBool = false;
-let gameOverBool = false;
-let pauseGame = false;
-let computerPaddleSpeed;
-let level = 1;
-let playerLives = 3;
-let computerLives = 3;
-
-function pauseGameOn() {
-  pauseGame = true;
-}
-
-function pauseGameOff() {
-  pauseGame = false;
-  requestAnimationFrame(__WEBPACK_IMPORTED_MODULE_5__render__["a" /* render */]);
-}
-
-function nextLevel() {
-  computerLives = 3;
-  computerPaddleSpeed *= 1.13;
-  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["d" /* updateBallSpeed */])(__WEBPACK_IMPORTED_MODULE_3__ball__["a" /* baseBallSpeed */] * 1.07);
-  level += 1;
-  document.getElementById("game-level").innerHTML = `Level ${level}`;
-  blinkText(document.getElementById('game-level'));
-}
-
-function gameOver() {
-  gameOverBool = true;
-  document.getElementById("game-over-message").classList.remove("hide");
-  document.getElementById("play-button-text").classList.add("blink-me");
-}
-
-function startGame() {
-  document.getElementById("game-over-message").classList.add("hide");
-  document.getElementById("game-level").innerHTML = `Level ${level}`;
-
-  resetGame();
-  gameMode = "play";
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["b" /* demoPaddle1 */]);
-  __WEBPACK_IMPORTED_MODULE_1__initialize_init__["d" /* scene */].remove(__WEBPACK_IMPORTED_MODULE_4__initialize_paddles__["c" /* demoPaddle2 */]);
-  requestAnimationFrame(__WEBPACK_IMPORTED_MODULE_5__render__["a" /* render */]);
-}
-
-function resetGame() {
-  gameOverBool = false;
-  playerLives = 3;
-  computerLives = 3;
-  computerPaddleSpeed = 0.145;
-  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["d" /* updateBallSpeed */])(0.2);
-  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["e" /* updateXBallVelocity */])(0.02);
-  Object(__WEBPACK_IMPORTED_MODULE_3__ball__["f" /* updateYBallVelocity */])(0.02);
-  level = 1;
-  __WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.set(0, 0, 9);
-  document.getElementById('comp-score').innerHTML = computerLives;
-  document.getElementById('player-score').innerHTML = playerLives;
-  document.getElementById("game-level").innerHTML = `Level ${level}`;
-}
-
-
-function decrementLife(player) {
-  if (player === "computer") {
-    computerLives = computerLives - 1;
-    document.getElementById('comp-score').innerHTML = computerLives;
-    blinkText(document.getElementById('comp-score'));
-  } else if (player === "player") {
-    if (playerLives > 0) {
-      playerLives = playerLives - 1;
-    }
-    document.getElementById('player-score').innerHTML = playerLives;
-    blinkText(document.getElementById('player-score'));
-  }
-
-  if (playerLives <= 0) {
-    gameOver();
-  } else if (computerLives <= 0) {
-    nextLevel();
-  }
-}
-
-function checkPastNet() {
-  if (playerLives > 0 && computerLives > 0) {
-    if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z <= -11) {
-      if (!muteBool && !gameOverBool) document.getElementById("beep5").play();
-      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
-        decrementLife("computer");
-      }
-      Object(__WEBPACK_IMPORTED_MODULE_3__ball__["c" /* resetBall */])("computer");
-      pauseGameOn();
-      setTimeout(pauseGameOff, 1000);
-    } else if (__WEBPACK_IMPORTED_MODULE_2__initialize_sphere__["b" /* sphere */].position.z >= 11) {
-      if (!muteBool && !gameOverBool) document.getElementById("shut-down2").play();
-
-      if (gameMode === "play" && pauseGame === false && gameOverBool === false) {
-        decrementLife("player");
-      }
-      Object(__WEBPACK_IMPORTED_MODULE_3__ball__["c" /* resetBall */])("player");
-      pauseGameOn();
-      setTimeout(pauseGameOff, 1000);
-    }
-  }
-}
-
-const blinkText = domElement => {
-  for (let i = 0; i < 8; i++) {
-    setTimeout(() => {
-      domElement.style.visibility = domElement.style.visibility === 'hidden' ? "" : 'hidden';
-    },
-      200 * i);
-  }
-};
-
-const toggleMuteBool = () => {
-  muteBool = muteBool ? false : true;
-};
-/* harmony export (immutable) */ __webpack_exports__["h"] = toggleMuteBool;
-
-
-/***/ }),
-/* 24 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46152,12 +46139,12 @@ const toggleMuteBool = () => {
 /* unused harmony export yCurve */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_walls__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ball__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__game__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__userControls__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_sphere__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initialize_walls__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ball__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__initialize_paddles__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__game__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__userControls__ = __webpack_require__(9);
 
 
 
