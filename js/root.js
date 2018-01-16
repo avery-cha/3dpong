@@ -5,12 +5,16 @@ import {
 import {
   renderContainer,
 } from './render/render';
+import {
+  handleOverlay
+} from './overlay/overlay';
 
     
 
 document.addEventListener("DOMContentLoaded", function() {
   init();
   renderContainer();
+  handleOverlay();
 });
 
 

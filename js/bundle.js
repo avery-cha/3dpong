@@ -45742,8 +45742,8 @@ let leftOutline;
 const initOutline = () => {
   var outlineMaterial = new __WEBPACK_IMPORTED_MODULE_0_three__["MeshBasicMaterial"]({ color: 0x00ee00, side: __WEBPACK_IMPORTED_MODULE_0_three__["DoubleSide"] });
 
-  var horizOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 0.6);
-  var vertOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](0.6, 9);
+  var horizOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](16, 0.3);
+  var vertOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["PlaneGeometry"](0.3, 9);
 
   topOutline = new __WEBPACK_IMPORTED_MODULE_0_three__["Mesh"](horizOutline, outlineMaterial);
   topOutline.translateY(4.5);
@@ -45945,6 +45945,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_three___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_three__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__initialize_init__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__render_render__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__overlay_overlay__ = __webpack_require__(17);
+
 
 
 
@@ -45954,6 +45956,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 document.addEventListener("DOMContentLoaded", function() {
   Object(__WEBPACK_IMPORTED_MODULE_1__initialize_init__["b" /* init */])();
   Object(__WEBPACK_IMPORTED_MODULE_2__render_render__["b" /* renderContainer */])();
+  Object(__WEBPACK_IMPORTED_MODULE_3__overlay_overlay__["a" /* handleOverlay */])();
 });
 
 
@@ -46244,6 +46247,17 @@ const handleCollision = () => {
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = handleCollision;
 
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = handleOverlay;
+function handleOverlay() {
+  setTimeout( () => document.getElementById('overlay-div').classList.add('remove-opacity'), 0);
+  setTimeout( () => document.getElementById('overlay-div').classList.remove('overlay'), 3000);
+}
 
 /***/ })
 /******/ ]);

@@ -11,8 +11,8 @@ export let leftOutline;
 export const initOutline = () => {
   var outlineMaterial = new THREE.MeshBasicMaterial({ color: 0x00ee00, side: THREE.DoubleSide });
 
-  var horizOutline = new THREE.PlaneGeometry(16, 0.6);
-  var vertOutline = new THREE.PlaneGeometry(0.6, 9);
+  var horizOutline = new THREE.PlaneGeometry(16, 0.3);
+  var vertOutline = new THREE.PlaneGeometry(0.3, 9);
 
   topOutline = new THREE.Mesh(horizOutline, outlineMaterial);
   topOutline.translateY(4.5);

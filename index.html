@@ -24,7 +24,10 @@
 
 <body id="main">
   <script src="./js/bundle.js"></script>
-  <div class="left-aside">
+
+  <div id="overlay-div" class="overlay"></div>
+
+  <div class="left-aside fade-in">
     3D Pong
     <br>
     <br>
@@ -52,7 +55,7 @@
       Good luck!
     </div>
   </div>
-  <div class="right-aside">
+  <div class="right-aside fade-in">
     <div class="scores-content">
       <div class="score-title">
         Lives
@@ -62,7 +65,7 @@
     </div>
   </div>
 
-  <div class="buttons-container">
+  <div class="buttons-container fade-in">
     <button id="play-button" class="button">
       <span 
         class="blink-me" 
@@ -74,7 +77,7 @@
     <button id="mute-button" class="button">Mute</button>
   </div>
 
-  <div class="right-aside-bottom">
+  <div class="right-aside-bottom fade-in">
     <a
       target="_blank"
       href="https://github.com/trwong/3dpong">
@@ -104,8 +107,9 @@
   </div>
 
   <div
-    id="game-level">
-    Demo
+    id="game-level"
+    class="fade-in">
+    Demo Mode
   </div>
 
   <audio src="./assets/Beep1.mp3" id="beep1"></audio>
