@@ -13,7 +13,7 @@ canvas {
   top: 0;
   left: 0;
   color: #ffffff;
-  font-size: 36px;
+  font-size: 34px;
   margin: 30px 0 0 20px;
   font-weight: bold;
   z-index: 100;
@@ -21,7 +21,7 @@ canvas {
 
 .instructions-title {
   color: #ffffff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   margin-top: 20px;
   width: 150px;
@@ -30,7 +30,7 @@ canvas {
 
 .instructions-text {
   color: #ffffff;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 20px;
   width: 150px;
   line-height: 130%;
@@ -41,7 +41,7 @@ canvas {
   top: 0;
   right: 20px;
   color: #ffffff;
-  font-size: 22px;
+  font-size: 20px;
   margin: 40px 0px 0 0;
   font-weight: bold;
   z-index: 100;
@@ -61,7 +61,7 @@ canvas {
   padding: 30px;
   border-radius: 5px;
   border: 5px solid #000000;
-  font-size: 32px;
+  font-size: 30px;
   font-family: 'Press Start 2p', sans-serif;
   font-weight: bold;
   color: black;
@@ -83,12 +83,12 @@ canvas {
 }
 
 .score-title {
-  font-size: 24px;
+  font-size: 22px;
 
 }
 
 .scores-content {
-  font-size: 18px;
+  font-size: 16px;
   margin: 20px 10px 20px 0;
   text-align: right;
 }
@@ -99,7 +99,7 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 38px;
+  font-size: 36px;
 }
 
 .buttons-container {
@@ -114,7 +114,7 @@ canvas {
   margin-top: 15px;
   box-sizing: border-box;
   width: 75%;
-  font-size: 20px;
+  font-size: 18px;
   padding: 5px;
   border-radius: 5px;
   font-family: 'Press Start 2p', sans-serif;
@@ -123,7 +123,7 @@ canvas {
 }
 
 #mute-button {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .button:focus {
